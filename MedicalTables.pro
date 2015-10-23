@@ -8,6 +8,8 @@ RESOURCES += qml.qrc
 
 RC_ICONS += logo.ico
 
+CONFIG += qml_debug
+
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
