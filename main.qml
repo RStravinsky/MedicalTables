@@ -5,21 +5,45 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 
 ApplicationWindow {
-    title: qsTr("Hello World")
+
+    title: qsTr("NoxiMove Schedule")
     visibility: "Maximized"
     visible: true
 
-
     MainForm {
+
+            anchors.fill: parent
+
+            /* TOP FRAME */
+            Rectangle
+            {
+                id: frame
+                width: parent.width
+                height: parent.height/5
+                visible: true
+
+                Row {
+                    spacing: 10
+                    width:  frame.width
+                    height: frame.height
+                    anchors.fill: frame
+                    anchors.margins: 10
+
+                    property real itemWidth : ((width + spacing) / 3) - spacing;
+
+                    Rectangle { color: "red"; width: parent.itemWidth; height: parent.height; }
+                    Rectangle { color: "red"; width: parent.itemWidth; height: parent.height;  }
+                    Rectangle { color: "red"; width: parent.itemWidth; height: parent.height;  }
+
+                    visible: true
+                }
+            }
+            /*************/
 
             StatusBar{
                     anchors.bottom: parent.bottom
                     Label { text: "Read Only" }
             }
-        anchors.fill: parent
-        button1.onClicked: messageDialog.show(qsTr("Button 1 pressed"))
-        button2.onClicked: messageDialog.show(qsTr("Button 2 pressed"))
-        button3.onClicked: messageDialog.show(qsTr("Button 3 pressed"))
     }
 
     MessageDialog {
