@@ -1,0 +1,26 @@
+import QtQuick 2.0
+
+Item {
+    id: container
+    property alias titleImg: value
+    property alias tableImg: value
+    property alias width: container.width
+    property alias height: container.height
+
+    Rectangle {
+                id: rectangle
+                anchors.fill: parent
+                border.color: "orange"
+                border.width: 4
+                radius: 8
+                
+                Row {
+                    spacing: 5
+                    anchors.fill: rectangle
+                    anchors.margins: 5
+                    Image { source: 
+
+                }
+    }
+
+}
