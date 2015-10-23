@@ -1,4 +1,4 @@
-import QtQuick 2.4
+import QtQuick 2.2
 import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
@@ -25,6 +25,7 @@ ApplicationWindow {
 
 
                 Row {
+                    id: row
                     spacing: 10
                     width:  frame.width
                     height: frame.height

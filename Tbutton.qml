@@ -15,8 +15,9 @@ Item {
     Rectangle {
                 id: rectangle
                 color: "#e4d8d8"
-                border.width: 0
-                radius: 8
+                border.color: "transparent"
+                border.width: 5
+                radius: 10
                 anchors.fill: parent
                 gradient: Gradient {
                     GradientStop {
@@ -28,6 +29,99 @@ Item {
                         color: "#ffffff";
                     }
                 }
+
+                MouseArea {
+                    id: mouseArea;
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onEntered: rectangle.state = "ENTERED"
+                    onExited: rectangle.state = "EXITED"
+                    onClicked: {
+                        //rectangle.state = "pressed"
+                        //pressedTimer.start()
+                        scaleAnimation.start()
+                        numberAnim.start()
+                    }
+                }
+
+
+                PropertyAnimation{
+                    id:scaleAnimation
+                    target: rectangle
+                    property: "scale"
+                    from: 0
+                    to: 1
+                    duration: 1200
+                    easing.type: Easing.OutBack
+                }
+
+
+                NumberAnimation {
+                    id:numberAnim
+                    target: rectangle
+                    property: "opacity"
+                    from: 0
+                    to: 1
+                    duration: 1200
+                    easing.type: Easing.OutSine
+                }
+
+
+
+                states: [
+                    State {
+                        name: "ENTERED"
+                        PropertyChanges {
+                            target: rectangle
+                            border.color: "#e0d9d9"
+                        }
+                    },
+                    State {
+                        name: "EXITED"
+                        PropertyChanges {
+                            target: rectangle
+                            border.color: "transparent"
+
+                        }
+                    }//,
+//                    State {
+//                            name: "pressed"
+//                            PropertyChanges { target: rectangle; scale: 0.9 }
+//                    }
+                ]
+
+//                Timer {
+//                    id: pressedTimer
+//                    interval: 500;
+//                    repeat: false
+//                    onTriggered: rectangle.state = 'State0'
+//                }
+
+                transitions: [
+                    Transition {
+                        from: "EXITED"
+                        to: "ENTERED"
+                        ColorAnimation {
+                            target: rectangle
+                            duration: 800
+                        }
+                    },
+                    Transition {
+                        from: "EXITED"
+                        to: "ENTERED"
+                        ColorAnimation {
+                            target: rectangle
+                            duration: 800
+                        }
+                    }//,
+//                    Transition {
+//                        NumberAnimation {
+//                            properties: "scale";
+//                            duration: 500;
+//                            easing.type: Easing.OutBounce }
+//                    }
+                ]
+
 
                 Row {
                     spacing: 2
@@ -49,6 +143,9 @@ Item {
                     }
 
                 }
+
+
+
     }
 
 }
