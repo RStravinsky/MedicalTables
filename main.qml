@@ -9,7 +9,6 @@ ApplicationWindow {
     visibility: "Maximized"
     visible: true
 
-
     MainForm {
 
             StatusBar{
@@ -17,10 +16,20 @@ ApplicationWindow {
                     Label { text: "Read Only" }
             }
         anchors.fill: parent
-        button1.onClicked: messageDialog.show(qsTr("Button 1 pressed"))
-        button2.onClicked: messageDialog.show(qsTr("Button 2 pressed"))
-        button3.onClicked: messageDialog.show(qsTr("Button 3 pressed"))
+
+
+        //Tbutton { titleSource: "images/t2logo.png"; pictureSource: "images/noxi-T2 mod 1.jpg" }
+        Tbutton {
+            titleImg: "/images/logo.ico"
+            tableImg: "/images/logo.ico"
+            bWidth: parent.width/3
+            bHeight: parent.height/8
+
+        }
+
     }
+
+
 
     MessageDialog {
         id: messageDialog
@@ -30,5 +39,6 @@ ApplicationWindow {
             messageDialog.text = caption;
             messageDialog.open();
         }
+
     }
 }
