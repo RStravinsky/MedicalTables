@@ -31,9 +31,9 @@ ApplicationWindow {
 
                     property real itemWidth : ((width + spacing) / 3) - spacing;
 
-                    Rectangle { color: "red"; width: parent.itemWidth; height: parent.height; }
-                    Rectangle { color: "red"; width: parent.itemWidth; height: parent.height;  }
-                    Rectangle { color: "red"; width: parent.itemWidth; height: parent.height;  }
+                    Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/logo.ico"; tableImg: "/images/logo.ico" }
+                    Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/logo.ico"; tableImg: "/images/logo.ico" }
+                    Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/logo.ico"; tableImg: "/images/logo.ico" }
 
                     visible: true
                 }
@@ -44,7 +44,10 @@ ApplicationWindow {
                     anchors.bottom: parent.bottom
                     Label { text: "Read Only" }
             }
+
     }
+
+
 
     MessageDialog {
         id: messageDialog
@@ -54,5 +57,6 @@ ApplicationWindow {
             messageDialog.text = caption;
             messageDialog.open();
         }
+
     }
 }
