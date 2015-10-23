@@ -10,6 +10,7 @@ ApplicationWindow {
     visibility: "Maximized"
     visible: true
 
+
     MainForm {
 
             anchors.fill: parent
@@ -22,6 +23,7 @@ ApplicationWindow {
                 height: parent.height/5
                 visible: true
 
+
                 Row {
                     spacing: 10
                     width:  frame.width
@@ -29,11 +31,12 @@ ApplicationWindow {
                     anchors.fill: frame
                     anchors.margins: 10
 
+
                     property real itemWidth : ((width + spacing) / 3) - spacing;
 
-                    Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/logo.ico"; tableImg: "/images/logo.ico" }
-                    Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/logo.ico"; tableImg: "/images/logo.ico" }
-                    Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/logo.ico"; tableImg: "/images/logo.ico" }
+                    Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/images/t2logo.png"; tableImg: "/images/images/t2izo.png" }
+                    Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/images/t3logo.png"; tableImg: "/images/images/t3izo.png" }
+                    Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/images/t7logo.png"; tableImg: "/images/images/t7izo.png" }
 
                     visible: true
                 }
