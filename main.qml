@@ -33,8 +33,6 @@ ApplicationWindow {
                     property real itemWidth : ((width + spacing) / 3) - spacing;
 
                     Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/logo.ico"; tableImg: "/images/logo.ico" }
-
-
                     Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/logo.ico"; tableImg: "/images/logo.ico" }
                     Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/logo.ico"; tableImg: "/images/logo.ico" }
 

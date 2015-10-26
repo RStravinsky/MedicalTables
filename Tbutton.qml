@@ -29,10 +29,17 @@ Item {
                     onExited: rectangle.state = "EXITED"
                     onClicked: {
                         //rectangle.state = "pressed"
-                        //pressedTimer.start()
                         scaleAnimation.start()
-                        numberAnim.start()
+                        numberAnim.start() 
+                        pressedTimer.start()
                     }
+                }
+
+                Timer {
+                    id: pressedTimer
+                    interval: 500;
+                    repeat: false
+                    onTriggered: rectangle.state = 'State0'
                 }
 
 
@@ -40,21 +47,21 @@ Item {
                     id:scaleAnimation
                     target: rectangle
                     property: "scale"
-                    from: 0
-                    to: 1
+                    from: 1
+                    to: 0.80
                     duration: 1200
-                    easing.type: Easing.OutBack
-                }
+                    easing.type: Easing.OutBounce
 
+                }
 
                 NumberAnimation {
                     id:numberAnim
                     target: rectangle
                     property: "opacity"
-                    from: 0
-                    to: 1
+                    from: 1
+                    to: 0.80
                     duration: 1200
-                    easing.type: Easing.OutSine
+                    easing.type: Easing.InSine
                 }
 
 
@@ -75,18 +82,13 @@ Item {
 
                         }
                     }//,
-//                    State {
-//                            name: "pressed"
-//                            PropertyChanges { target: rectangle; scale: 0.9 }
-//                    }
+                    //State {
+                    //        name: "pressed"
+                    //        PropertyChanges { target: rectangle; scale: 0.9 }
+                    //}
                 ]
 
-//                Timer {
-//                    id: pressedTimer
-//                    interval: 500;
-//                    repeat: false
-//                    onTriggered: rectangle.state = 'State0'
-//                }
+
 
                 transitions: [
                     Transition {
