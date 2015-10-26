@@ -6,6 +6,7 @@ import QtQuick.Layouts 1.1
 
 Item {
     id: container
+    property string bName
     property alias titleImg: title.source
     property alias tableImg: table.source
     property alias bWidth: container.width
@@ -39,6 +40,8 @@ Item {
                     onClicked: {
                         scaleAnimation.start()
                         numberAnim.start()
+                        //_myClass.mainButtonClicked(container.bName)
+                        grid.visible = true
                     }
                     onReleased: {
                         if (containsMouse)

@@ -10,7 +10,6 @@ ApplicationWindow {
     visibility: "Maximized"
     visible: true
 
-
     MainForm {
 
             anchors.fill: parent
@@ -23,13 +22,12 @@ ApplicationWindow {
                 height: parent.height/5
                 visible: true
 
-                Behavior on scale {
-                    NumberAnimation {
-                        duration: 2000
-                        easing.type: Easing.OutBack
-                    }
-                }
-
+//                Behavior on scale {
+//                    NumberAnimation {
+//                        duration: 2000
+//                        easing.type: Easing.OutBack
+//                    }
+//                }
 
                 Row {
                     id: row
@@ -41,9 +39,9 @@ ApplicationWindow {
 
                     property real itemWidth : ((width + spacing) / 3) - spacing;
 
-                    Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/images/t2logo.png"; tableImg: "/images/images/t2izo.png" }
-                    Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/images/t3logo.png"; tableImg: "/images/images/t3izo.png" }
-                    Tbutton { bWidth: parent.itemWidth; bHeight: parent.height; titleImg: "/images/images/t7logo.png"; tableImg: "/images/images/t7izo.png" }
+                    Tbutton { bName: "T2"; bWidth: row.itemWidth; bHeight: row.height; titleImg: "/images/images/t2logo.png"; tableImg: "/images/images/t2izo.png" }
+                    Tbutton { bName: "T3"; bWidth: row.itemWidth; bHeight: row.height; titleImg: "/images/images/t3logo.png"; tableImg: "/images/images/t3izo.png" }
+                    Tbutton { bName: "T7"; bWidth: row.itemWidth; bHeight: row.height; titleImg: "/images/images/t7logo.png"; tableImg: "/images/images/t7izo.png" }
 
                     visible: true
                 }
@@ -51,51 +49,52 @@ ApplicationWindow {
             /*************/
 
             GridView {
-                id: dndGrid
+                property bool cond:true;
+
+                id: grid
                 height: parent.height - frame.height - 150
                 width: parent.width/3
                 anchors.top: frame.bottom
                 anchors.right: parent.right
                 anchors.margins: 20
-                cellWidth: dndGrid.width/4
-                cellHeight: dndGrid.height/4
-                model: dndModel
-                delegate: dndDelegate
+                cellWidth: grid.width/4
+                cellHeight: grid.height/4
+                //model: optionsModel
+                model: myModel
+                delegate: optionsDelegate
+                visible: false
             }
 
             Component {
-
-                id: dndDelegate
+                id: optionsDelegate
 
                 Item {
                     id: wrapper
-                    width: dndGrid.cellWidth-10
-                    height: dndGrid.cellHeight-10
-
+                    width: grid.cellWidth-10
+                    height: grid.cellHeight-10
 
                     Image {
-
-                        property bool active: false
                         id: itemImage
                         source: imagePath
-                        anchors.centerIn: parent
-                        width: parent.width-10
-                        height: parent.width-10
+                        anchors.centerIn: wrapper
+                        width: wrapper.width-10
+                        height: wrapper.width-10
                         smooth: true
                         opacity: 0.4
                         state: "UNCHECKED"
 
                         MouseArea {
                             id: mouseArea;
-                            anchors.fill: parent
+                            anchors.fill: itemImage
                             hoverEnabled: true
                             onClicked: {
                                 checkedAnimation.start()
-                                parent.state == "CHECKED" ? parent.state = "UNCHECKED" : parent.state = "CHECKED"
+                                itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
+                                grid.currentIndex = index
+                                _myClass.buttonClicked(grid.currentIndex)
                             }
                             onEntered: enteringAnimation.start()
                             onExited:  exitingAnimation.start()
-
                         }
 
                         NumberAnimation {
@@ -152,7 +151,7 @@ ApplicationWindow {
             } // component
 
             ListModel {
-                id: dndModel
+                id: optionsModel
                 ListElement { imagePath: "/images/images/zaglowek.png" }
                 ListElement { imagePath: "/images/images/pilot.png" }
                 ListElement { imagePath: "/images/images/uklad_jezdny.png" }
@@ -170,9 +169,6 @@ ApplicationWindow {
                 ListElement { imagePath: "/images/images/uklad_jezdny.png" }
                 ListElement { imagePath: "/images/images/nozne_sterowanie.png" }
             }
-
-
-
 
             StatusBar{
                     anchors.bottom: parent.bottom
@@ -180,8 +176,6 @@ ApplicationWindow {
             }
 
     }
-
-
 
     MessageDialog {
         id: messageDialog
