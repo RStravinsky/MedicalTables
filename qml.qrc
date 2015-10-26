@@ -12,5 +12,9 @@
         <file>images/t3logo.png</file>
         <file>images/t7izo.png</file>
         <file>images/t7logo.png</file>
+        <file>images/zaglowek.png</file>
+        <file>images/uklad_jezdny.png</file>
+        <file>images/pilot.png</file>
+        <file>images/nozne_sterowanie.png</file>
     </qresource>
 </RCC>

@@ -4,7 +4,6 @@ import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 
-
 Item {
     id: container
     property alias titleImg: title.source
@@ -13,10 +12,11 @@ Item {
     property alias bHeight: container.height
 
     Rectangle {
+
                 id: rectangle
                 color: "#e4d8d8"
                 border.color: "transparent"
-                border.width: 5
+                border.width: 3
                 radius: 10
                 anchors.fill: parent
                 gradient: Gradient {
@@ -37,13 +37,17 @@ Item {
                     onEntered: rectangle.state = "ENTERED"
                     onExited: rectangle.state = "EXITED"
                     onClicked: {
-                        //rectangle.state = "pressed"
-                        //pressedTimer.start()
                         scaleAnimation.start()
                         numberAnim.start()
+                        //container.clicked(container.cellColor)
                     }
+                    onReleased: {
+                        if (containsMouse)
+                            rectangle.state="HOVERING";
+                        else
+                            rectangle.state="EXITED";
+                        }
                 }
-
 
                 PropertyAnimation{
                     id:scaleAnimation
@@ -51,10 +55,9 @@ Item {
                     property: "scale"
                     from: 0
                     to: 1
-                    duration: 1200
-                    easing.type: Easing.OutBack
+                    duration: 500
+                    easing.type: Easing.OutCirc
                 }
-
 
                 NumberAnimation {
                     id:numberAnim
@@ -62,18 +65,25 @@ Item {
                     property: "opacity"
                     from: 0
                     to: 1
-                    duration: 1200
+                    duration: 500
                     easing.type: Easing.OutSine
                 }
 
-
-
                 states: [
+                    State {
+                         name: "HOVERING"
+                         PropertyChanges {
+                         target: rectangle
+                         border.color: "lightgray"
+                         opacity: 1.0
+                         }
+                    },
                     State {
                         name: "ENTERED"
                         PropertyChanges {
                             target: rectangle
-                            border.color: "#e0d9d9"
+                            border.color: "lightgray"
+                            opacity: 1.0
                         }
                     },
                     State {
@@ -83,21 +93,18 @@ Item {
                             border.color: "transparent"
 
                         }
-                    }//,
-//                    State {
-//                            name: "pressed"
-//                            PropertyChanges { target: rectangle; scale: 0.9 }
-//                    }
+                    }
                 ]
 
-//                Timer {
-//                    id: pressedTimer
-//                    interval: 500;
-//                    repeat: false
-//                    onTriggered: rectangle.state = 'State0'
-//                }
-
                 transitions: [
+                    Transition {
+                         from: "EXITED";
+                         to: "HOVERING"
+                          ColorAnimation {
+                              target: rectangle
+                              duration: 200
+                          }
+                    },
                     Transition {
                         from: "EXITED"
                         to: "ENTERED"
@@ -107,43 +114,34 @@ Item {
                         }
                     },
                     Transition {
-                        from: "EXITED"
-                        to: "ENTERED"
+                        from: "ENTERED"
+                        to: "EXITED"
                         ColorAnimation {
                             target: rectangle
                             duration: 800
                         }
-                    }//,
-//                    Transition {
-//                        NumberAnimation {
-//                            properties: "scale";
-//                            duration: 500;
-//                            easing.type: Easing.OutBounce }
-//                    }
+                    }
                 ]
 
-
                 Row {
-                    spacing: 2
-                    anchors.fill: rectangle
-                    anchors.margins: 5
+                        spacing: 2
+                        anchors.fill: rectangle
+                        anchors.margins: 5
 
-                    Image {
-                        id: title;
-                        width: (rectangle.width/2 - 10);
-                        height: (rectangle.height - 10);
-                        opacity: 0.5
+                        Image {
+                            id: title;
+                            width: (rectangle.width/2 - 10);
+                            height: (rectangle.height - 10);
+                            opacity: 0.5
+                        }
+                        Image {
+                            id: table;
+                            width: (rectangle.width/2 - 10);
+                            height: (rectangle.height - 10);
+                            opacity: 1
+                            antialiasing: true
+                        }
                     }
-                    Image {
-                        id: table;
-                        width: (rectangle.width/2 - 10);
-                        height: (rectangle.height - 10);
-                        opacity: 1
-                        antialiasing: true
-                    }
-
-                }
-
 
 
     }
