@@ -1,10 +1,8 @@
-import QtQuick 2.0
 import QtQuick 2.4
 import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
-
 
 Item {
     id: container
@@ -14,12 +12,23 @@ Item {
     property alias bHeight: container.height
 
     Rectangle {
+
                 id: rectangle
+                color: "#e4d8d8"
                 border.color: "transparent"
-                border.width: 10
-                color: "lightgrey"
+                border.width: 3
                 radius: 10
                 anchors.fill: parent
+                gradient: Gradient {
+                    GradientStop {
+                        position: 0.00;
+                        color: "#e0d9d9";
+                    }
+                    GradientStop {
+                        position: 1.00;
+                        color: "#ffffff";
+                    }
+                }
 
                 MouseArea {
                     id: mouseArea;
@@ -28,50 +37,52 @@ Item {
                     onEntered: rectangle.state = "ENTERED"
                     onExited: rectangle.state = "EXITED"
                     onClicked: {
-                        //rectangle.state = "pressed"
                         scaleAnimation.start()
-                        numberAnim.start() 
-                        pressedTimer.start()
+                        numberAnim.start()
                     }
+                    onReleased: {
+                        if (containsMouse)
+                            rectangle.state="HOVERING";
+                        else
+                            rectangle.state="EXITED";
+                        }
                 }
-
-                Timer {
-                    id: pressedTimer
-                    interval: 500;
-                    repeat: false
-                    onTriggered: rectangle.state = 'State0'
-                }
-
 
                 PropertyAnimation{
                     id:scaleAnimation
                     target: rectangle
                     property: "scale"
-                    from: 1
-                    to: 0.80
-                    duration: 1200
-                    easing.type: Easing.OutBounce
-
+                    from: 0
+                    to: 1
+                    duration: 500
+                    easing.type: Easing.OutCirc
                 }
 
                 NumberAnimation {
                     id:numberAnim
                     target: rectangle
                     property: "opacity"
-                    from: 1
-                    to: 0.80
-                    duration: 1200
-                    easing.type: Easing.InSine
+                    from: 0
+                    to: 1
+                    duration: 500
+                    easing.type: Easing.OutSine
                 }
 
-
-
                 states: [
+                    State {
+                         name: "HOVERING"
+                         PropertyChanges {
+                         target: rectangle
+                         border.color: "lightgray"
+                         opacity: 1.0
+                         }
+                    },
                     State {
                         name: "ENTERED"
                         PropertyChanges {
                             target: rectangle
-                            border.color: "orange"
+                            border.color: "lightgray"
+                            opacity: 1.0
                         }
                     },
                     State {
@@ -81,16 +92,18 @@ Item {
                             border.color: "transparent"
 
                         }
-                    }//,
-                    //State {
-                    //        name: "pressed"
-                    //        PropertyChanges { target: rectangle; scale: 0.9 }
-                    //}
+                    }
                 ]
 
-
-
                 transitions: [
+                    Transition {
+                         from: "EXITED";
+                         to: "HOVERING"
+                          ColorAnimation {
+                              target: rectangle
+                              duration: 200
+                          }
+                    },
                     Transition {
                         from: "EXITED"
                         to: "ENTERED"
@@ -100,31 +113,34 @@ Item {
                         }
                     },
                     Transition {
-                        from: "EXITED"
-                        to: "ENTERED"
+                        from: "ENTERED"
+                        to: "EXITED"
                         ColorAnimation {
                             target: rectangle
                             duration: 800
                         }
-                    }//,
-//                    Transition {
-//                        NumberAnimation {
-//                            properties: "scale";
-//                            duration: 500;
-//                            easing.type: Easing.OutBounce }
-//                    }
+                    }
                 ]
 
-
                 Row {
-                    spacing: 2
-                    anchors.fill: rectangle
-                    anchors.margins: 10
+                        spacing: 2
+                        anchors.fill: rectangle
+                        anchors.margins: 5
 
-                    Image { id: title; width: rectangle.width/2; height: rectangle.height }
-                    Image { id: table; width: rectangle.width/2; height: rectangle.height }
-                }
-
+                        Image {
+                            id: title;
+                            width: (rectangle.width/2 - 10);
+                            height: (rectangle.height - 10);
+                            opacity: 0.5
+                        }
+                        Image {
+                            id: table;
+                            width: (rectangle.width/2 - 10);
+                            height: (rectangle.height - 10);
+                            opacity: 1
+                            antialiasing: true
+                        }
+                    }
 
 
     }

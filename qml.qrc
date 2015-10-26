@@ -6,8 +6,15 @@
     </qresource>
     <qresource prefix="/images">
         <file>logo.ico</file>
-        <file>images/noxi-T2 2.jpg</file>
-        <file>images/noxi-T3 2.jpg</file>
-        <file>images/noxi-T7  3.jpg</file>
+        <file>images/t2izo.png</file>
+        <file>images/t2logo.png</file>
+        <file>images/t3izo.png</file>
+        <file>images/t3logo.png</file>
+        <file>images/t7izo.png</file>
+        <file>images/t7logo.png</file>
+        <file>images/zaglowek.png</file>
+        <file>images/uklad_jezdny.png</file>
+        <file>images/pilot.png</file>
+        <file>images/nozne_sterowanie.png</file>
     </qresource>
 </RCC>
