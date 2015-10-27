@@ -3,7 +3,7 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
-import project.Tables 1.0
+import MedicalTableComponent 1.0
 
 ApplicationWindow {
 
@@ -16,6 +16,8 @@ ApplicationWindow {
     MainForm {
 
             anchors.fill: parent
+
+            MedicalTable { id: optList }
 
             /* TOP FRAME */
             Rectangle
@@ -42,9 +44,31 @@ ApplicationWindow {
 
                     property real itemWidth : ((width + spacing) / 3) - spacing;
 
-                    Tbutton { bName: "T2"; bWidth: row.itemWidth; bHeight: row.height; titleImg: "/images/images/t2logo.png"; tableImg: "/images/images/t2izo.png" }
-                    Tbutton { bName: "T3"; bWidth: row.itemWidth; bHeight: row.height; titleImg: "/images/images/t3logo.png"; tableImg: "/images/images/t3izo.png" }
-                    Tbutton { bName: "T7"; bWidth: row.itemWidth; bHeight: row.height; titleImg: "/images/images/t7logo.png"; tableImg: "/images/images/t7izo.png" }
+                    Tbutton {
+                        bName: "T2";
+                        bWidth: row.itemWidth;
+                        bHeight: row.height;
+                        titleImg: "/images/images/t2logo.png";
+                        tableImg: "/images/images/t2izo.png";
+                        onClicked: optList.setDataList(bName)
+                    }
+                    Tbutton {
+                        bName: "T3";
+                        bWidth: row.itemWidth;
+                        bHeight: row.height;
+                        titleImg: "/images/images/t3logo.png";
+                        tableImg: "/images/images/t3izo.png"
+                        onClicked: optList.setDataList(bName)
+                    }
+                    Tbutton {
+                        bName: "T7";
+                        bWidth: row.itemWidth;
+                        bHeight: row.height;
+                        titleImg: "/images/images/t7logo.png";
+                        tableImg: "/images/images/t7izo.png"
+                        onClicked: optList.setDataList(bName)
+
+                    }
 
                     visible: true
                 }
@@ -62,7 +86,7 @@ ApplicationWindow {
                 anchors.margins: 20
                 cellWidth: grid.width/4
                 cellHeight: grid.height/4
-                model: _myModel
+                model: optList.dataList
                 delegate: optionsDelegate
                 visible: true
             }
@@ -90,15 +114,16 @@ ApplicationWindow {
                             anchors.fill: itemImage
                             hoverEnabled: true
                             onClicked: {
-                                if( animationActive == true) {
-                                    checkedAnimation.start()
-                                    itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
-                                    grid.currentIndex = index
+                                if(animationActive == true) {
+                                checkedAnimation.start()
+                                itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
+                                grid.currentIndex = index
+                                optList.buttonClicked(grid.currentIndex)
                                 }
-                                //_myClass.buttonClicked(grid.currentIndex)
                             }
-                            onEntered: if( animationActive == true) enteringAnimation.start()
-                            onExited:  if( animationActive == true) exitingAnimation.start()
+
+                            onEntered: if(animationActive == true) enteringAnimation.start()
+                            onExited:  if(animationActive == true) exitingAnimation.start()
                         }
 
                         NumberAnimation {
@@ -154,30 +179,12 @@ ApplicationWindow {
 
             } // component
 
-//            ListModel {
-//                id: optionsModel
-//                ListElement { imagePath: "/images/images/zaglowek.png" }
-//                ListElement { imagePath: "/images/images/pilot.png" }
-//                ListElement { imagePath: "/images/images/uklad_jezdny.png" }
-//                ListElement { imagePath: "/images/images/nozne_sterowanie.png" }
-//                ListElement { imagePath: "/images/images/zaglowek.png" }
-//                ListElement { imagePath: "/images/images/pilot.png" }
-//                ListElement { imagePath: "/images/images/uklad_jezdny.png" }
-//                ListElement { imagePath: "/images/images/nozne_sterowanie.png" }
-//                ListElement { imagePath: "/images/images/zaglowek.png" }
-//                ListElement { imagePath: "/images/images/pilot.png" }
-//                ListElement { imagePath: "/images/images/uklad_jezdny.png" }
-//                ListElement { imagePath: "/images/images/nozne_sterowanie.png" }
-//                ListElement { imagePath: "/images/images/zaglowek.png" }
-//                ListElement { imagePath: "/images/images/pilot.png" }
-//                ListElement { imagePath: "/images/images/uklad_jezdny.png" }
-//                ListElement { imagePath: "/images/images/nozne_sterowanie.png" }
-//            }
 
             StatusBar{
                     anchors.bottom: parent.bottom
                     Label { text: "Read Only" }
             }
+
 
     }
 

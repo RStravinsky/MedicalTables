@@ -12,6 +12,8 @@ Item {
     property alias tableImg: table.source
     property alias bWidth: container.width
     property alias bHeight: container.height
+    signal clicked(string sState)
+
 
     Rectangle {
 
@@ -32,6 +34,7 @@ Item {
                     }
                 }
 
+
                 MouseArea {
                     id: mouseArea;
                     anchors.fill: parent
@@ -45,6 +48,7 @@ Item {
                         //_generator.generate()
                         //tables_class.setData();
                         grid.visible = true
+                        container.clicked(container.bName)
                     }
                     onReleased: {
                         if (containsMouse)
