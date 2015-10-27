@@ -3,6 +3,7 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
+import project.Tables 1.0
 
 Item {
     id: container
@@ -41,6 +42,8 @@ Item {
                         scaleAnimation.start()
                         numberAnim.start()
                         //_myClass.mainButtonClicked(container.bName)
+                        //_generator.generate()
+                        //tables_class.setData();
                         grid.visible = true
                     }
                     onReleased: {

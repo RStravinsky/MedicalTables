@@ -3,12 +3,15 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
+import project.Tables 1.0
 
 ApplicationWindow {
 
     title: qsTr("NoxiMove Schedule")
     visibility: "Maximized"
     visible: true
+
+
 
     MainForm {
 
@@ -59,10 +62,9 @@ ApplicationWindow {
                 anchors.margins: 20
                 cellWidth: grid.width/4
                 cellHeight: grid.height/4
-                //model: optionsModel
-                model: myModel
+                model: _myModel
                 delegate: optionsDelegate
-                visible: false
+                visible: true
             }
 
             Component {
@@ -81,20 +83,22 @@ ApplicationWindow {
                         height: wrapper.width-10
                         smooth: true
                         opacity: 0.4
-                        state: "UNCHECKED"
+                        state: imageState
 
                         MouseArea {
                             id: mouseArea;
                             anchors.fill: itemImage
                             hoverEnabled: true
                             onClicked: {
-                                checkedAnimation.start()
-                                itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
-                                grid.currentIndex = index
-                                _myClass.buttonClicked(grid.currentIndex)
+                                if( animationActive == true) {
+                                    checkedAnimation.start()
+                                    itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
+                                    grid.currentIndex = index
+                                }
+                                //_myClass.buttonClicked(grid.currentIndex)
                             }
-                            onEntered: enteringAnimation.start()
-                            onExited:  exitingAnimation.start()
+                            onEntered: if( animationActive == true) enteringAnimation.start()
+                            onExited:  if( animationActive == true) exitingAnimation.start()
                         }
 
                         NumberAnimation {
@@ -150,25 +154,25 @@ ApplicationWindow {
 
             } // component
 
-            ListModel {
-                id: optionsModel
-                ListElement { imagePath: "/images/images/zaglowek.png" }
-                ListElement { imagePath: "/images/images/pilot.png" }
-                ListElement { imagePath: "/images/images/uklad_jezdny.png" }
-                ListElement { imagePath: "/images/images/nozne_sterowanie.png" }
-                ListElement { imagePath: "/images/images/zaglowek.png" }
-                ListElement { imagePath: "/images/images/pilot.png" }
-                ListElement { imagePath: "/images/images/uklad_jezdny.png" }
-                ListElement { imagePath: "/images/images/nozne_sterowanie.png" }
-                ListElement { imagePath: "/images/images/zaglowek.png" }
-                ListElement { imagePath: "/images/images/pilot.png" }
-                ListElement { imagePath: "/images/images/uklad_jezdny.png" }
-                ListElement { imagePath: "/images/images/nozne_sterowanie.png" }
-                ListElement { imagePath: "/images/images/zaglowek.png" }
-                ListElement { imagePath: "/images/images/pilot.png" }
-                ListElement { imagePath: "/images/images/uklad_jezdny.png" }
-                ListElement { imagePath: "/images/images/nozne_sterowanie.png" }
-            }
+//            ListModel {
+//                id: optionsModel
+//                ListElement { imagePath: "/images/images/zaglowek.png" }
+//                ListElement { imagePath: "/images/images/pilot.png" }
+//                ListElement { imagePath: "/images/images/uklad_jezdny.png" }
+//                ListElement { imagePath: "/images/images/nozne_sterowanie.png" }
+//                ListElement { imagePath: "/images/images/zaglowek.png" }
+//                ListElement { imagePath: "/images/images/pilot.png" }
+//                ListElement { imagePath: "/images/images/uklad_jezdny.png" }
+//                ListElement { imagePath: "/images/images/nozne_sterowanie.png" }
+//                ListElement { imagePath: "/images/images/zaglowek.png" }
+//                ListElement { imagePath: "/images/images/pilot.png" }
+//                ListElement { imagePath: "/images/images/uklad_jezdny.png" }
+//                ListElement { imagePath: "/images/images/nozne_sterowanie.png" }
+//                ListElement { imagePath: "/images/images/zaglowek.png" }
+//                ListElement { imagePath: "/images/images/pilot.png" }
+//                ListElement { imagePath: "/images/images/uklad_jezdny.png" }
+//                ListElement { imagePath: "/images/images/nozne_sterowanie.png" }
+//            }
 
             StatusBar{
                     anchors.bottom: parent.bottom
