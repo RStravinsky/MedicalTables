@@ -4,6 +4,9 @@
 #include <QRect>
 #include <QDebug>
 #include <QDesktopWidget>
+#include <QtQuick/QQuickView>
+#include <QGuiApplication>
+
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +15,9 @@ int main(int argc, char *argv[])
     app.setWindowIcon(QIcon("qrc:/images/logo.ico"));
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+
+
+
 
     return app.exec();
 }
