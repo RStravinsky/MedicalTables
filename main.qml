@@ -3,6 +3,7 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
+import MedicalTableComponent 1.0
 
 ApplicationWindow {
 
@@ -10,10 +11,11 @@ ApplicationWindow {
     visibility: "Maximized"
     visible: true
 
-
     MainForm {
 
             anchors.fill: parent
+
+            MedicalTable { id: optList }
 
             /* TOP FRAME */
             Rectangle
@@ -23,13 +25,12 @@ ApplicationWindow {
                 height: parent.height/5
                 visible: true
 
-                Behavior on scale {
-                    NumberAnimation {
-                        duration: 2000
-                        easing.type: Easing.OutBack
-                    }
-                }
-
+//                Behavior on scale {
+//                    NumberAnimation {
+//                        duration: 2000
+//                        easing.type: Easing.OutBack
+//                    }
+//                }
 
                 Row {
                     id: row
@@ -41,15 +42,30 @@ ApplicationWindow {
 
                     property real itemWidth : ((width + spacing) / 3) - spacing;
 
-                    Tbutton { id: t2button; bWidth: parent.itemWidth; bHeight: parent.height;
-                            titleImg: "/images/images/t2logo.png"; tableImg: "/images/images/t2izo.png";
-                            //onClicked:
+                    Tbutton {
+                        bName: "T2";
+                        bWidth: row.itemWidth;
+                        bHeight: row.height;
+                        titleImg: "/images/images/t2logo.png";
+                        tableImg: "/images/images/t2izo.png";
+                        onClicked: optList.setDataList(bName)
                     }
-                    Tbutton { id: t3button; bWidth: parent.itemWidth; bHeight: parent.height;
-                            titleImg: "/images/images/t3logo.png"; tableImg: "/images/images/t3izo.png"
+                    Tbutton {
+                        bName: "T3";
+                        bWidth: row.itemWidth;
+                        bHeight: row.height;
+                        titleImg: "/images/images/t3logo.png";
+                        tableImg: "/images/images/t3izo.png"
+                        onClicked: optList.setDataList(bName)
                     }
-                    Tbutton { id: t7button; bWidth: parent.itemWidth; bHeight: parent.height;
-                            titleImg: "/images/images/t7logo.png"; tableImg: "/images/images/t7izo.png"
+                    Tbutton {
+                        bName: "T7";
+                        bWidth: row.itemWidth;
+                        bHeight: row.height;
+                        titleImg: "/images/images/t7logo.png";
+                        tableImg: "/images/images/t7izo.png"
+                        onClicked: optList.setDataList(bName)
+
                     }
 
                     visible: true
@@ -58,52 +74,54 @@ ApplicationWindow {
             /*************/
 
             GridView {
-                id: dndGrid
+                property bool cond:true;
+
+                id: grid
                 height: parent.height - frame.height - 150
                 width: parent.width/3
                 anchors.top: frame.bottom
                 anchors.right: parent.right
                 anchors.margins: 20
-                cellWidth: dndGrid.width/4
-                cellHeight: dndGrid.height/4
-                model: dndModel
-                delegate: dndDelegate
+                cellWidth: grid.width/4
+                cellHeight: grid.height/4
+                model: optList.dataList
+                delegate: optionsDelegate
+                visible: false
             }
 
             Component {
-
-                id: dndDelegate
+                id: optionsDelegate
 
                 Item {
                     id: wrapper
-                    width: dndGrid.cellWidth-10
-                    height: dndGrid.cellHeight-10
-
+                    width: grid.cellWidth-10
+                    height: grid.cellHeight-10
 
                     Image {
-
-                        property bool active: false
                         id: itemImage
                         source: imagePath
-                        anchors.centerIn: parent
-                        width: parent.width-10
-                        height: parent.width-10
+                        anchors.centerIn: wrapper
+                        width: wrapper.width-10
+                        height: wrapper.width-10
                         smooth: true
                         opacity: 0.4
-                        state: state
-
+                        state: imageState
 
                         MouseArea {
                             id: mouseArea;
-                            anchors.fill: parent
+                            anchors.fill: itemImage
                             hoverEnabled: true
                             onClicked: {
+                                if(animationActive == true) {
                                 checkedAnimation.start()
-                                parent.state == "CHECKED" ? parent.state = "UNCHECKED" : parent.state = "CHECKED"
+                                itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
+                                grid.currentIndex = index
+                                optList.buttonClicked(grid.currentIndex)
+                                }
                             }
-                            onEntered: enteringAnimation.start()
-                            onExited:  exitingAnimation.start()
 
+                            onEntered: if(animationActive == true) enteringAnimation.start()
+                            onExited:  if(animationActive == true) exitingAnimation.start()
                         }
 
                         NumberAnimation {
@@ -159,85 +177,13 @@ ApplicationWindow {
 
             } // component
 
-            ListModel {
-                id: dndModel
-                ListElement {
-                    imagePath: "/images/images/zaglowek.png";
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/pilot.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/uklad_jezdny.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/nozne_sterowanie.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/zaglowek.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/pilot.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/uklad_jezdny.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/nozne_sterowanie.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/zaglowek.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/pilot.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/uklad_jezdny.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/nozne_sterowanie.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/zaglowek.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/pilot.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/uklad_jezdny.png"
-                    state: "CHECKED"
-                }
-                ListElement {
-                    imagePath: "/images/images/nozne_sterowanie.png"
-                    state: "CHECKED"
-                }
-            }
-
-            function
-
-
             StatusBar{
                     anchors.bottom: parent.bottom
                     Label { text: "Read Only" }
             }
 
+
     }
-
-
 
     MessageDialog {
         id: messageDialog

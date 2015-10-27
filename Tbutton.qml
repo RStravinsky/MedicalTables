@@ -6,6 +6,7 @@ import QtQuick.Layouts 1.1
 
 Item {
     id: container
+    property string bName
     property alias titleImg: title.source
     property alias tableImg: table.source
     property alias bWidth: container.width
@@ -42,11 +43,9 @@ Item {
                     onClicked: {
                         scaleAnimation.start()
                         numberAnim.start()
-
-                       if(rectangle.state == "ENTERED")
-                            container.clicked("UNCHECKED");
-                       else
-                           container.clicked("CHECKED");
+                        //_myClass.mainButtonClicked(container.bName)
+                        grid.visible = true
+                        container.clicked(container.bName)
                     }
                     onReleased: {
                         if (containsMouse)
