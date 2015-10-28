@@ -13,7 +13,6 @@ Item {
     property alias bHeight: container.height
     signal clicked(string sState)
 
-
     Rectangle {
 
                 id: rectangle

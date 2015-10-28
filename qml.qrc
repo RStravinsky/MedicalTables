@@ -16,5 +16,8 @@
         <file>images/uklad_jezdny.png</file>
         <file>images/pilot.png</file>
         <file>images/nozne_sterowanie.png</file>
+        <file>images/t2main.png</file>
+        <file>images/t3main.png</file>
+        <file>images/t7main.png</file>
     </qresource>
 </RCC>

@@ -3,7 +3,7 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
-import MedicalTableComponent 1.0
+import ItemsListComponent 1.0
 
 ApplicationWindow {
 
@@ -11,11 +11,13 @@ ApplicationWindow {
     visibility: "Maximized"
     visible: true
 
+
+
     MainForm {
 
             anchors.fill: parent
 
-            MedicalTable { id: optList }
+            ItemsList { id: optList }
 
             /* TOP FRAME */
             Rectangle
@@ -48,7 +50,10 @@ ApplicationWindow {
                         bHeight: row.height;
                         titleImg: "/images/images/t2logo.png";
                         tableImg: "/images/images/t2izo.png";
-                        onClicked: optList.setDataList(bName)
+                        onClicked: {
+                            optList.setItemsList(bName)
+                            mainImage.source = "/images/images/t2main.png";
+                        }
                     }
                     Tbutton {
                         bName: "T3";
@@ -56,7 +61,10 @@ ApplicationWindow {
                         bHeight: row.height;
                         titleImg: "/images/images/t3logo.png";
                         tableImg: "/images/images/t3izo.png"
-                        onClicked: optList.setDataList(bName)
+                        onClicked: {
+                            optList.setItemsList(bName)
+                            mainImage.source = "/images/images/t3main.png";
+                        }
                     }
                     Tbutton {
                         bName: "T7";
@@ -64,8 +72,10 @@ ApplicationWindow {
                         bHeight: row.height;
                         titleImg: "/images/images/t7logo.png";
                         tableImg: "/images/images/t7izo.png"
-                        onClicked: optList.setDataList(bName)
-
+                        onClicked: {
+                            optList.setItemsList(bName)
+                            mainImage.source = "/images/images/t7main.png";
+                        }
                     }
 
                     visible: true
@@ -73,20 +83,45 @@ ApplicationWindow {
             }
             /*************/
 
+            Rectangle {
+                id: mainImageRectangle
+                visible: true
+                width: parent.width - grid.width - row.anchors.margins
+                height: grid.height
+                anchors.top: frame.bottom
+                anchors.left: parent.left
+                anchors.rightMargin: 20
+
+                Image {
+                    id: mainImage
+                    anchors.fill: parent
+                    opacity: 1.0
+                    visible: true
+                }
+
+//                PropertyAnimation {
+//                    id: moveAnimation
+//                    target: mainImageRectangle
+//                    property: "right"
+//                    from:
+//                }
+
+            }
+
             GridView {
                 property bool cond:true;
 
                 id: grid
                 height: parent.height - frame.height - 150
-                width: parent.width/3
+                width: parent.width/3 - row.anchors.margins
                 anchors.top: frame.bottom
                 anchors.right: parent.right
                 anchors.margins: 20
                 cellWidth: grid.width/4
                 cellHeight: grid.height/4
-                model: optList.dataList
+                model: optList.itemsList
                 delegate: optionsDelegate
-                visible: false
+                visible: true
             }
 
             Component {
@@ -116,7 +151,7 @@ ApplicationWindow {
                                 checkedAnimation.start()
                                 itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
                                 grid.currentIndex = index
-                                optList.buttonClicked(grid.currentIndex)
+                                optList.itemClicked(grid.currentIndex)
                                 }
                             }
 
@@ -176,6 +211,7 @@ ApplicationWindow {
                 } // item
 
             } // component
+
 
             StatusBar{
                     anchors.bottom: parent.bottom
