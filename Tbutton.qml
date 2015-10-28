@@ -43,7 +43,6 @@ Item {
                     onClicked: {
                         scaleAnimation.start()
                         numberAnim.start()
-                        //_myClass.mainButtonClicked(container.bName)
                         grid.visible = true
                         container.clicked(container.bName)
                     }

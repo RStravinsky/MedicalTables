@@ -2,8 +2,7 @@ TEMPLATE = app
 
 QT += qml quick widgets gui
 
-SOURCES += main.cpp \
-    medicaltable.cpp
+SOURCES += main.cpp
 
 RESOURCES += qml.qrc
 
@@ -19,5 +18,4 @@ QML_IMPORT_PATH =
 # Default rules for deployment.
 include(deployment.pri)
 
-HEADERS += \
-    medicaltable.h
+HEADERS +=
