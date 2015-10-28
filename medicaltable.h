@@ -5,14 +5,12 @@
 #include <QObject>
 #include <QQmlListProperty>
 
-
 class MedicalTable : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString imagePath READ imagePath WRITE setImagePath NOTIFY pathChanged)
     Q_PROPERTY(QString imageState READ imageState WRITE setImageState NOTIFY stateChanged)
     Q_PROPERTY(bool animationActive READ animationActive WRITE setAnimationActive NOTIFY animationActiveChanged)
-    Q_PROPERTY(QQmlListProperty<QObject> dataList READ getDataList NOTIFY signalQmlDataListChanged)
 
 public:
     explicit MedicalTable(QObject *parent = 0);
@@ -21,11 +19,14 @@ public:
 
     inline QString imagePath()
     {
+        qDebug() << "imagePath()" << endl;
         return m_imagePath;
     }
 
     inline void setImagePath( const QString & path )
     {
+        qDebug() << "setImagePath()" << endl;
+
         if ( path != m_imagePath )
         {
            m_imagePath = path;
@@ -35,11 +36,13 @@ public:
 
     inline QString imageState()
     {
+        qDebug() << "imageState()" << endl;
         return m_imageState;
     }
 
     inline void setImageState( const QString & state )
     {
+        qDebug() << "setImageState()" << endl;
         if ( state != m_imageState )
         {
            m_imageState = state;
@@ -49,11 +52,14 @@ public:
 
     inline bool animationActive()
     {
+        qDebug() << "animationActive()" << endl;
         return m_animationActive;
     }
 
     inline void setAnimationActive( const bool & active )
     {
+        qDebug() << "setAnimationActive()" << endl;
+
         if ( active != m_animationActive )
         {
            m_animationActive = active;
@@ -61,27 +67,17 @@ public:
         }
     }
 
-    Q_INVOKABLE QQmlListProperty<QObject> getDataList();
-    Q_INVOKABLE void setDataList(const QString & button);
-    Q_INVOKABLE void clearList();
-
-
 public slots:
-    void buttonClicked(const int &in);
-    void mainButtonClicked( const QString &in);
 
 signals:
     void pathChanged( QString path );
     void stateChanged( QString state );
     void animationActiveChanged( bool active );
-    void signalQmlDataListChanged(QQmlListProperty<QObject> aList );
 
 private:
     QString m_imagePath;
     QString m_imageState;
     bool m_animationActive;
-    QList<QObject*> dataList;
-
 };
 
 #endif // MEDICALTABLE_H

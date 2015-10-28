@@ -3,7 +3,7 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
-import MedicalTableComponent 1.0
+import ItemsListComponent 1.0
 
 ApplicationWindow {
 
@@ -17,7 +17,7 @@ ApplicationWindow {
 
             anchors.fill: parent
 
-            MedicalTable { id: optList }
+            ItemsList { id: optList }
 
             /* TOP FRAME */
             Rectangle
@@ -50,7 +50,7 @@ ApplicationWindow {
                         bHeight: row.height;
                         titleImg: "/images/images/t2logo.png";
                         tableImg: "/images/images/t2izo.png";
-                        onClicked: optList.setDataList(bName)
+                        onClicked: optList.setItemsList(bName)
                     }
                     Tbutton {
                         bName: "T3";
@@ -58,7 +58,7 @@ ApplicationWindow {
                         bHeight: row.height;
                         titleImg: "/images/images/t3logo.png";
                         tableImg: "/images/images/t3izo.png"
-                        onClicked: optList.setDataList(bName)
+                        onClicked: optList.setItemsList(bName)
                     }
                     Tbutton {
                         bName: "T7";
@@ -66,7 +66,7 @@ ApplicationWindow {
                         bHeight: row.height;
                         titleImg: "/images/images/t7logo.png";
                         tableImg: "/images/images/t7izo.png"
-                        onClicked: optList.setDataList(bName)
+                        onClicked: optList.setItemsList(bName)
 
                     }
 
@@ -86,7 +86,7 @@ ApplicationWindow {
                 anchors.margins: 20
                 cellWidth: grid.width/4
                 cellHeight: grid.height/4
-                model: optList.dataList
+                model: optList.itemsList
                 delegate: optionsDelegate
                 visible: true
             }
@@ -118,7 +118,7 @@ ApplicationWindow {
                                 checkedAnimation.start()
                                 itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
                                 grid.currentIndex = index
-                                optList.buttonClicked(grid.currentIndex)
+                                optList.itemClicked(grid.currentIndex)
                                 }
                             }
 

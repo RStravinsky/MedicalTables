@@ -4,7 +4,8 @@ QT += qml quick widgets gui
 
 
 SOURCES += main.cpp \
-    medicaltable.cpp
+    medicaltable.cpp \
+    itemslist.cpp
 
 RESOURCES += qml.qrc
 
@@ -21,5 +22,6 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    medicaltable.h
+    medicaltable.h \
+    itemslist.h
 

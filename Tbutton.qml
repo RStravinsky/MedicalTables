@@ -3,7 +3,6 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
-import project.Tables 1.0
 
 Item {
     id: container
@@ -13,7 +12,6 @@ Item {
     property alias bWidth: container.width
     property alias bHeight: container.height
     signal clicked(string sState)
-
 
     Rectangle {
 
