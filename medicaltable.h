@@ -8,63 +8,25 @@
 class MedicalTable : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString imagePath READ imagePath WRITE setImagePath NOTIFY pathChanged)
-    Q_PROPERTY(QString imageState READ imageState WRITE setImageState NOTIFY stateChanged)
-    Q_PROPERTY(bool animationActive READ animationActive WRITE setAnimationActive NOTIFY animationActiveChanged)
+    Q_PROPERTY(QString imagePath READ imagePath NOTIFY pathChanged)
+    Q_PROPERTY(QString imageState READ imageState NOTIFY stateChanged)
+    Q_PROPERTY(bool animationActive READ animationActive NOTIFY animationActiveChanged)
 
 public:
     explicit MedicalTable(QObject *parent = 0);
     MedicalTable(QString path, QString state, bool animationActive): m_imagePath(path),
     m_imageState(state), m_animationActive(animationActive){}
 
-    inline QString imagePath()
-    {
-        qDebug() << "imagePath()" << endl;
+    inline QString imagePath() const {
         return m_imagePath;
     }
 
-    inline void setImagePath( const QString & path )
-    {
-        qDebug() << "setImagePath()" << endl;
-
-        if ( path != m_imagePath )
-        {
-           m_imagePath = path;
-           emit pathChanged( path );
-        }
-    }
-
-    inline QString imageState()
-    {
-        qDebug() << "imageState()" << endl;
+    inline QString imageState() const {
         return m_imageState;
     }
 
-    inline void setImageState( const QString & state )
-    {
-        qDebug() << "setImageState()" << endl;
-        if ( state != m_imageState )
-        {
-           m_imageState = state;
-           emit stateChanged( state );
-        }
-    }
-
-    inline bool animationActive()
-    {
-        qDebug() << "animationActive()" << endl;
+    inline bool animationActive() const {
         return m_animationActive;
-    }
-
-    inline void setAnimationActive( const bool & active )
-    {
-        qDebug() << "setAnimationActive()" << endl;
-
-        if ( active != m_animationActive )
-        {
-           m_animationActive = active;
-           emit animationActiveChanged( active );
-        }
     }
 
 public slots:

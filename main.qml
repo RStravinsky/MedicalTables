@@ -27,13 +27,6 @@ ApplicationWindow {
                 height: parent.height/5
                 visible: true
 
-//                Behavior on scale {
-//                    NumberAnimation {
-//                        duration: 2000
-//                        easing.type: Easing.OutBack
-//                    }
-//                }
-
                 Row {
                     id: row
                     spacing: 10
@@ -67,7 +60,6 @@ ApplicationWindow {
                         titleImg: "/images/images/t7logo.png";
                         tableImg: "/images/images/t7izo.png"
                         onClicked: optList.setItemsList(bName)
-
                     }
 
                     visible: true
@@ -79,8 +71,8 @@ ApplicationWindow {
                 property bool cond:true;
 
                 id: grid
-                height: parent.height - frame.height - 150
-                width: parent.width/3
+                height: parent.height - frame.height + 50// - 150
+                width: parent.width/2.5
                 anchors.top: frame.bottom
                 anchors.right: parent.right
                 anchors.margins: 20
