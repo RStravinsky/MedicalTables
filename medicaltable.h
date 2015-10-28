@@ -17,18 +17,16 @@ public:
     MedicalTable(QString path, QString state, bool animationActive): m_imagePath(path),
     m_imageState(state), m_animationActive(animationActive){}
 
-    inline QString imagePath()
-    {
+    inline QString imagePath() const {
         return m_imagePath;
     }
 
-    inline QString imageState()
-    {
+    inline QString imageState() const {
         return m_imageState;
     }
 
-    inline bool animationActive()
-    {
+    inline bool animationActive() const {
+
         return m_animationActive;
     }
 

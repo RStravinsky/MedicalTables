@@ -27,13 +27,6 @@ ApplicationWindow {
                 height: parent.height/5
                 visible: true
 
-//                Behavior on scale {
-//                    NumberAnimation {
-//                        duration: 2000
-//                        easing.type: Easing.OutBack
-//                    }
-//                }
-
                 Row {
                     id: row
                     spacing: 10
@@ -90,7 +83,9 @@ ApplicationWindow {
                 height: grid.height
                 anchors.top: frame.bottom
                 anchors.left: parent.left
+                anchors.right: grid.left
                 anchors.rightMargin: 20
+
 
                 Image {
                     id: mainImage
@@ -103,7 +98,10 @@ ApplicationWindow {
 //                    id: moveAnimation
 //                    target: mainImageRectangle
 //                    property: "right"
-//                    from:
+//                    from: frame.left
+//                    to: grid.right
+//                    duration: 1000
+//                    easing.type: Easing.OutBack
 //                }
 
             }
@@ -112,13 +110,13 @@ ApplicationWindow {
                 property bool cond:true;
 
                 id: grid
-                height: parent.height - frame.height - 150
-                width: parent.width/3 - row.anchors.margins
+                height: parent.height - frame.height - 200
+                width: parent.width/2.5
                 anchors.top: frame.bottom
                 anchors.right: parent.right
                 anchors.margins: 20
-                cellWidth: grid.width/4
-                cellHeight: grid.height/4
+                cellWidth: grid.width/4 - 5
+                cellHeight: grid.height/3 - 5
                 model: optList.itemsList
                 delegate: optionsDelegate
                 visible: true

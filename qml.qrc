@@ -12,12 +12,28 @@
         <file>images/t3logo.png</file>
         <file>images/t7izo.png</file>
         <file>images/t7logo.png</file>
-        <file>images/zaglowek.png</file>
-        <file>images/uklad_jezdny.png</file>
-        <file>images/pilot.png</file>
-        <file>images/nozne_sterowanie.png</file>
         <file>images/t2main.png</file>
         <file>images/t3main.png</file>
         <file>images/t7main.png</file>
+        <file>images/bolser.png</file>
+        <file>images/belt_holder.png</file>
+        <file>images/chair_position.png</file>
+        <file>images/chassis.png</file>
+        <file>images/foot_control.png</file>
+        <file>images/remote_control.png</file>
+        <file>images/sheet_holder.png</file>
+        <file>images/pins.png</file>
+        <file>images/electric_top.png</file>
+        <file>images/plug.png</file>
+        <file>images/belt_holder_CH.png</file>
+        <file>images/bolser_CH.png</file>
+        <file>images/chassis_CH.png</file>
+        <file>images/electric_regulation_CH.png</file>
+        <file>images/electric_top_CH.png</file>
+        <file>images/chair_position_L.png</file>
+        <file>images/electric_top_L.png</file>
+        <file>images/pins_L.png</file>
+        <file>images/plug_L.png</file>
+        <file>images/angle_regulation_CH.png</file>
     </qresource>
 </RCC>
