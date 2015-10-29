@@ -14,20 +14,19 @@ Item {
 
     Rectangle {
                 id: rectangle
-                color: "#e4d8d8"
-                border.color: "transparent"
-                border.width: 3
-                radius: 10
                 anchors.fill: parent
+                color: "lightgray"
+                border.color: "transparent"
+                border.width: 6
+                radius: 20
+                smooth: true
                 gradient: Gradient {
-                    GradientStop {
-                        position: 0.00;
-                        color: "#e0d9d9";
-                    }
-                    GradientStop {
-                        position: 1.00;
-                        color: "#ffffff";
-                    }
+                    GradientStop { position: 0;    color: "#88FFFFFF" }
+                    GradientStop { position: .1;   color: "#55FFFFFF" }
+                    GradientStop { position: .5;   color: "#33FFFFFF" }
+                    GradientStop { position: .501; color: "#11000000" }
+                    GradientStop { position: .8;   color: "#11FFFFFF" }
+                    GradientStop { position: 1;    color: "#55FFFFFF" }
                 }
 
                 Row {
@@ -57,10 +56,15 @@ Item {
                     onEntered: rectangle.state = "ENTERED"
                     onExited: rectangle.state = "EXITED"
                     onClicked: {
+
                         clickedAnimation.start()
                         optList.mainButtonClicked(container.bName)
                         optList.setItemsList(bName)
                         mainImageRectangle.visible = true
+                        logoNoxi.visible = false
+                        logoMove.visible = false
+                        glowMove.visible = false
+                        glowNoxi.visible = false
                         if ( bName == "T2")
                         {
                             imageT2.visible = true
@@ -94,8 +98,8 @@ Item {
                         property: "scale"
                         from: 0
                         to: 1
-                        duration: 200
-                        easing.type: Easing.InBack
+                        duration: 300
+                        easing.type: Easing.InCirc
                     }
 
                     NumberAnimation {
@@ -133,16 +137,16 @@ Item {
                         from: "EXITED"
                         to: "ENTERED"
                         ColorAnimation {
-                            target: rectangle
-                            duration: 600
+                            target: rectangle.border
+                            duration: 1000
                         }
                     },
                     Transition {
                         from: "ENTERED"
                         to: "EXITED"
                         ColorAnimation {
-                            target: rectangle
-                            duration: 600
+                            target: rectangle.border
+                            duration: 1000
                         }
                     }
                 ]
