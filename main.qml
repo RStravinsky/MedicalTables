@@ -68,7 +68,7 @@ ApplicationWindow {
             /* MAIN IMAGE */
             Rectangle {
                 id: mainImageRectangle
-                color: "lightblue"
+                //color: "lightblue"
                 visible: false
                 width: parent.width - grid.width - row.anchors.margins
                 height: grid.height
@@ -115,6 +115,7 @@ ApplicationWindow {
             }
             /*************/
 
+
             /*  OPTIONS LIST */
             GridView {
                 id: grid
@@ -128,7 +129,9 @@ ApplicationWindow {
                 model: optList.itemsList
                 delegate: optionsDelegate
                 visible: true
+
             }
+
 
             Component {
                 id: optionsDelegate
