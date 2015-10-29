@@ -1,7 +1,6 @@
 #ifndef MEDICALTABLE_H
 #define MEDICALTABLE_H
 
-#include <QDebug>
 #include <QObject>
 #include <QQmlListProperty>
 

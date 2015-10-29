@@ -1,4 +1,4 @@
-import QtQuick 2.4
+import QtQuick 2.2
 import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
@@ -11,10 +11,8 @@ Item {
     property alias tableImg: table.source
     property alias bWidth: container.width
     property alias bHeight: container.height
-    signal clicked(string sState)
 
     Rectangle {
-
                 id: rectangle
                 color: "#e4d8d8"
                 border.color: "transparent"
@@ -32,6 +30,25 @@ Item {
                     }
                 }
 
+                Row {
+                    spacing: 2
+                    anchors.fill: rectangle
+                    anchors.margins: 5
+
+                    Image {
+                        id: title;
+                        width: (rectangle.width/2 - 10);
+                        height: (rectangle.height - 10);
+                        opacity: 0.5
+                    }
+                    Image {
+                        id: table;
+                        width: (rectangle.width/2 - 10);
+                        height: (rectangle.height - 10);
+                        opacity: 1
+                        antialiasing: true
+                    }
+                }
 
                 MouseArea {
                     id: mouseArea;
@@ -40,48 +57,59 @@ Item {
                     onEntered: rectangle.state = "ENTERED"
                     onExited: rectangle.state = "EXITED"
                     onClicked: {
-                        scaleAnimation.start()
-                        numberAnim.start()
-                        grid.visible = true
-                        container.clicked(container.bName)
-                    }
-                    onReleased: {
-                        if (containsMouse)
-                            rectangle.state="HOVERING";
-                        else
-                            rectangle.state="EXITED";
+                        clickedAnimation.start()
+                        optList.mainButtonClicked(container.bName)
+                        optList.setItemsList(bName)
+                        mainImageRectangle.visible = true
+                        if ( bName == "T2")
+                        {
+                            imageT2.visible = true
+                            imageT3.visible = false
+                            imageT7.visible = false
                         }
+
+                        if ( bName == "T3")
+                        {
+                            imageT2.visible = false
+                            imageT3.visible = true
+                            imageT7.visible = false
+                        }
+
+                        if ( bName == "T7")
+                        {
+                            imageT2.visible = false
+                            imageT3.visible = false
+                            imageT7.visible = true
+                        }
+                        grid.visible = true
+                    }
                 }
 
-                PropertyAnimation{
-                    id:scaleAnimation
-                    target: rectangle
-                    property: "scale"
-                    from: 0
-                    to: 1
-                    duration: 500
-                    easing.type: Easing.OutCirc
-                }
+                ParallelAnimation {
 
-                NumberAnimation {
-                    id:numberAnim
-                    target: rectangle
-                    property: "opacity"
-                    from: 0
-                    to: 1
-                    duration: 500
-                    easing.type: Easing.OutSine
+                    id: clickedAnimation
+                    NumberAnimation{
+                        id:scaleAnimation
+                        target: rectangle
+                        property: "scale"
+                        from: 0
+                        to: 1
+                        duration: 200
+                        easing.type: Easing.InBack
+                    }
+
+                    NumberAnimation {
+                        id:numberAnim
+                        target: rectangle
+                        property: "opacity"
+                        from: 0
+                        to: 1
+                        duration: 300
+                        easing.type: Easing.OutSine
+                    }
                 }
 
                 states: [
-                    State {
-                         name: "HOVERING"
-                         PropertyChanges {
-                         target: rectangle
-                         border.color: "lightgray"
-                         opacity: 1.0
-                         }
-                    },
                     State {
                         name: "ENTERED"
                         PropertyChanges {
@@ -95,26 +123,18 @@ Item {
                         PropertyChanges {
                             target: rectangle
                             border.color: "transparent"
-
+                            opacity: 1.0
                         }
                     }
                 ]
 
                 transitions: [
                     Transition {
-                         from: "EXITED";
-                         to: "HOVERING"
-                          ColorAnimation {
-                              target: rectangle
-                              duration: 200
-                          }
-                    },
-                    Transition {
                         from: "EXITED"
                         to: "ENTERED"
                         ColorAnimation {
                             target: rectangle
-                            duration: 800
+                            duration: 600
                         }
                     },
                     Transition {
@@ -122,32 +142,10 @@ Item {
                         to: "EXITED"
                         ColorAnimation {
                             target: rectangle
-                            duration: 800
+                            duration: 600
                         }
                     }
                 ]
-
-                Row {
-                        spacing: 2
-                        anchors.fill: rectangle
-                        anchors.margins: 5
-
-                        Image {
-                            id: title;
-                            width: (rectangle.width/2 - 10);
-                            height: (rectangle.height - 10);
-                            opacity: 0.5
-                        }
-                        Image {
-                            id: table;
-                            width: (rectangle.width/2 - 10);
-                            height: (rectangle.height - 10);
-                            opacity: 1
-                            antialiasing: true
-                        }
-                    }
-
-
     }
 
 }
