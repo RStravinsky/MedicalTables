@@ -3,6 +3,7 @@
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
         <file>Tbutton.qml</file>
+        <file>StartupScreen.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>logo.ico</file>
@@ -35,5 +36,8 @@
         <file>images/t2izo.png</file>
         <file>images/t3izo.png</file>
         <file>images/t7izo.png</file>
+        <file>images/logoNOXImove.png</file>
+        <file>images/logoMOVE.png</file>
+        <file>images/logoNOXI.png</file>
     </qresource>
 </RCC>
