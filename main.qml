@@ -7,15 +7,16 @@ import ItemsListComponent 1.0
 
 ApplicationWindow {
 
+    id: applicationWindow
     title: qsTr("NoxiMove Schedule")
-    visibility: "Maximized"
     visible: true
-
-
+    visibility: "Maximized"
+    color: "lightblue"
 
     MainForm {
-
+            id: mainform
             anchors.fill: parent
+            visible: true
 
             ItemsList { id: optList }
 
@@ -26,6 +27,7 @@ ApplicationWindow {
                 width: parent.width
                 height: parent.height/5
                 visible: true
+                color: "lightblue"
 
                 Row {
                     id: row
@@ -38,77 +40,83 @@ ApplicationWindow {
                     property real itemWidth : ((width + spacing) / 3) - spacing;
 
                     Tbutton {
-                        bName: "T2";
-                        bWidth: row.itemWidth;
-                        bHeight: row.height;
-                        titleImg: "/images/images/t2logo.png";
-                        tableImg: "/images/images/t2izo.png";
-                        onClicked: {
-                            optList.setItemsList(bName)
-                            mainImage.source = "/images/images/t2main.png";
-                        }
+                        bName: "T2"
+                        bWidth: row.itemWidth
+                        bHeight: row.height
+                        titleImg: "/images/images/t2logo.png"
+                        tableImg: "/images/images/t2izo.png"
                     }
                     Tbutton {
-                        bName: "T3";
-                        bWidth: row.itemWidth;
-                        bHeight: row.height;
-                        titleImg: "/images/images/t3logo.png";
+                        bName: "T3"
+                        bWidth: row.itemWidth
+                        bHeight: row.height
+                        titleImg: "/images/images/t3logo.png"
                         tableImg: "/images/images/t3izo.png"
-                        onClicked: {
-                            optList.setItemsList(bName)
-                            mainImage.source = "/images/images/t3main.png";
-                        }
                     }
                     Tbutton {
-                        bName: "T7";
-                        bWidth: row.itemWidth;
-                        bHeight: row.height;
-                        titleImg: "/images/images/t7logo.png";
+                        bName: "T7"
+                        bWidth: row.itemWidth
+                        bHeight: row.height
+                        titleImg: "/images/images/t7logo.png"
                         tableImg: "/images/images/t7izo.png"
-                        onClicked: {
-                            optList.setItemsList(bName)
-                            mainImage.source = "/images/images/t7main.png";
-                        }
                     }
-
                     visible: true
                 }
             }
             /*************/
 
+            /* MAIN IMAGE */
             Rectangle {
                 id: mainImageRectangle
-                visible: true
+                visible: false
                 width: parent.width - grid.width - row.anchors.margins
                 height: grid.height
                 anchors.top: frame.bottom
                 anchors.left: parent.left
                 anchors.right: grid.left
+                color: "lightblue"
                 anchors.rightMargin: 20
 
-
                 Image {
-                    id: mainImage
+                    id: imageT2
                     anchors.fill: parent
                     opacity: 1.0
-                    visible: true
+                    visible: false
+                    sourceSize.width: parent.width
+                    sourceSize.height: parent.height
+                    source: "/images/images/t2main.png"
+                    smooth: true
+                    asynchronous: true
                 }
 
-//                PropertyAnimation {
-//                    id: moveAnimation
-//                    target: mainImageRectangle
-//                    property: "right"
-//                    from: frame.left
-//                    to: grid.right
-//                    duration: 1000
-//                    easing.type: Easing.OutBack
-//                }
+                Image {
+                    id: imageT3
+                    anchors.fill: parent
+                    opacity: 1.0
+                    visible: false
+                    sourceSize.width: parent.width
+                    sourceSize.height: parent.height
+                    source: "/images/images/t3main.png"
+                    smooth: true
+                    asynchronous: true
+                }
 
+                Image {
+                    id: imageT7
+                    anchors.fill: parent
+                    opacity: 1.0
+                    visible: false
+                    sourceSize.width: parent.width
+                    sourceSize.height: parent.height
+                    source: "/images/images/t7main.png"
+                    smooth: true
+                    asynchronous: true
+                }
             }
+            /*************/
 
+            /*  OPTIONS LIST */
             GridView {
-                property bool cond:true;
-
                 id: grid
                 height: parent.height - frame.height - 200
                 width: parent.width/2.5
@@ -146,10 +154,10 @@ ApplicationWindow {
                             hoverEnabled: true
                             onClicked: {
                                 if(animationActive == true) {
-                                checkedAnimation.start()
-                                itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
-                                grid.currentIndex = index
-                                optList.itemClicked(grid.currentIndex)
+                                    checkedAnimation.start()
+                                    itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
+                                    grid.currentIndex = index
+                                    optList.itemClicked(grid.currentIndex)
                                 }
                             }
 
@@ -173,7 +181,7 @@ ApplicationWindow {
                             property: "scale"
                             from: 1
                             to: 1.3
-                            duration: 150
+                            duration: 100
                             easing.type: Easing.Linear
                         }
 
@@ -183,7 +191,7 @@ ApplicationWindow {
                             property: "scale"
                             from: 1.3
                             to: 1
-                            duration: 150
+                            duration: 100
                             easing.type: Easing.Linear
                         }
 
@@ -209,14 +217,12 @@ ApplicationWindow {
                 } // item
 
             } // component
-
+            /*************/
 
             StatusBar{
                     anchors.bottom: parent.bottom
                     Label { text: "Read Only" }
             }
-
-
     }
 
     MessageDialog {

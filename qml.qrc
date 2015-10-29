@@ -6,11 +6,8 @@
     </qresource>
     <qresource prefix="/images">
         <file>logo.ico</file>
-        <file>images/t2izo.png</file>
         <file>images/t2logo.png</file>
-        <file>images/t3izo.png</file>
         <file>images/t3logo.png</file>
-        <file>images/t7izo.png</file>
         <file>images/t7logo.png</file>
         <file>images/t2main.png</file>
         <file>images/t3main.png</file>
@@ -35,5 +32,8 @@
         <file>images/pins_L.png</file>
         <file>images/plug_L.png</file>
         <file>images/angle_regulation_CH.png</file>
+        <file>images/t2izo.png</file>
+        <file>images/t3izo.png</file>
+        <file>images/t7izo.png</file>
     </qresource>
 </RCC>

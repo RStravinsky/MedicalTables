@@ -2,6 +2,7 @@
 #define ITEMSLIST_H
 
 #include <QObject>
+#include <QDebug>
 #include <medicaltable.h>
 
 class ItemsList : public QObject
