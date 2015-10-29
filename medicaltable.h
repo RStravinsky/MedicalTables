@@ -26,6 +26,7 @@ public:
     }
 
     inline bool animationActive() const {
+
         return m_animationActive;
     }
 

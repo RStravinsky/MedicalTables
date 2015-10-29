@@ -2,7 +2,6 @@ TEMPLATE = app
 
 QT += qml quick widgets gui
 
-
 SOURCES += main.cpp \
     medicaltable.cpp \
     itemslist.cpp
@@ -24,4 +23,3 @@ include(deployment.pri)
 HEADERS += \
     medicaltable.h \
     itemslist.h
-

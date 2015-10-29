@@ -14,6 +14,7 @@ public:
     explicit ItemsList(QObject *parent = 0); 
 
     Q_INVOKABLE QQmlListProperty<QObject> getItemsList() {
+
        return QQmlListProperty<QObject>(this, itemsList);
     }
 

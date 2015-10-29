@@ -42,9 +42,6 @@ Item {
                     onClicked: {
                         scaleAnimation.start()
                         numberAnim.start()
-                        //_myClass.mainButtonClicked(container.bName)
-                        //_generator.generate()
-                        //tables_class.setData();
                         grid.visible = true
                         container.clicked(container.bName)
                     }

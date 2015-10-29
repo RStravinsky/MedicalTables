@@ -43,7 +43,10 @@ ApplicationWindow {
                         bHeight: row.height;
                         titleImg: "/images/images/t2logo.png";
                         tableImg: "/images/images/t2izo.png";
-                        onClicked: optList.setItemsList(bName)
+                        onClicked: {
+                            optList.setItemsList(bName)
+                            mainImage.source = "/images/images/t2main.png";
+                        }
                     }
                     Tbutton {
                         bName: "T3";
@@ -51,7 +54,10 @@ ApplicationWindow {
                         bHeight: row.height;
                         titleImg: "/images/images/t3logo.png";
                         tableImg: "/images/images/t3izo.png"
-                        onClicked: optList.setItemsList(bName)
+                        onClicked: {
+                            optList.setItemsList(bName)
+                            mainImage.source = "/images/images/t3main.png";
+                        }
                     }
                     Tbutton {
                         bName: "T7";
@@ -59,7 +65,10 @@ ApplicationWindow {
                         bHeight: row.height;
                         titleImg: "/images/images/t7logo.png";
                         tableImg: "/images/images/t7izo.png"
-                        onClicked: optList.setItemsList(bName)
+                        onClicked: {
+                            optList.setItemsList(bName)
+                            mainImage.source = "/images/images/t7main.png";
+                        }
                     }
 
                     visible: true
@@ -67,17 +76,47 @@ ApplicationWindow {
             }
             /*************/
 
+            Rectangle {
+                id: mainImageRectangle
+                visible: true
+                width: parent.width - grid.width - row.anchors.margins
+                height: grid.height
+                anchors.top: frame.bottom
+                anchors.left: parent.left
+                anchors.right: grid.left
+                anchors.rightMargin: 20
+
+
+                Image {
+                    id: mainImage
+                    anchors.fill: parent
+                    opacity: 1.0
+                    visible: true
+                }
+
+//                PropertyAnimation {
+//                    id: moveAnimation
+//                    target: mainImageRectangle
+//                    property: "right"
+//                    from: frame.left
+//                    to: grid.right
+//                    duration: 1000
+//                    easing.type: Easing.OutBack
+//                }
+
+            }
+
             GridView {
                 property bool cond:true;
 
                 id: grid
-                height: parent.height - frame.height + 50// - 150
+                height: parent.height - frame.height - 200
                 width: parent.width/2.5
                 anchors.top: frame.bottom
                 anchors.right: parent.right
                 anchors.margins: 20
-                cellWidth: grid.width/4
-                cellHeight: grid.height/4
+                cellWidth: grid.width/4 - 5
+                cellHeight: grid.height/3 - 5
                 model: optList.itemsList
                 delegate: optionsDelegate
                 visible: true
