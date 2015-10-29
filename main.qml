@@ -15,6 +15,7 @@ ApplicationWindow {
 
     MainForm {
 
+            id: mForm
             anchors.fill: parent
 
             ItemsList { id: optList }
@@ -68,6 +69,9 @@ ApplicationWindow {
                         onClicked: {
                             optList.setItemsList(bName)
                             mainImage.source = "/images/images/t7main.png";
+                            yAnimation.start()
+                            opacityAnimation.start()
+
                         }
                     }
 
@@ -76,16 +80,49 @@ ApplicationWindow {
             }
             /*************/
 
+
+            PropertyAnimation {
+                id: yAnimation
+                target: mainImageRectangle
+                properties: "y"
+                to: grid.y
+                duration: 200
+                easing.type: Easing.OutBack
+            }
+
+            PropertyAnimation {
+                id: opacityAnimation
+                target: mainImageRectangle
+                properties: "opacity"
+                to: 1.0
+                duration: 1000
+            }
+
+
+
             Rectangle {
                 id: mainImageRectangle
+                //color: "lightblue"
                 visible: true
                 width: parent.width - grid.width - row.anchors.margins
                 height: grid.height
-                anchors.top: frame.bottom
+                opacity: 0.0
+                z: -1
+                //anchors.top: frame.bottom
                 anchors.left: parent.left
                 anchors.right: grid.left
                 anchors.rightMargin: 20
-
+                y: mForm.y
+                gradient: Gradient {
+                    GradientStop {
+                        position: 0.00;
+                        color: "#e0d9d9";
+                    }
+                    GradientStop {
+                        position: 1.00;
+                        color: "#ffffff";
+                    }
+                }
 
                 Image {
                     id: mainImage
@@ -94,15 +131,6 @@ ApplicationWindow {
                     visible: true
                 }
 
-//                PropertyAnimation {
-//                    id: moveAnimation
-//                    target: mainImageRectangle
-//                    property: "right"
-//                    from: frame.left
-//                    to: grid.right
-//                    duration: 1000
-//                    easing.type: Easing.OutBack
-//                }
 
             }
 
@@ -212,6 +240,7 @@ ApplicationWindow {
 
 
             StatusBar{
+                    id: statBar
                     anchors.bottom: parent.bottom
                     Label { text: "Read Only" }
             }
