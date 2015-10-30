@@ -12,11 +12,13 @@ ApplicationWindow {
     title: qsTr("NoxiMove Schedule")
     visible: true
     visibility: "Maximized"
+    color: "white"
 
-//    Image {
-//        anchors.fill: parent
-//        source: "/images/images/"
-//    }
+    Image
+    {
+        anchors.fill: parent
+        source: "/images/images/white-background1.jpg"
+    }
 
     MainForm {
             id: mainform
@@ -132,6 +134,7 @@ ApplicationWindow {
                 width: parent.width
                 height: parent.height/5
                 visible: true
+                color: "transparent"
 
                 Row {
                     id: row
@@ -172,6 +175,7 @@ ApplicationWindow {
             /* MAIN IMAGE */
             Rectangle {
                 id: mainImageRectangle
+                color: "transparent"
                 visible: false
                 width: parent.width - grid.width - row.anchors.margins
                 height: grid.height
@@ -183,6 +187,7 @@ ApplicationWindow {
                 Image {
                     id: imageT2
                     anchors.fill: parent
+
                     opacity: 1.0
                     visible: false
                     sourceSize.width: parent.width
@@ -194,11 +199,11 @@ ApplicationWindow {
 
                 Image {
                     id: imageT3
-                    anchors.fill: parent
+                    anchors.centerIn: parent
                     opacity: 1.0
                     visible: false
-                    sourceSize.width: parent.width
-                    sourceSize.height: parent.height
+                    sourceSize.width: parent.width - 20
+                    sourceSize.height: parent.height - 20
                     source: "/images/images/t3main.png"
                     smooth: true
                     asynchronous: true
@@ -218,6 +223,7 @@ ApplicationWindow {
             }
             /*************/
 
+
             /*  OPTIONS LIST */
             GridView {
                 id: grid
@@ -231,7 +237,9 @@ ApplicationWindow {
                 model: optList.itemsList
                 delegate: optionsDelegate
                 visible: true
+
             }
+
 
             Component {
                 id: optionsDelegate
@@ -323,6 +331,7 @@ ApplicationWindow {
             /*************/
 
             StatusBar{
+                    id: statBar
                     anchors.bottom: parent.bottom
                     Label { text: "Read Only" }
             }

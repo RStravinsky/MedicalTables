@@ -3,6 +3,7 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
+import QtGraphicalEffects 1.0
 
 Item {
     id: container
@@ -17,30 +18,29 @@ Item {
                 anchors.fill: parent
                 color: "lightblue"
                 border.color: "transparent"
-                border.width: 6
+                border.width: 4
                 radius: 30
-                smooth: true
 
-                Rectangle {
-                    id: rectangle
-                    anchors.centerIn: parent
-                    width: parent.width - parent.border.width
-                    height: parent.height - parent.border.width
-                    radius:parent.radius - parent.border.width/2
-                    smooth: true
+          Rectangle {
 
-                    border.width: parent.border.width/2
-                    border.color: "#22FFFFFF"
+                  id:rectangle
+                  anchors.centerIn: parent
+                  width: parent.width - parent.border.width
+                  height: parent.height - parent.border.width
+                  radius:parent.radius - parent.border.width/2
+                  smooth: true
 
-                    gradient: Gradient {
-                        GradientStop { position: 0;    color: "#88FFFFFF" }
-                        GradientStop { position: .1;   color: "#55FFFFFF" }
-                        GradientStop { position: .5;   color: "#33FFFFFF" }
-                        GradientStop { position: .501; color: "#11000000" }
-                        GradientStop { position: .8;   color: "#11FFFFFF" }
-                        GradientStop { position: 1;    color: "#55FFFFFF" }
-                    }
+                  border.width: parent.border.width/2
+                  border.color: "#22FFFFFF"
 
+                  gradient: Gradient {
+                      GradientStop { position: 0;    color: "#88FFFFFF" }
+                      GradientStop { position: .1;   color: "#55FFFFFF" }
+                      GradientStop { position: .5;   color: "#33FFFFFF" }
+                      GradientStop { position: .501; color: "#11000000" }
+                      GradientStop { position: .8;   color: "#11FFFFFF" }
+                      GradientStop { position: 1;    color: "#55FFFFFF" }
+                  }
 
                 Row {
                     spacing: 2
@@ -74,6 +74,10 @@ Item {
                         optList.mainButtonClicked(container.bName)
                         optList.setItemsList(bName)
                         mainImageRectangle.visible = true
+                        logoNoxi.visible = false
+                        logoMove.visible = false
+                        glowMove.visible = false
+                        glowNoxi.visible = false
                         if ( bName == "T2")
                         {
                             imageT2.visible = true
@@ -127,7 +131,7 @@ Item {
                         name: "ENTERED"
                         PropertyChanges {
                             target: mainRectangle
-                            border.color: "lightgray"
+                            border.color: "gray"
                             opacity: 1.0
                         }
                     },
@@ -146,7 +150,7 @@ Item {
                         from: "EXITED"
                         to: "ENTERED"
                         ColorAnimation {
-                            target: rectangle.border
+                            target: mainRectangle.border
                             duration: 1000
                         }
                     },
@@ -154,13 +158,14 @@ Item {
                         from: "ENTERED"
                         to: "EXITED"
                         ColorAnimation {
-                            target: rectangle.border
+                            target: mainRectangle.border
                             duration: 1000
                         }
                     }
                 ]
-    }
+             }
+        }
 
     }
 
-}
+

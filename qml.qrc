@@ -9,9 +9,6 @@
         <file>images/t2logo.png</file>
         <file>images/t3logo.png</file>
         <file>images/t7logo.png</file>
-        <file>images/t2main.png</file>
-        <file>images/t3main.png</file>
-        <file>images/t7main.png</file>
         <file>images/bolser.png</file>
         <file>images/belt_holder.png</file>
         <file>images/chair_position.png</file>
@@ -35,8 +32,12 @@
         <file>images/t2izo.png</file>
         <file>images/t3izo.png</file>
         <file>images/t7izo.png</file>
+        <file>images/t2main.png</file>
+        <file>images/t3main.png</file>
+        <file>images/t7main.png</file>
         <file>images/logoNOXImove.png</file>
         <file>images/logoMOVE.png</file>
         <file>images/logoNOXI.png</file>
+        <file>images/white-background1.jpg</file>
     </qresource>
 </RCC>
