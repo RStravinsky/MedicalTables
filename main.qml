@@ -13,6 +13,11 @@ ApplicationWindow {
     visible: true
     visibility: "Maximized"
 
+//    Image {
+//        anchors.fill: parent
+//        source: "/images/images/"
+//    }
+
     MainForm {
             id: mainform
             anchors.fill: parent
