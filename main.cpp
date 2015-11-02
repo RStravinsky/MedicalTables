@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<ItemsList>("ItemsListComponent",1,0,"ItemsList");
 
-    Schedule sched("schedule.xlsx");
+    Schedule sched;
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("scheduleItem", (QObject *)&sched);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

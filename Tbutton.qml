@@ -3,6 +3,7 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
+//import QtGraphicalEffects 1.0
 
 Item {
     id: container
@@ -15,21 +16,30 @@ Item {
 
 
     Rectangle {
-                id: rectangle
+                id: mainRectangle
                 anchors.fill: parent
-                color: "lightgray"
-                border.color: "transparent"
-                border.width: 6
-                radius: 20
-                smooth: true
-                gradient: Gradient {
-                    GradientStop { position: 0;    color: "#88FFFFFF" }
-                    GradientStop { position: .1;   color: "#55FFFFFF" }
-                    GradientStop { position: .5;   color: "#33FFFFFF" }
-                    GradientStop { position: .501; color: "#11000000" }
-                    GradientStop { position: .8;   color: "#11FFFFFF" }
-                    GradientStop { position: 1;    color: "#55FFFFFF" }
-                }
+                color: "lightblue"
+                radius: 30
+                border.width: 5
+                border.color: "lightblue"
+
+                Rectangle {
+                    id: rectangle
+                    anchors.centerIn: mainRectangle
+                    color: "lightblue"
+                    width: mainRectangle.width - 10
+                    height: mainRectangle.height - 10
+                    radius: mainRectangle.radius - mainRectangle.border.width/2
+
+                    gradient: Gradient {
+                        GradientStop { position: 0;    color: "#88FFFFFF" }
+                        GradientStop { position: .1;   color: "#55FFFFFF" }
+                        GradientStop { position: .5;   color: "#33FFFFFF" }
+                        GradientStop { position: .501; color: "#11000000" }
+                        GradientStop { position: .8;   color: "#11FFFFFF" }
+                        GradientStop { position: 1;    color: "#55FFFFFF" }
+                    }
+
 
                 Row {
                     spacing: 2
@@ -59,21 +69,15 @@ Item {
                     onExited: rectangle.state = "EXITED"
                     onClicked: {
 
-
                         clickedAnimation.start()
                         optList.mainButtonClicked(container.bName)
                         optList.setItemsList(bName)
-                        mainImageRectangle.visible = true
-                        logoNoxi.visible = false
-                        logoMove.visible = false
-                        glowMove.visible = false
-                        glowNoxi.visible = false
                         if ( bName == "T2")
                         {
                             imageT2.visible = true
                             imageT3.visible = false
                             imageT7.visible = false
-                        }
+                       }
 
                         if ( bName == "T3")
                         {
@@ -90,8 +94,10 @@ Item {
 
                         }
                         grid.visible = true
-
-
+                        mainImageRectangle.visible = true
+                        initAnimation.visible = false
+                        colorArea.visible = true
+                        acceptButton.visible = true
                     }
                 }
 
@@ -100,7 +106,7 @@ Item {
                     id: clickedAnimation
                     NumberAnimation{
                         id:scaleAnimation
-                        target: rectangle
+                        target: mainRectangle
                         property: "scale"
                         from: 0
                         to: 1
@@ -110,7 +116,7 @@ Item {
 
                     NumberAnimation {
                         id:numberAnim
-                        target: rectangle
+                        target: mainRectangle
                         property: "opacity"
                         from: 0
                         to: 1
@@ -123,16 +129,16 @@ Item {
                     State {
                         name: "ENTERED"
                         PropertyChanges {
-                            target: rectangle
-                            border.color: "lightgray"
+                            target: mainRectangle
+                            border.color: "white"
                             opacity: 1.0
                         }
                     },
                     State {
                         name: "EXITED"
                         PropertyChanges {
-                            target: rectangle
-                            border.color: "transparent"
+                            target: mainRectangle
+                            border.color: "lightblue"
                             opacity: 1.0
                         }
                     }
@@ -143,20 +149,22 @@ Item {
                         from: "EXITED"
                         to: "ENTERED"
                         ColorAnimation {
-                            target: rectangle.border
-                            duration: 1000
+                            target: mainRectangle
+                            duration: 600
                         }
                     },
                     Transition {
                         from: "ENTERED"
                         to: "EXITED"
                         ColorAnimation {
-                            target: rectangle.border
-                            duration: 1000
+                            target: mainRectangle
+                            duration: 600
                         }
                     }
                 ]
+             }
+        }
+
     }
 
-}
 

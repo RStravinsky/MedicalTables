@@ -3,6 +3,11 @@
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
         <file>Tbutton.qml</file>
+        <file>InitAnimation.qml</file>
+        <file>TopFrame.qml</file>
+        <file>ColorArea.qml</file>
+        <file>AcceptButton.qml</file>
+        <file>Delegate.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>logo.ico</file>
@@ -32,11 +37,16 @@
         <file>images/t2izo.png</file>
         <file>images/t3izo.png</file>
         <file>images/t7izo.png</file>
-        <file>images/t2main.png</file>
-        <file>images/t3main.png</file>
-        <file>images/t7main.png</file>
         <file>images/logoNOXImove.png</file>
         <file>images/logoMOVE.png</file>
         <file>images/logoNOXI.png</file>
+        <file>images/t2main.png</file>
+        <file>images/t3main.png</file>
+        <file>images/t7main.png</file>
+        <file>images/back.png</file>
+        <file>images/background.jpg</file>
+        <file>images/tableColor.png</file>
+        <file>images/background1.jpg</file>
+        <file>images/frameColor.png</file>
     </qresource>
 </RCC>
