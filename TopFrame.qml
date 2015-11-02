@@ -48,7 +48,6 @@ Item
                 titleImg: "/images/images/t7logo.png"
                 tableImg: "/images/images/t7izo.png"
             }
-            visible: true
         }
     }
 }

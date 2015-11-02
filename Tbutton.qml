@@ -66,6 +66,9 @@ Item {
                     onEntered: rectangle.state = "ENTERED"
                     onExited: rectangle.state = "EXITED"
                     onClicked: {
+                        clickedAnimation.start()
+                        optList.mainButtonClicked(container.bName)
+                        optList.setItemsList(bName)
                         if ( bName == "T2")
                         {
                             imageT2.visible = true
@@ -87,11 +90,10 @@ Item {
                             imageT7.visible = true
                         }
                         grid.visible = true
-                        clickedAnimation.start()
-                        optList.mainButtonClicked(container.bName)
-                        optList.setItemsList(bName)
                         mainImageRectangle.visible = true
                         initAnimation.visible = false
+                        colorArea.visible = true
+                        acceptButton.visible = true
                     }
                 }
 

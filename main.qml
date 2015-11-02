@@ -13,6 +13,8 @@ ApplicationWindow {
     title: qsTr("NoxiMove Schedule")
     visibility: "Maximized"
     visible: true
+    minimumHeight: 600
+    minimumWidth: 800
 
     MainForm {
         id: mainform
@@ -23,141 +25,90 @@ ApplicationWindow {
         Image{ anchors.fill: parent; source: "/images/images/background1.jpg"}
 
         /* INIT ANIMATION */
-        InitAnimation { id: initAnimation; anchors.fill: parent }
+        Rectangle
+        {
+            id: initAnimation
+            width: parent.width
+            height: parent.height - topFrame.height
+            anchors.top: topFrame.bottom
+            Image {
+               id: logoTable
+               width: (4*parent.width)/3
+               height: parent.height/2
+               anchors.horizontalCenter: parent.horizontalCenter
+               anchors.bottom: parent.bottom
+               source: "/images/images/back.png"
+               opacity: 0.3
+            }
+
+            InitAnimation {
+                width: parent.width/2
+                height: parent.height/2
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+        }
+
+        /* TOP FRAME */
+        TopFrame { id: topFrame; width: parent.width; height: parent.height/5 }
 
         /* OPTIONS LIST */
         ItemsList { id: optList }
 
-        /* TOP FRAME */
-        TopFrame { id: frame; width: parent.width; height: parent.height/5 }
+        /* OPTIONS LIST DELEGATE */
+        Delegate { id: optionsDelegate }
 
+        /* OPTIONS LIST GRID VIEW */
         Rectangle
         {
-
-            id: tableColorArea
-            height: applicationWindow.height - mainImageRectangle.height - frame.height - 60
-            width: mainImageRectangle
-            anchors.top: mainImageRectangle.bottom
-            anchors.left: parent.left
-            anchors.right: gridRectangle.left
-            anchors.leftMargin: 20
-            anchors.rightMargin: 20
-            anchors.topMargin: 10
-            anchors.bottomMargin: 20
-            color: "white"
-            clip: true
-            border.width: 4
-            border.color: "lightgray"
+            id: gridRectangle
+            height: parent.height - topFrame.height - 200
+            width: parent.width/2.5
+            anchors.top: topFrame.bottom
+            anchors.right: parent.right
+            anchors.topMargin: 20
+            color: "transparent"
             radius: 20
 
-            Rectangle {
-                id: tableColor
-                height: tableColorArea.height - 30
-                width: tableColorArea.width/9
-                color: "red"
-                border.width: 5
-                border.color: "lightgray"
-                anchors.left: parent.left
-                anchors.leftMargin: 10
-                anchors.topMargin: 30
-                radius: 20
-                visible: true
-                gradient: Gradient {
-                    GradientStop { position: 0;    color: "#88FFFFFF" }
-                    GradientStop { position: .1;   color: "#55FFFFFF" }
-                    GradientStop { position: .5;   color: "#33FFFFFF" }
-                    GradientStop { position: .501; color: "#11000000" }
-                    GradientStop { position: .8;   color: "#11FFFFFF" }
-                    GradientStop { position: 1;    color: "#55FFFFFF" }
-                }
-            }
-
-            Image {
-                id: tableTop
-                anchors.left: tableColor.right
-                anchors.leftMargin: 20
-                height: tableColorArea.height
-                width: tableColorArea.width/3
-                source: "/images/images/tableColor.png"
+            GridView {
+                id: grid
+                anchors.fill: parent
+                width: parent.width
+                height: parent.height
+                cellWidth: grid.width/4
+                cellHeight: grid.height/3
+                model: optList.itemsList
+                anchors.margins: 10
+                delegate: optionsDelegate
                 visible: true
             }
-
-            Rectangle {
-                id: frameColor
-                height: tableColorArea.height - 30
-                width: tableColorArea.width/9
-                color: "blue"
-                border.width: 5
-                border.color: "lightgray"
-                anchors.left: tableTop.right
-                anchors.leftMargin: 40
-                anchors.topMargin: 30
-                radius: 20
-                visible: true
-                gradient: Gradient {
-                    GradientStop { position: 0;    color: "#88FFFFFF" }
-                    GradientStop { position: .1;   color: "#55FFFFFF" }
-                    GradientStop { position: .5;   color: "#33FFFFFF" }
-                    GradientStop { position: .501; color: "#11000000" }
-                    GradientStop { position: .8;   color: "#11FFFFFF" }
-                    GradientStop { position: 1;    color: "#55FFFFFF" }
-                }
-            }
-
-            Image {
-                id: tableBottom
-                anchors.left: frameColor.right
-                anchors.leftMargin: 20
-                height: tableColorArea.height
-                width: tableColorArea.width/3
-                source: "/images/images/frameColor.png"
-                visible: true
-            }
-
-
         }
 
-        Rectangle {
-                    id: acceptButton
-                    width: gridRectangle.width - 10
-                    height: applicationWindow.height - mainImageRectangle.height - frame.height - 60
-                    anchors.top: gridRectangle.bottom
-                    anchors.left: gridRectangle.left
-                    anchors.topMargin: 10
-                    anchors.bottomMargin: 20
-
-                    color: "green"
-                    radius: 30
-                    border.width: 5
-                    border.color: "green"
-
-                    Rectangle {
-                        id: acceptButton2
-                        anchors.centerIn: acceptButton
-                        color: "green"
-                        width: acceptButton.width - 10
-                        height: acceptButton.height - 10
-                        radius: acceptButton.radius - acceptButton.border.width/2
-
-                        gradient: Gradient {
-                            GradientStop { position: 0;    color: "#88FFFFFF" }
-                            GradientStop { position: .1;   color: "#55FFFFFF" }
-                            GradientStop { position: .5;   color: "#33FFFFFF" }
-                            GradientStop { position: .501; color: "#11000000" }
-                            GradientStop { position: .8;   color: "#11FFFFFF" }
-                            GradientStop { position: 1;    color: "#55FFFFFF" }
-                        }
-
-                        Text {
-                            anchors.centerIn: parent
-                            text: "GENERUJ"
-                            font.family: "Arial Bold"
-                            font.pointSize: 35
-                            color: "white"
-                        }
-                    }
+        /* TABLE COLOR */
+        ColorArea {
+            id: colorArea
+            width: mainImageRectangle.width
+            height:  mainform.height - mainImageRectangle.height - topFrame.height - 3*anchors.margins
+            anchors {
+                top: mainImageRectangle.bottom
+                left: parent.left
+                right: gridRectangle.left
+                margins: 20
+            }
+            visible: false
         }
 
+        /* ACCEPT BUTTON */
+        AcceptButton {
+            id: acceptButton
+            width: gridRectangle.width - 2*anchors.margins
+            height: mainform.height - mainImageRectangle.height - topFrame.height - 4*anchors.margins
+            anchors.top: gridRectangle.bottom
+            anchors.left: gridRectangle.left
+            anchors.margins: 20
+            bColor: "green"
+            bText: "GENERUJ"
+            visible: false
+        }
 
         /* MAIN IMAGE */
         Rectangle {
@@ -166,16 +117,12 @@ ApplicationWindow {
             visible: false
             width: parent.width - gridRectangle.width - 10
             height: grid.height
-            anchors.top: frame.bottom
+            anchors.top: topFrame.bottom
             anchors.left: parent.left
             anchors.right: gridRectangle.left
             anchors.rightMargin: 20
             anchors.topMargin: 20
             anchors.leftMargin: 20
-            radius: 20
-            clip: true
-            border.width: 4
-            border.color: "lightgray"
 
             Image {
                 id: imageT2
@@ -213,131 +160,6 @@ ApplicationWindow {
                 asynchronous: true
             }
         }
-
-        /*  OPTIONS LIST VIEW */
-        Rectangle
-        {
-            id: gridRectangle
-            height: parent.height - frame.height - 200
-            width: parent.width/2.5
-            anchors.top: frame.bottom
-            anchors.right: parent.right
-            anchors.topMargin: 20
-            color: "transparent"
-            radius: 20
-
-            GridView {
-
-                property real itemWidth : ((width + anchors.margins) / 4) - anchors.margins;
-                property real itemHeight : ((height + anchors.margins) / 3) - anchors.margins;
-
-                id: grid
-                anchors.fill: parent
-                width: parent.width
-                height: parent.height
-                cellWidth: grid.width/4
-                cellHeight: grid.height/3
-                model: optList.itemsList
-                anchors.margins: 10
-                delegate: optionsDelegate
-                visible: true
-            }
-        }
-
-        /* OPTION LIST DELEGATE */
-        Component {
-            id: optionsDelegate
-
-            Item {
-                id: wrapper
-                width: grid.cellWidth
-                height: grid.cellHeight
-
-                Image {
-                    id: itemImage
-                    source: imagePath
-                    anchors.centerIn: wrapper
-                    width: wrapper.width - 10
-                    height: wrapper.width - 10
-                    smooth: true
-                    opacity: 0.4
-                    state: imageState
-
-                    MouseArea {
-                        id: mouseArea;
-                        anchors.fill: itemImage
-                        hoverEnabled: true
-                        onClicked: {
-                            if(animationActive == true) {
-                                checkedAnimation.start()
-                                itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
-                                grid.currentIndex = index
-                                optList.itemClicked(grid.currentIndex)
-                            }
-                        }
-
-                        onEntered: if(animationActive == true) enteringAnimation.start()
-                        onExited:  if(animationActive == true) exitingAnimation.start()
-                    }
-
-                    NumberAnimation {
-                        id: checkedAnimation
-                        target: itemImage
-                        property: "scale"
-                        from: 0.4
-                        to: 1.3
-                        duration: 150
-                        easing.type: Easing.OutSine
-                    }
-
-                    NumberAnimation {
-                        id: enteringAnimation
-                        target: itemImage
-                        property: "scale"
-                        from: 1
-                        to: 1.3
-                        duration: 100
-                        easing.type: Easing.Linear
-                    }
-
-                    NumberAnimation {
-                        id: exitingAnimation
-                        target: itemImage
-                        property: "scale"
-                        from: 1.3
-                        to: 1
-                        duration: 100
-                        easing.type: Easing.Linear
-                    }
-
-                    states: [
-                        State {
-                            name: "CHECKED"
-                            PropertyChanges {
-                                target: itemImage
-                                opacity: 1.0
-                            }
-                        },
-                        State {
-                            name: "UNCHECKED"
-                            PropertyChanges {
-                                target: itemImage
-                                opacity: 0.4
-                            }
-                        }
-                    ]
-
-                } // image
-
-            } // item
-
-        } // component
-
-//        StatusBar{
-//                id: statBar
-//                anchors.bottom: parent.bottom
-//                Label { text: "Read Only" }
-//        }
     }
 
     MessageDialog {

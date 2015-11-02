@@ -5,6 +5,9 @@
         <file>Tbutton.qml</file>
         <file>InitAnimation.qml</file>
         <file>TopFrame.qml</file>
+        <file>ColorArea.qml</file>
+        <file>AcceptButton.qml</file>
+        <file>Delegate.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>logo.ico</file>

@@ -9,17 +9,8 @@ import QtGraphicalEffects 1.0
 Item{
 
     Image {
-       id: logoTable
-       anchors.horizontalCenter: parent.horizontalCenter
-       anchors.bottom: parent.bottom
-       source: "/images/images/back.png"
-       opacity: 0.3
-    }
-
-    Image {
         id: logoNoxi
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.fill: parent
         source: "/images/images/logoNOXI.png"
         scale: 0
     }
@@ -40,7 +31,6 @@ Item{
         anchors.right: logoNoxi.right
         source: "/images/images/logoMOVE.png"
         scale: 0
-
     }
 
     Glow {
