@@ -62,7 +62,7 @@ ApplicationWindow {
         Rectangle
         {
             id: gridRectangle
-            height: parent.height - topFrame.height - 200
+            height: 3*(parent.height - topFrame.height)/4
             width: parent.width/2.5
             anchors.top: topFrame.bottom
             anchors.right: parent.right
