@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QQmlListProperty>
+#include <QtXlsx>
 
 class MedicalTable : public QObject
 {

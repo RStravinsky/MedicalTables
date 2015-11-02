@@ -12,6 +12,8 @@ Item {
     property alias bWidth: container.width
     property alias bHeight: container.height
 
+
+
     Rectangle {
                 id: rectangle
                 anchors.fill: parent
@@ -57,6 +59,7 @@ Item {
                     onExited: rectangle.state = "EXITED"
                     onClicked: {
 
+
                         clickedAnimation.start()
                         optList.mainButtonClicked(container.bName)
                         optList.setItemsList(bName)
@@ -84,8 +87,11 @@ Item {
                             imageT2.visible = false
                             imageT3.visible = false
                             imageT7.visible = true
+
                         }
                         grid.visible = true
+
+
                     }
                 }
 
@@ -153,3 +159,4 @@ Item {
     }
 
 }
+

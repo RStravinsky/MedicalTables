@@ -12,6 +12,7 @@
 #include <QObject>
 
 #include <itemslist.h>
+#include <schedule.h>
 
 int main(int argc, char *argv[])
 {
@@ -21,9 +22,11 @@ int main(int argc, char *argv[])
     app.setWindowIcon(QIcon("qrc:/images/logo.ico"));
 
     qmlRegisterType<ItemsList>("ItemsListComponent",1,0,"ItemsList");
-    QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
+    Schedule sched("schedule.xlsx");
+    QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("scheduleItem", (QObject *)&sched);
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();
 }

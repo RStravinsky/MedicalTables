@@ -158,6 +158,7 @@ ApplicationWindow {
                         bHeight: row.height
                         titleImg: "/images/images/t7logo.png"
                         tableImg: "/images/images/t7izo.png"
+
                     }
                     visible: true
                 }
@@ -260,6 +261,7 @@ ApplicationWindow {
                                     itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
                                     grid.currentIndex = index
                                     optList.itemClicked(grid.currentIndex)
+
                                 }
                             }
 

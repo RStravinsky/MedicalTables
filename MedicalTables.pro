@@ -1,10 +1,11 @@
 TEMPLATE = app
 
-QT += qml quick widgets gui
+QT += qml quick widgets gui xlsx
 
 SOURCES += main.cpp \
     medicaltable.cpp \
-    itemslist.cpp
+    itemslist.cpp \
+    schedule.cpp
 
 RESOURCES += qml.qrc
 
@@ -18,4 +19,5 @@ include(deployment.pri)
 
 HEADERS += \
     medicaltable.h \
-    itemslist.h
+    itemslist.h \
+    schedule.h
