@@ -66,9 +66,11 @@ ApplicationWindow {
             width: parent.width/2.5
             anchors.top: topFrame.bottom
             anchors.left: parent.left
-            anchors.topMargin: 20
+            anchors.leftMargin: 20
+            anchors.topMargin: 10
+            anchors.bottomMargin: 10
             color: "transparent"
-            radius: 20
+            radius: 10
 
             GridView {
                 id: grid
@@ -123,12 +125,11 @@ ApplicationWindow {
         /* ACCEPT BUTTON */
         AcceptButton {
             id: acceptButton
-            width: mainImageRectangle.width/2
+            width: mainImageRectangle.width/4
             height: mainform.height - mainImageRectangle.height - topFrame.height - 4*anchors.margins
             anchors.top: mainImageRectangle.bottom
-            anchors.horizontalCenter:  mainImageRectangle.horizontalCenter
+            anchors.right: parent.right
             anchors.margins: 20
-            bText: "Harmonogram"
             visible: false
         }
 
@@ -136,6 +137,7 @@ ApplicationWindow {
         Rectangle {
             id: mainImageRectangle
             color: "lightgray"
+            radius: 15
             visible: false
             width: parent.width - gridRectangle.width - 10
             height: grid.height

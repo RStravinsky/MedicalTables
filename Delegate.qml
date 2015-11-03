@@ -16,21 +16,10 @@ Component {
         Rectangle
         {
             anchors.centerIn: wrapper
-            width: wrapper.width - 10
-            height: wrapper.width - 10
+            width: wrapper.width - 30
+            height: wrapper.width - 30
             color: tableColor
-
-            Rectangle {
-                anchors.fill: parent
-                gradient: Gradient {
-                    GradientStop { position: 0;    color: tableColor != "transparent" ? "#88FFFFFF" : "transparent" }
-                    GradientStop { position: .1;   color: tableColor != "transparent" ? "#55FFFFFF" : "transparent"}
-                    GradientStop { position: .5;   color: tableColor != "transparent" ? "#33FFFFFF" : "transparent"}
-                    GradientStop { position: .501; color: tableColor != "transparent" ? "#11000000" : "transparent"}
-                    GradientStop { position: .8;   color: tableColor != "transparent" ? "#11FFFFFF" : "transparent"}
-                    GradientStop { position: 1;    color: tableColor != "transparent" ? "#55FFFFFF" : "transparent"}
-                }
-
+            radius: 10
 
         Image {
             id: itemImage
@@ -107,8 +96,6 @@ Component {
             ]
 
         } // image
-
-        } // rectangle
 
         }
 

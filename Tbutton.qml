@@ -96,7 +96,7 @@ Item {
 //                        opacity: 1
 //                        antialiasing: true
 //                    }
-                //}
+//                }
 
                 MouseArea {
                     id: mouseArea;

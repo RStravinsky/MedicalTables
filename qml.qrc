@@ -46,5 +46,10 @@
         <file>images/steel.png</file>
         <file>images/add_list.png</file>
         <file>images/test.png</file>
+        <file>images/x7.xcf</file>
+        <file>images/electric_regulation.png</file>
+        <file>images/elastic.png</file>
+        <file>images/angle_regulation.png</file>
+        <file>images/accept.png</file>
     </qresource>
 </RCC>

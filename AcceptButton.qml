@@ -7,14 +7,14 @@ import QtGraphicalEffects 1.0
 
 Item {
 
-    property string bText
+    //property string bText
 
     Rectangle {
         id: acceptButton
         anchors.fill: parent
-        radius: 30
+        radius: 15
         border.width: 5
-        border.color: "lightgray"
+        border.color: "#919191"
 
         gradient: Gradient {
             GradientStop { position: 0;    color: "lightgray" }
@@ -26,42 +26,12 @@ Item {
 
         Image {
             id: title;
-            source: "/images/images/add_list.png"
-            anchors.left: acceptButton.left
-            anchors.verticalCenter: acceptButton.verticalCenter
-            anchors.topMargin: 10
-            anchors.leftMargin: 30
-            width: ((acceptButton.width * .2)- 10);
-            height: (acceptButton.height - 30);
+            source: "/images/images/accept.png"
+            anchors.fill: parent
+            anchors.margins: 30
+            antialiasing: true
+            smooth: true
         }
-
-        Text {
-            id: buttonText
-            anchors.left: title.right
-            anchors.top: acceptButton.top
-            anchors.leftMargin: 30
-            anchors.topMargin: height/2 - 30
-            width: ((acceptButton.width * .5) - 10);
-            height: (acceptButton.height - 10);
-            text: bText
-            font.pixelSize: acceptButton.height * .3
-            font.family: "Lato Black"
-            color: "#00CED1"
-            styleColor: "#4f000000"
-            style: Text.Sunken
-        }
-
-        DropShadow {
-               anchors.fill: buttonText
-               horizontalOffset: 3
-               verticalOffset: 4
-               radius: 3
-               samples: 16
-               color: "#80000000"
-               source: buttonText
-           }
-
-
 
 
         MouseArea {
@@ -110,7 +80,7 @@ Item {
                 name: "EXITED"
                 PropertyChanges {
                     target: acceptButton
-                    border.color: "lightgray"
+                    border.color: "#919191"
                     opacity: 1.0
                 }
             }
