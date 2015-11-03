@@ -22,7 +22,7 @@ ApplicationWindow {
         visible: true
 
         /* BACKGROUND */
-        Image{ anchors.fill: parent; source: "/images/images/background1.jpg"}
+        Image{ anchors.fill: parent; source: "/images/images/background.jpg"}
 
         /* INIT ANIMATION */
         Rectangle
@@ -31,6 +31,7 @@ ApplicationWindow {
             width: parent.width
             height: parent.height - topFrame.height
             anchors.top: topFrame.bottom
+            color: "transparent"
             Image {
                id: logoTable
                width: (4*parent.width)/3
@@ -38,7 +39,7 @@ ApplicationWindow {
                anchors.horizontalCenter: parent.horizontalCenter
                anchors.bottom: parent.bottom
                source: "/images/images/back.png"
-               opacity: 0.3
+               opacity: 0.6
             }
 
             InitAnimation {
@@ -64,7 +65,7 @@ ApplicationWindow {
             height: 3*(parent.height - topFrame.height)/4
             width: parent.width/2.5
             anchors.top: topFrame.bottom
-            anchors.right: parent.right
+            anchors.left: parent.left
             anchors.topMargin: 20
             color: "transparent"
             radius: 20
@@ -80,49 +81,72 @@ ApplicationWindow {
                 anchors.margins: 10
                 delegate: optionsDelegate
                 visible: true
+                interactive: false
             }
         }
 
-        /* TABLE COLOR */
-        ColorArea {
-            id: colorArea
-            width: mainImageRectangle.width
-            height:  mainform.height - mainImageRectangle.height - topFrame.height - 3*anchors.margins
-            anchors {
-                top: mainImageRectangle.bottom
-                left: parent.left
-                right: gridRectangle.left
-                margins: 20
-            }
-            visible: false
-        }
+//        Rectangle{
+//            height: grid.cellHeight
+//            width: gridRectangle.width
+//            anchors.left: gridRectangle.left
+//            anchors.top: gridRectangle.bottom
+//            visible: true
+//            color: "white"
+//        Row {
+//            id: row
+//            anchors.fill: parent
+//            anchors.leftMargin: 15
+//            spacing: 10
+//            Rectangle { color: "red"; width: grid.cellWidth-10; height: optionsDelegate.height;}
+//            Rectangle { color: "green"; width: grid.cellWidth-10; height:  optionsDelegate.height;}
+//            Rectangle { color: "blue"; width: grid.cellWidth-10; height:  optionsDelegate.height;}
+//            Rectangle { color: "gray"; width: grid.cellWidth-10; height:  optionsDelegate.height;}
+//        }
+//        }
+
+
+
+//        /* TABLE COLOR */
+//        ColorArea {
+//            id: colorArea
+//            width: gridRectangle.width
+//            height:  mainform.height - mainImageRectangle.height - topFrame.height - 3*anchors.margins
+//            anchors {
+//                top: gridRectangle.bottom
+//                left: parent.left
+//                right: mainImageRectangle.left
+//                margins: 20
+//            }
+//            visible: false
+//        }
 
         /* ACCEPT BUTTON */
         AcceptButton {
             id: acceptButton
-            width: gridRectangle.width - 2*anchors.margins
+            width: mainImageRectangle.width/2
             height: mainform.height - mainImageRectangle.height - topFrame.height - 4*anchors.margins
-            anchors.top: gridRectangle.bottom
-            anchors.left: gridRectangle.left
+            anchors.top: mainImageRectangle.bottom
+            anchors.horizontalCenter:  mainImageRectangle.horizontalCenter
             anchors.margins: 20
-            bColor: "green"
-            bText: "GENERUJ"
+            bText: "Harmonogram"
             visible: false
         }
 
         /* MAIN IMAGE */
         Rectangle {
             id: mainImageRectangle
-            color: "white"
+            color: "lightgray"
             visible: false
             width: parent.width - gridRectangle.width - 10
             height: grid.height
             anchors.top: topFrame.bottom
-            anchors.left: parent.left
-            anchors.right: gridRectangle.left
+            anchors.right: parent.right
+            anchors.left: gridRectangle.right
+            anchors.bottom: gridRectangle.bottom
             anchors.rightMargin: 20
-            anchors.topMargin: 20
+            anchors.topMargin: 40
             anchors.leftMargin: 20
+            anchors.bottomMargin: 15
 
             Image {
                 id: imageT2
@@ -131,7 +155,7 @@ ApplicationWindow {
                 visible: false
                 sourceSize.width: parent.width
                 sourceSize.height: parent.height
-                source: "/images/images/t2main.png"
+                source: "/images/images/t2.png"
                 smooth: true
                 asynchronous: true
             }
@@ -143,7 +167,7 @@ ApplicationWindow {
                 visible: false
                 sourceSize.width: parent.width
                 sourceSize.height: parent.height
-                source: "/images/images/t3main.png"
+                source: "/images/images/t3.png"
                 smooth: true
                 asynchronous: true
             }
@@ -155,7 +179,7 @@ ApplicationWindow {
                 visible: false
                 sourceSize.width: parent.width
                 sourceSize.height: parent.height
-                source: "/images/images/t7main.png"
+                source: "/images/images/t7.png"
                 smooth: true
                 asynchronous: true
             }

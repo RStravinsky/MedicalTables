@@ -4,7 +4,8 @@ QT += qml quick widgets gui
 
 SOURCES += main.cpp \
     medicaltable.cpp \
-    itemslist.cpp
+    itemslist.cpp \
+    tablecolor.cpp
 
 RESOURCES += qml.qrc
 
@@ -18,4 +19,5 @@ include(deployment.pri)
 
 HEADERS += \
     medicaltable.h \
-    itemslist.h
+    itemslist.h \
+    tablecolor.h

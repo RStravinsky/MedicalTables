@@ -8,12 +8,10 @@
         <file>ColorArea.qml</file>
         <file>AcceptButton.qml</file>
         <file>Delegate.qml</file>
+        <file>MainButton.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>logo.ico</file>
-        <file>images/t2logo.png</file>
-        <file>images/t3logo.png</file>
-        <file>images/t7logo.png</file>
         <file>images/bolser.png</file>
         <file>images/belt_holder.png</file>
         <file>images/chair_position.png</file>
@@ -34,19 +32,19 @@
         <file>images/pins_L.png</file>
         <file>images/plug_L.png</file>
         <file>images/angle_regulation_CH.png</file>
-        <file>images/t2izo.png</file>
-        <file>images/t3izo.png</file>
-        <file>images/t7izo.png</file>
-        <file>images/logoNOXImove.png</file>
         <file>images/logoMOVE.png</file>
         <file>images/logoNOXI.png</file>
-        <file>images/t2main.png</file>
-        <file>images/t3main.png</file>
-        <file>images/t7main.png</file>
         <file>images/back.png</file>
         <file>images/background.jpg</file>
         <file>images/tableColor.png</file>
         <file>images/background1.jpg</file>
         <file>images/frameColor.png</file>
+        <file>images/t2.png</file>
+        <file>images/t3.png</file>
+        <file>images/t7.png</file>
+        <file>images/inox_steel.png</file>
+        <file>images/steel.png</file>
+        <file>images/add_list.png</file>
+        <file>images/test.png</file>
     </qresource>
 </RCC>

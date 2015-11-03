@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QDebug>
 #include <medicaltable.h>
+#include <tablecolor.h>
 
 class ItemsList : public QObject
 {

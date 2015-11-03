@@ -17,7 +17,7 @@ Item
             id: topColor
             height: width
             width: colorArea.width/9
-            color: "white"
+            color: "transparent"
             border.width: 5
             border.color: "lightgray"
             anchors {
