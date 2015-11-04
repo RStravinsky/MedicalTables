@@ -108,30 +108,30 @@ Item {
                         clickedAnimation.start()
                         optList.mainButtonClicked(container.bName)
                         optList.setItemsList(bName)
-                        if ( bName == "T2")
-                        {
-                            imageT2.visible = true
-                            imageT3.visible = false
-                            imageT7.visible = false
-                       }
+//                        if ( bName == "T2")
+//                        {
+//                            imageT2.visible = true
+//                            imageT3.visible = false
+//                            imageT7.visible = false
+//                       }
 
-                        if ( bName == "T3")
-                        {
-                            imageT2.visible = false
-                            imageT3.visible = true
-                            imageT7.visible = false
-                        }
+//                        if ( bName == "T3")
+//                        {
+//                            imageT2.visible = false
+//                            imageT3.visible = true
+//                            imageT7.visible = false
+//                        }
 
-                        if ( bName == "T7")
-                        {
-                            imageT2.visible = false
-                            imageT3.visible = false
-                            imageT7.visible = true
-                        }
-                        grid.visible = true
+//                        if ( bName == "T7")
+//                        {
+//                            imageT2.visible = false
+//                            imageT3.visible = false
+//                            imageT7.visible = true
+//                        }
                         mainImageRectangle.visible = true
+                        sampleListView.visible = true
+                        grid.visible = true
                         initAnimation.visible = false
-                        //colorArea.visible = true
                         acceptButton.visible = true
                     }
                 }

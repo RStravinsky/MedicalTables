@@ -3,6 +3,8 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
+import QtGraphicalEffects 1.0
+
 
 Component {
     id: optionsDelegate
@@ -11,13 +13,15 @@ Component {
         property alias itemImage : itemImage
         id: wrapper
         width: grid.cellWidth
-        height: grid.cellHeight        
+        height: grid.cellHeight
+        z: -1
 
         Rectangle
         {
+            id: itemRectangle
             anchors.centerIn: wrapper
-            width: wrapper.width - 30
-            height: wrapper.width - 30
+            width: wrapper.width - 10
+            height: wrapper.width - 10
             color: tableColor
             radius: 10
 
@@ -44,8 +48,16 @@ Component {
                     }
                 }
 
-                onEntered: if(animationActive == true) enteringAnimation.start()
-                onExited:  if(animationActive == true) exitingAnimation.start()
+                onEntered: if(animationActive == true)
+                           {
+                               wrapper.z = 1
+                               enteringAnimation.start()
+                           }
+                onExited:  if(animationActive == true)
+                           {
+                               wrapper.z = -1
+                               exitingAnimation.start()
+                           }
             }
 
             NumberAnimation {
@@ -54,7 +66,7 @@ Component {
                 property: "scale"
                 from: 0.4
                 to: 1.3
-                duration: 150
+                duration: 50
                 easing.type: Easing.OutSine
             }
 
