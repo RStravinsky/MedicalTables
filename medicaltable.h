@@ -9,7 +9,7 @@ class MedicalTable : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString imagePath READ imagePath NOTIFY pathChanged)
-    Q_PROPERTY(QString imageState READ imageState NOTIFY stateChanged)
+    Q_PROPERTY(QString imageState READ imageState WRITE setState NOTIFY stateChanged)
     Q_PROPERTY(bool animationActive READ animationActive NOTIFY animationActiveChanged)
 
 public:
@@ -17,15 +17,19 @@ public:
     MedicalTable(QString path, QString state, bool animationActive): m_imagePath(path),
     m_imageState(state), m_animationActive(animationActive){}
 
-    inline QString imagePath() const {
+    Q_INVOKABLE inline QString imagePath() const {
         return m_imagePath;
     }
 
-    inline QString imageState() const {
+    Q_INVOKABLE inline QString imageState() const {
         return m_imageState;
     }
 
-    inline bool animationActive() const {
+    Q_INVOKABLE inline void setState(QString iState) {
+        m_imageState = iState;
+    }
+
+    Q_INVOKABLE inline bool animationActive() const {
 
         return m_animationActive;
     }

@@ -29,9 +29,24 @@ Component {
                 onClicked: {
                     if(animationActive == true) {
                         checkedAnimation.start()
-                        itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
+                        //itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
                         grid.currentIndex = index
+
+                        if(itemImage.state == "CHECKED")
+                        {
+                            itemImage.state = "UNCHECKED"
+                            optList.setItemState(grid.currentIndex, "UNCHECKED")
+                        }
+                        else
+                        {
+                            itemImage.state = "CHECKED"
+                            optList.setItemState(grid.currentIndex, "CHECKED")
+                        }
+
+
                         optList.itemClicked(grid.currentIndex)
+
+
                     }
                 }
 

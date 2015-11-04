@@ -71,6 +71,7 @@ Item {
 
                         clickedAnimation.start()
                         optList.mainButtonClicked(container.bName)
+                        scheduleItem.activeMainButton(container.bName)
                         optList.setItemsList(bName)
                         if ( bName == "T2")
                         {

@@ -8,17 +8,18 @@ class Schedule : public QObject
 {
     Q_OBJECT
     QXlsx::Document m_schedule;
+    QString activeTable;
 
 public:
-    explicit Schedule(QObject *parent = 0);
-    Q_INVOKABLE void testSave();
+    explicit Schedule(QString filename, QObject *parent = 0) : QObject(parent), m_schedule(filename) {}
+    Q_INVOKABLE void generateSchedule();
 
 
 signals:
-    void documentTitleChanged();
 
 public slots:
-
+    void activeMainButton(const QString &buttonName);
+    void gridState(const QString &state);
 
 };
 

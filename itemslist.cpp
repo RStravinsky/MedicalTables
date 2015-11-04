@@ -82,4 +82,22 @@ void ItemsList::clearList()
     emit itemsListChanged(getItemsList());
 }
 
+void ItemsList::readItemsState()
+{
+
+    for(int i = 0; i < itemsList.size(); ++i)
+        qDebug() << (itemsList.at(i)->property("imageState")).toString();
+
+
+}
+
+void ItemsList::setItemState(int index, QString state)
+{
+
+    qDebug() << itemsList.at(index)->setProperty("imageState",QVariant(state));
+    qDebug() << "After changes: " << index << " " << (itemsList.at(index)->property("imageState")).toString();
+
+
+}
+
 

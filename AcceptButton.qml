@@ -40,6 +40,9 @@ Item {
                 onExited: acceptArea.state = "EXITED"
                 onClicked: {
                     clickedAnimation.start()
+                    scheduleItem.generateSchedule()
+                    optList.readItemsState()
+
                 }
             }
 
@@ -113,5 +116,5 @@ Item {
             }
         }
     }
-}
+ }
 

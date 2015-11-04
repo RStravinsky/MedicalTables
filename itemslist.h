@@ -22,6 +22,9 @@ public:
     Q_INVOKABLE void setItemsList(const QString & buttonName);
     Q_INVOKABLE void clearList();
 
+    Q_INVOKABLE void readItemsState();
+    Q_INVOKABLE void setItemState(int index, QString state);
+
 signals:
     void itemsListChanged(QQmlListProperty<QObject> _itemsList);
 
