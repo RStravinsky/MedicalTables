@@ -46,7 +46,7 @@ private:
     QString m_imagePath;
     QString m_imageState;
     bool m_animationActive;
-      QString m_color;
+    QString m_color;
 };
 
 #endif // MEDICALTABLE_H

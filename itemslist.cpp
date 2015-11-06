@@ -17,7 +17,7 @@ void ItemsList::itemClicked( const int &itemIndex)
 
 void ItemsList::setItemsList(const QString &buttonName)
 {
-    if(buttonName == "T2")
+    if(buttonName == "Noxi T2")
     {
         itemsList.clear();
         itemsList.append(new MedicalTable("/images/images/electric_regulation_CH.png", "CHECKED", false,"transparent")); // CHECKED
@@ -38,7 +38,7 @@ void ItemsList::setItemsList(const QString &buttonName)
         itemsList.append(new MedicalTable("", "UNCHECKED", true,"white"));
         emit itemsListChanged(getItemsList());
     }
-    else if(buttonName == "T3")
+    else if(buttonName == "Noxi T3")
     {
         itemsList.clear();      
         itemsList.append(new MedicalTable("/images/images/electric_regulation_CH.png", "CHECKED", false,"transparent")); // CHECKED
@@ -59,7 +59,7 @@ void ItemsList::setItemsList(const QString &buttonName)
         itemsList.append(new MedicalTable("", "CHECKED", true,"white"));
         emit itemsListChanged(getItemsList());
     }
-    else if(buttonName == "T7")
+    else if(buttonName == "Noxi T7")
     {
         itemsList.clear();
         itemsList.append(new MedicalTable("/images/images/electric_regulation_CH.png", "CHECKED", false,"transparent")); // CHECKED
@@ -92,6 +92,39 @@ void ItemsList::clearList()
     qDeleteAll(tmpList);
     tmpList.clear();
     emit itemsListChanged(getItemsList());
+}
+
+void ItemsList::setImagesList(const QString &buttonName)
+{
+    if(buttonName == "Noxi T2")
+    {
+        imagesList.clear();
+        imagesList.append(new ImagesPath("/images/images/t2.png"));
+        imagesList.append(new ImagesPath("/images/images/t2.png"));
+        imagesList.append(new ImagesPath("/images/images/t2.png"));
+        imagesList.append(new ImagesPath("/images/images/t2.png"));
+        emit imagesListChanged(getImagesList());
+    }
+    else if(buttonName == "Noxi T3")
+    {
+        imagesList.clear();
+        imagesList.append(new ImagesPath("/images/images/t3.png"));
+        imagesList.append(new ImagesPath("/images/images/t3.png"));
+        imagesList.append(new ImagesPath("/images/images/t3.png"));
+        imagesList.append(new ImagesPath("/images/images/t3.png"));
+        emit imagesListChanged(getImagesList());
+    }
+    else if(buttonName == "Noxi T7")
+    {
+        imagesList.clear();
+        imagesList.append(new ImagesPath("/images/images/t7.png"));
+        imagesList.append(new ImagesPath("/images/images/t7.png"));
+        imagesList.append(new ImagesPath("/images/images/t7.png"));
+        imagesList.append(new ImagesPath("/images/images/t7.png"));
+        emit imagesListChanged(getImagesList());
+    }
+    else
+        return;
 }
 
 
