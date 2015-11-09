@@ -3,14 +3,26 @@
 
 #include <QObject>
 #include <QDebug>
+#include <QMap>
+#include <QDir>
+#include <QFile>
+#include <QMessageBox>
+#include <QTextStream>
 #include <medicaltable.h>
-#include <tablecolor.h>
+#include <imagespath.h>
+#include <array>
 
 class ItemsList : public QObject
 {
     Q_OBJECT
     Q_PROPERTY (QQmlListProperty<QObject> itemsList READ getItemsList NOTIFY itemsListChanged)
+    Q_PROPERTY (QQmlListProperty<QObject> imagesList READ getImagesList NOTIFY imagesListChanged)
     QList<QObject*> itemsList;
+    QList<QObject*> imagesList;
+    QString actualTable;
+    std::array<int,14> indexArray;
+    void setArray();
+    void generateCSV();
 
 public:
     explicit ItemsList(QObject *parent = 0); 
@@ -23,8 +35,20 @@ public:
     Q_INVOKABLE void setItemsList(const QString & buttonName);
     Q_INVOKABLE void clearList();
 
+    Q_INVOKABLE QQmlListProperty<QObject> getImagesList() {
+
+       return QQmlListProperty<QObject>(this, imagesList);
+    }
+
+    Q_INVOKABLE void setImagesList(const QString & buttonName);
+
+    Q_INVOKABLE void generateSchedule();
+
+    Q_INVOKABLE void setColor(QString color,  const int &itemIndex );
+
 signals:
     void itemsListChanged(QQmlListProperty<QObject> _itemsList);
+    void imagesListChanged(QQmlListProperty<QObject> _imagesList);
 
 public slots:
     void mainButtonClicked(const QString &buttonName);
