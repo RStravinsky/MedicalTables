@@ -8,18 +8,25 @@ Component {
     id: optionsDelegate
 
     Item {
+        property alias itemImage : itemImage
         id: wrapper
         width: grid.cellWidth
-        height: grid.cellHeight
+        height: grid.cellHeight        
+
+        Rectangle
+        {
+            anchors.centerIn: wrapper
+            width: wrapper.width - 30
+            height: wrapper.width - 30
+            color: tableColor
+            radius: 10
 
         Image {
             id: itemImage
             source: imagePath
-            anchors.centerIn: wrapper
-            width: wrapper.width - 10
-            height: wrapper.width - 10
+            anchors.fill: parent
             smooth: true
-            opacity: 0.4
+            opacity: 0.2
             state: imageState
 
             MouseArea {
@@ -29,24 +36,25 @@ Component {
                 onClicked: {
                     if(animationActive == true) {
                         checkedAnimation.start()
+
+                        if ( index < 13 ) {
                         //itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
                         grid.currentIndex = index
 
-                        if(itemImage.state == "CHECKED")
-                        {
-                            itemImage.state = "UNCHECKED"
-                            optList.setItemState(grid.currentIndex, "UNCHECKED")
+                            if(itemImage.state == "CHECKED")
+                            {
+                                itemImage.state = "UNCHECKED"
+                                optList.setItemState(grid.currentIndex, "UNCHECKED")
+                            }
+                            else
+                            {
+                                itemImage.state = "CHECKED"
+                                optList.setItemState(grid.currentIndex, "CHECKED")
+                            }
+
+                            optList.itemClicked(grid.currentIndex)
+
                         }
-                        else
-                        {
-                            itemImage.state = "CHECKED"
-                            optList.setItemState(grid.currentIndex, "CHECKED")
-                        }
-
-
-                        optList.itemClicked(grid.currentIndex)
-
-
                     }
                 }
 
@@ -96,12 +104,14 @@ Component {
                     name: "UNCHECKED"
                     PropertyChanges {
                         target: itemImage
-                        opacity: 0.4
+                        opacity: 0.2
                     }
                 }
             ]
 
         } // image
+
+        }
 
     } // item
 

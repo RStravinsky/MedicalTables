@@ -27,8 +27,10 @@ Item{
 
     Image {
         id: logoMove
-        anchors.top: logoNoxi.bottom
-        anchors.right: logoNoxi.right
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        width: parent.width/2
+        height: parent.height/2
         source: "/images/images/logoMOVE.png"
         scale: 0
     }
@@ -36,8 +38,8 @@ Item{
     Glow {
         id: glowMove
         anchors.fill: logoMove
-        radius: 10
-        samples: 10
+        radius: 80
+        samples: 30
         color: "orange"
         source: logoMove
         fast: true

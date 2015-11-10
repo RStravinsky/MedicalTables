@@ -4,12 +4,14 @@
 #include <QObject>
 #include <QDebug>
 #include <medicaltable.h>
+#include <tablecolor.h>
 
 class ItemsList : public QObject
 {
     Q_OBJECT
     Q_PROPERTY (QQmlListProperty<QObject> itemsList READ getItemsList NOTIFY itemsListChanged)
     QList<QObject*> itemsList;
+    QStringList m_stateList;
 
 public:
     explicit ItemsList(QObject *parent = 0); 
@@ -19,11 +21,14 @@ public:
        return QQmlListProperty<QObject>(this, itemsList);
     }
 
+
     Q_INVOKABLE void setItemsList(const QString & buttonName);
     Q_INVOKABLE void clearList();
 
-    Q_INVOKABLE void readItemsState();
     Q_INVOKABLE void setItemState(int index, QString state);
+
+    inline QStringList getStateList() {return m_stateList;}
+    void loadItemsState();
 
 signals:
     void itemsListChanged(QQmlListProperty<QObject> _itemsList);
