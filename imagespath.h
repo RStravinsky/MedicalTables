@@ -16,7 +16,7 @@ public:
     }
 
 signals:
-     void sourceChanged( QString path );
+    void sourceChanged( QString path );
 
 private:
     QString m_imageSource;

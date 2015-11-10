@@ -29,10 +29,10 @@ Item {
 
     function setColor(){
         clearColor()
-        if(listView.currentIndex == 0) circleOne.circleColor = lightBlueGradientItem
-        if(listView.currentIndex == 1) circleTwo.circleColor = lightBlueGradientItem
-        if(listView.currentIndex == 2) circleThree.circleColor = lightBlueGradientItem
-        if(listView.currentIndex == 3) circleFour.circleColor = lightBlueGradientItem
+        if(listView.currentIndex === 0) circleOne.circleColor = lightBlueGradientItem
+        if(listView.currentIndex === 1) circleTwo.circleColor = lightBlueGradientItem
+        if(listView.currentIndex === 2) circleThree.circleColor = lightBlueGradientItem
+        if(listView.currentIndex === 3) circleFour.circleColor = lightBlueGradientItem
     }
 
     Rectangle {

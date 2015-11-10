@@ -51,5 +51,8 @@
         <file>images/accept_hover.png</file>
         <file>images/top_color.png</file>
         <file>images/bottom_color.png</file>
+        <file>images/add.png</file>
+        <file>images/clear.png</file>
+        <file>images/check.png</file>
     </qresource>
 </RCC>
