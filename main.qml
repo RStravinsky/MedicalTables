@@ -8,195 +8,185 @@ import QtGraphicalEffects 1.0
 import ItemsListComponent 1.0
 
 ApplicationWindow {
-
     id: applicationWindow
     title: qsTr("NoxiMove Schedule")
-    visibility: "Maximized"
     visible: true
+    visibility: "Maximized"
     minimumHeight: 600
     minimumWidth: 800
 
     MainForm {
-        id: mainform
+        id: mainForm
         anchors.fill: parent
-        visible: true
 
-        /* BACKGROUND */
-        Image{ anchors.fill: parent; source: "/images/images/background.jpg"}
+        /* Background image */
+        Image{
+            anchors.fill: parent;
+            source: "/images/images/background.jpg"
+        }
 
-        /* INIT ANIMATION */
-        Rectangle
-        {
-            id: initAnimation
+        /* Top frame of application */
+        TopFrame {
+            id: topFrame;
+            width: parent.width;
+            height: parent.height/5;
+            anchors.top: parent.top
+        }  
+
+        ColorArea { id: colorArea; width: mainForm.width/4; height: width; visible: false;}
+
+        /* Animation at start of application */
+        Rectangle {
+            id: initRectangle
             width: parent.width
             height: parent.height - topFrame.height
             anchors.top: topFrame.bottom
             color: "transparent"
             Image {
                id: logoTable
-               width: (4*parent.width)/3
-               height: parent.height/2
-               anchors.horizontalCenter: parent.horizontalCenter
-               anchors.bottom: parent.bottom
+               width: (4*initRectangle.width)/3
+               height: initRectangle.height/2
+               anchors.horizontalCenter: initRectangle.horizontalCenter
+               anchors.bottom: initRectangle.bottom
                source: "/images/images/back.png"
                opacity: 0.6
             }
 
             InitAnimation {
-                width: parent.width/2
-                height: parent.height/2
-                anchors.horizontalCenter: parent.horizontalCenter
-
+                id: initAnimation
+                width: initRectangle.width/2
+                height: initRectangle.height/2
+                anchors.horizontalCenter: initRectangle.horizontalCenter
             }
         }
 
-        /* TOP FRAME */
-        TopFrame { id: topFrame; width: parent.width; height: parent.height/5 }
-
-        /* OPTIONS LIST */
-        ItemsList { id: optList }
-
-        /* OPTIONS LIST DELEGATE */
-        Delegate { id: optionsDelegate }
-
-        /* OPTIONS LIST GRID VIEW */
+        /* Table options list */
         Rectangle
         {
             id: gridRectangle
-            height: 3*(parent.height - topFrame.height)/4
+            height: parent.height - topFrame.height
             width: parent.width/2.5
-            anchors.top: topFrame.bottom
-            anchors.left: parent.left
-            anchors.leftMargin: 20
-            anchors.topMargin: 10
-            anchors.bottomMargin: 10
+            anchors {
+                top: topFrame.bottom
+                left: parent.left
+                bottom: parent.bottom
+                leftMargin: 20
+                topMargin: 10
+                bottomMargin: 10
+            }
             color: "transparent"
             radius: 10
 
+            ItemsList { id: optList }
             GridView {
-                id: grid
-                anchors.fill: parent
-                width: parent.width
-                height: parent.height
-                cellWidth: grid.width/4
-                cellHeight: grid.height/3
+                id: gridView
+                anchors.fill: gridRectangle
+                cellWidth: gridView.width/4
+                cellHeight: gridView.height/4
                 model: optList.itemsList
                 anchors.margins: 10
-                delegate: optionsDelegate
-                visible: true
+                delegate: GridDelegate { }
                 interactive: false
             }
         }
 
-//        Rectangle{
-//            height: grid.cellHeight
-//            width: gridRectangle.width
-//            anchors.left: gridRectangle.left
-//            anchors.top: gridRectangle.bottom
-//            visible: true
-//            color: "white"
-//        Row {
-//            id: row
-//            anchors.fill: parent
-//            anchors.leftMargin: 15
-//            spacing: 10
-//            Rectangle { color: "red"; width: grid.cellWidth-10; height: optionsDelegate.height;}
-//            Rectangle { color: "green"; width: grid.cellWidth-10; height:  optionsDelegate.height;}
-//            Rectangle { color: "blue"; width: grid.cellWidth-10; height:  optionsDelegate.height;}
-//            Rectangle { color: "gray"; width: grid.cellWidth-10; height:  optionsDelegate.height;}
-//        }
-//        }
+        /* Images list */
+        Rectangle {
+            id: mainImageRectangle
+            width: parent.width - gridRectangle.width - 10
+            height: gridView.height * .7
+            anchors {
+                top: topFrame.bottom
+                right: parent.right
+                left: gridRectangle.right
+                rightMargin: 30
+                topMargin: 25
+                leftMargin: 20
 
+            }
+            border.width: 10
+            border.color: "gray"
+            color: "lightgray"
+            radius: 15
+            visible: false
 
+            /* Image state */
+            ImageState {
+                id: imageState
+                width: mainImageRectangle.width/5
+                height: mainImageRectangle.height/10
+                anchors.horizontalCenter: mainImageRectangle.horizontalCenter
+                anchors.bottom: mainImageRectangle.bottom
+            }
 
-//        /* TABLE COLOR */
-//        ColorArea {
-//            id: colorArea
-//            width: gridRectangle.width
-//            height:  mainform.height - mainImageRectangle.height - topFrame.height - 3*anchors.margins
-//            anchors {
-//                top: gridRectangle.bottom
-//                left: parent.left
-//                right: mainImageRectangle.left
-//                margins: 20
-//            }
-//            visible: false
-//        }
+            /* Image list */
+            Rectangle {
+                id: insideRectangle
+                color: "transparent"
+                radius: 5
+                anchors {
+                    fill: parent
+                    margins: mainImageRectangle.border.width
+                }
+
+                ImageArrow {
+                    anchors.verticalCenter: insideRectangle.verticalCenter
+                    anchors.right: insideRectangle.right
+                    anchors.rightMargin: 20
+                    imagePath: "/images/images/right_arrow.png"
+                    arrowDirection: "right"
+                }
+                ImageArrow {
+                    anchors.verticalCenter: insideRectangle.verticalCenter
+                    anchors.left: insideRectangle.left
+                    anchors.leftMargin: 20
+                    imagePath: "/images/images/arrow_left.png"
+                    arrowDirection: "left"
+                }
+
+                // The view:
+                ListView {
+                    id: listView
+                    anchors.fill: insideRectangle
+                    orientation: ListView.Horizontal
+                    snapMode: ListView.SnapOneItem
+                    highlightRangeMode: ListView.StrictlyEnforceRange
+                    boundsBehavior: Flickable.StopAtBounds
+                    clip: true
+                    highlightMoveVelocity: 2000
+                    interactive: false
+                    model: optList.imagesList
+                    delegate: Component {
+                        Item {
+                            id: delegateItem
+                            width: listView.width
+                            height: listView.height
+                            Image {
+                                id: imageItem
+                                anchors.fill: delegateItem
+                                source: imageSource
+                              }
+                        }
+                    }
+                    Component.onCompleted: positionViewAtBeginning()
+                  }
+
+        } // insideRectangle
+
+      } // mainImageRectangle
 
         /* ACCEPT BUTTON */
         AcceptButton {
             id: acceptButton
-            width: mainImageRectangle.width/4
-            height: mainform.height - mainImageRectangle.height - topFrame.height - 4*anchors.margins
+            width: height
+            height: mainForm.height - mainImageRectangle.height - topFrame.height - 4*anchors.margins
             anchors.top: mainImageRectangle.bottom
             anchors.right: parent.right
+            anchors.topMargin: 30
             anchors.margins: 20
             visible: false
         }
 
-        /* MAIN IMAGE */
-        Rectangle {
-            id: mainImageRectangle
-            color: "lightgray"
-            radius: 15
-            visible: false
-            width: parent.width - gridRectangle.width - 10
-            height: grid.height
-            anchors.top: topFrame.bottom
-            anchors.right: parent.right
-            anchors.left: gridRectangle.right
-            anchors.bottom: gridRectangle.bottom
-            anchors.rightMargin: 20
-            anchors.topMargin: 40
-            anchors.leftMargin: 20
-            anchors.bottomMargin: 15
+    } // MainForm
 
-            Image {
-                id: imageT2
-                anchors.fill: mainImageRectangle
-                opacity: 1.0
-                visible: false
-                sourceSize.width: parent.width
-                sourceSize.height: parent.height
-                source: "/images/images/t2.png"
-                smooth: true
-                asynchronous: true
-            }
-
-            Image {
-                id: imageT3
-                anchors.fill: mainImageRectangle
-                opacity: 1.0
-                visible: false
-                sourceSize.width: parent.width
-                sourceSize.height: parent.height
-                source: "/images/images/t3.png"
-                smooth: true
-                asynchronous: true
-            }
-
-            Image {
-                id: imageT7
-                anchors.fill: mainImageRectangle
-                opacity: 1.0
-                visible: false
-                sourceSize.width: parent.width
-                sourceSize.height: parent.height
-                source: "/images/images/t7.png"
-                smooth: true
-                asynchronous: true
-            }
-        }
-    }
-
-    MessageDialog {
-        id: messageDialog
-        title: qsTr("May I have your attention, please?")
-
-        function show(caption) {
-            messageDialog.text = caption;
-            messageDialog.open();
-        }
-
-    }
-}
+} // ApplicationWindow

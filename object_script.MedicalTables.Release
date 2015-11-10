@@ -3,10 +3,10 @@ INPUT(
 ./release\medicaltable.o
 ./release\itemslist.o
 ./release\schedule.o
-./release\tablecolor.o
+./release\imagespath.o
 ./release\qrc_qml.o
 ./release\moc_medicaltable.o
 ./release\moc_itemslist.o
 ./release\moc_schedule.o
-./release\moc_tablecolor.o
+./release\moc_imagespath.o
 );

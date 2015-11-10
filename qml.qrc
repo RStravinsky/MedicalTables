@@ -2,13 +2,15 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
-        <file>Tbutton.qml</file>
+        <file>MainButton.qml</file>
         <file>InitAnimation.qml</file>
         <file>TopFrame.qml</file>
-        <file>ColorArea.qml</file>
         <file>AcceptButton.qml</file>
-        <file>Delegate.qml</file>
-        <file>MainButton.qml</file>
+        <file>GridDelegate.qml</file>
+        <file>ImageArrow.qml</file>
+        <file>ImageCircle.qml</file>
+        <file>ImageState.qml</file>
+        <file>ColorArea.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>logo.ico</file>
@@ -36,20 +38,18 @@
         <file>images/logoNOXI.png</file>
         <file>images/back.png</file>
         <file>images/background.jpg</file>
-        <file>images/tableColor.png</file>
-        <file>images/background1.jpg</file>
-        <file>images/frameColor.png</file>
         <file>images/t2.png</file>
         <file>images/t3.png</file>
         <file>images/t7.png</file>
         <file>images/inox_steel.png</file>
-        <file>images/steel.png</file>
-        <file>images/add_list.png</file>
-        <file>images/test.png</file>
-        <file>images/x7.xcf</file>
         <file>images/electric_regulation.png</file>
         <file>images/elastic.png</file>
         <file>images/angle_regulation.png</file>
         <file>images/accept.png</file>
+        <file>images/arrow_left.png</file>
+        <file>images/right_arrow.png</file>
+        <file>images/accept_hover.png</file>
+        <file>images/top_color.png</file>
+        <file>images/bottom_color.png</file>
     </qresource>
 </RCC>

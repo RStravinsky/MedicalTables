@@ -6,11 +6,13 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.3
 import QtGraphicalEffects 1.0
 
-Item{
+Item {
+
+    id: initAnimation
 
     Image {
         id: logoNoxi
-        anchors.fill: parent
+        anchors.fill: initAnimation
         source: "/images/images/logoNOXI.png"
         scale: 0
     }
@@ -27,10 +29,10 @@ Item{
 
     Image {
         id: logoMove
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        width: parent.width/2
-        height: parent.height/2
+        anchors.bottom: initAnimation.bottom
+        anchors.right: initAnimation.right
+        width: initAnimation.width/2
+        height: initAnimation.height/2
         source: "/images/images/logoMOVE.png"
         scale: 0
     }
@@ -46,8 +48,7 @@ Item{
         visible: false
     }
 
-    SequentialAnimation
-    {
+    SequentialAnimation {
         running: true
 
         NumberAnimation {
@@ -104,7 +105,8 @@ Item{
                 duration: 2000
             }
         }
-    }
 
-}
+    } // SequentialAnimation
+
+} // Item
 

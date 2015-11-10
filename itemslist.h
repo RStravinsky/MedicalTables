@@ -3,15 +3,29 @@
 
 #include <QObject>
 #include <QDebug>
+#include <QMap>
+#include <QDir>
+#include <QFile>
+#include <QMessageBox>
+#include <QTextStream>
 #include <medicaltable.h>
-#include <tablecolor.h>
+#include <imagespath.h>
+#include <array>
+#include <QAxBase>
+#include <QAxObject>
+#include <QAxWidget>
 
 class ItemsList : public QObject
 {
     Q_OBJECT
     Q_PROPERTY (QQmlListProperty<QObject> itemsList READ getItemsList NOTIFY itemsListChanged)
+    Q_PROPERTY (QQmlListProperty<QObject> imagesList READ getImagesList NOTIFY imagesListChanged)
     QList<QObject*> itemsList;
-    QStringList m_stateList;
+    QList<QObject*> imagesList;
+    QString actualTable;
+    std::array<int,14> indexArray;
+    void setArray();
+    void generateCSV();
 
 public:
     explicit ItemsList(QObject *parent = 0); 
@@ -25,13 +39,20 @@ public:
     Q_INVOKABLE void setItemsList(const QString & buttonName);
     Q_INVOKABLE void clearList();
 
-    Q_INVOKABLE void setItemState(int index, QString state);
+    Q_INVOKABLE QQmlListProperty<QObject> getImagesList() {
 
-    inline QStringList getStateList() {return m_stateList;}
-    void loadItemsState();
+       return QQmlListProperty<QObject>(this, imagesList);
+    }
+
+    Q_INVOKABLE void setImagesList(const QString & buttonName);
+
+    Q_INVOKABLE void generateSchedule();
+
+    Q_INVOKABLE void setColor(QString color,  const int &itemIndex );
 
 signals:
     void itemsListChanged(QQmlListProperty<QObject> _itemsList);
+    void imagesListChanged(QQmlListProperty<QObject> _imagesList);
 
 public slots:
     void mainButtonClicked(const QString &buttonName);

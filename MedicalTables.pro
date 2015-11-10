@@ -1,16 +1,17 @@
 TEMPLATE = app
 
-QT += qml quick widgets gui xlsx axcontainer
+QT += qml quick widgets gui axcontainer
+
+CONFIG += c++11
 
 SOURCES += main.cpp \
     medicaltable.cpp \
     itemslist.cpp \
-    schedule.cpp \
-    tablecolor.cpp
+    imagespath.cpp
 
 RESOURCES += qml.qrc
 
-RC_ICONS += logo.ico
+RC_ICONS += "logo.ico"
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -21,5 +22,4 @@ include(deployment.pri)
 HEADERS += \
     medicaltable.h \
     itemslist.h \
-    schedule.h \
-    tablecolor.h
+    imagespath.h

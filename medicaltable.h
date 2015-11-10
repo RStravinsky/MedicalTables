@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QQmlListProperty>
-#include <QtXlsx>
 
 class MedicalTable : public QObject
 {
@@ -11,7 +10,7 @@ class MedicalTable : public QObject
     Q_PROPERTY(QString imagePath READ imagePath NOTIFY pathChanged)
     Q_PROPERTY(QString imageState READ imageState WRITE setState NOTIFY stateChanged)
     Q_PROPERTY(bool animationActive READ animationActive NOTIFY animationActiveChanged)
-    Q_PROPERTY(QString tableColor READ color NOTIFY colorChanged)
+    Q_PROPERTY(QString tableColor READ color WRITE setColor NOTIFY colorChanged)
 
 public:
     explicit MedicalTable(QObject *parent = 0);
@@ -39,6 +38,10 @@ public:
         return m_color;
     }
 
+    Q_INVOKABLE void setColor( QString color ) {
+        m_color = color;
+    }
+
 public slots:
 
 signals:
@@ -51,7 +54,7 @@ private:
     QString m_imagePath;
     QString m_imageState;
     bool m_animationActive;
-      QString m_color;
+    QString m_color;
 };
 
 #endif // MEDICALTABLE_H
