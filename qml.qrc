@@ -48,8 +48,19 @@
         <file>images/accept.png</file>
         <file>images/arrow_left.png</file>
         <file>images/right_arrow.png</file>
-        <file>images/accept_hover.png</file>
         <file>images/top_color.png</file>
         <file>images/bottom_color.png</file>
+        <file>images/add.png</file>
+        <file>images/clear.png</file>
+        <file>images/check.png</file>
+        <file>images/t2_2.png</file>
+        <file>images/t2_1.png</file>
+        <file>images/t2_3.png</file>
+        <file>images/t3_1.png</file>
+        <file>images/t3_2.png</file>
+        <file>images/t7_1.png</file>
+        <file>images/t7_2.png</file>
+        <file>images/t3_3.png</file>
+        <file>images/t7_3.png</file>
     </qresource>
 </RCC>

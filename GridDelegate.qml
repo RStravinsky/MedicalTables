@@ -20,6 +20,12 @@ Component {
             color: tableColor
             radius: 10
 
+            Text {
+                anchors.centerIn: rectangle
+                text: tableText
+                font { family: "Arial"; pixelSize: rectangle.height/10 }
+            }
+
             Image {
                 id: itemImage
                 source: imagePath
@@ -37,8 +43,7 @@ Component {
                             checkedAnimation.start()
                             if ( index < 14 ) {
                                 itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
-                                gridView.currentIndex = index
-                                optList.itemClicked(gridView.currentIndex)
+                                optList.itemClicked( index, itemImage.state )
                             }
                             else {
                                 colorArea.visible = true
