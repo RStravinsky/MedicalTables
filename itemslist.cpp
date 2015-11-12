@@ -139,27 +139,27 @@ void ItemsList::setImagesList(const QString &buttonName)
     {
         imagesList.clear();
         imagesList.append(new ImagesPath("/images/images/t2.png"));
-        imagesList.append(new ImagesPath("/images/images/t2.png"));
-        imagesList.append(new ImagesPath("/images/images/t2.png"));
-        imagesList.append(new ImagesPath("/images/images/t2.png"));
+        imagesList.append(new ImagesPath("/images/images/t2_1.png"));
+        imagesList.append(new ImagesPath("/images/images/t2_2.png"));
+        imagesList.append(new ImagesPath("/images/images/t2_3.png"));
         emit imagesListChanged(getImagesList());
     }
     else if(buttonName == "Noxi T3")
     {
         imagesList.clear();
         imagesList.append(new ImagesPath("/images/images/t3.png"));
-        imagesList.append(new ImagesPath("/images/images/t3.png"));
-        imagesList.append(new ImagesPath("/images/images/t3.png"));
-        imagesList.append(new ImagesPath("/images/images/t3.png"));
+        imagesList.append(new ImagesPath("/images/images/t3_1.png"));
+        imagesList.append(new ImagesPath("/images/images/t3_2.png"));
+        imagesList.append(new ImagesPath("/images/images/t3_3.png"));
         emit imagesListChanged(getImagesList());
     }
     else if(buttonName == "Noxi T7")
     {
         imagesList.clear();
         imagesList.append(new ImagesPath("/images/images/t7.png"));
-        imagesList.append(new ImagesPath("/images/images/t7.png"));
-        imagesList.append(new ImagesPath("/images/images/t7.png"));
-        imagesList.append(new ImagesPath("/images/images/t7.png"));
+        imagesList.append(new ImagesPath("/images/images/t7_1.png"));
+        imagesList.append(new ImagesPath("/images/images/t7_2.png"));
+        imagesList.append(new ImagesPath("/images/images/t7_3.png"));
         emit imagesListChanged(getImagesList());
     }
     else

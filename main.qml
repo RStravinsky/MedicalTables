@@ -94,7 +94,7 @@ ApplicationWindow {
         Rectangle {
             id: mainImageRectangle
             width: parent.width - gridRectangle.width - 10
-            height: gridView.height * .7
+            height: gridView.height// * .7
             anchors {
                 top: topFrame.bottom
                 right: parent.right
@@ -106,7 +106,7 @@ ApplicationWindow {
             }
             border.width: 10
             border.color: "gray"
-            color: "lightgray"
+            color: "white"
             radius: 15
             visible: false
 
@@ -178,12 +178,14 @@ ApplicationWindow {
         /* ACCEPT BUTTON */
         AcceptButton {
             id: acceptButton
+            //width: 3*height
             width: height
-            height: mainForm.height - mainImageRectangle.height - topFrame.height - 4*anchors.margins
-            anchors.top: mainImageRectangle.bottom
-            anchors.right: parent.right
-            anchors.topMargin: 30
             anchors.margins: 20
+            z: 100
+            //height: imageState.height
+            height: imageState.height * 2
+            anchors.bottom: mainImageRectangle.bottom
+            anchors.right: mainImageRectangle.right
             visible: false
         }
 
