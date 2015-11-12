@@ -172,9 +172,9 @@ void ItemsList::generateSchedule()
     QAxObject* book;
     QFileInfo scheduleFile("schedule.xlsm");
     QVariant excelPath;
+    QVariant destPath;
 
     excelPath = QVariant(scheduleFile.absoluteFilePath().replace("/", "\\\\"));
-    qDebug() << excelPath << endl;
 
     excel = new QAxObject("Excel.Application", this);
     excel->setProperty("Visible", false);
@@ -182,10 +182,17 @@ void ItemsList::generateSchedule()
 
     wbooks = excel->querySubObject("Workbooks");
     book = wbooks->querySubObject("Open (const QString&)", excelPath);
-    excel->dynamicCall("Run(QVariant)", QVariant("runMacro"));
+    destPath = excel->dynamicCall("Run(QVariant)", QVariant("runMacro"));
 
     book->dynamicCall("Close()");
     excel->dynamicCall("Quit()");
+
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(QString("Informacja"));
+    msgBox.setText(QString("Wygenerowano harmonogram."));
+    msgBox.setInformativeText(destPath.toString());
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.exec();
 
     delete book;
     delete wbooks;
