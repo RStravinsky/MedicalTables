@@ -169,6 +169,38 @@ void ItemsList::setImagesList(const QString &buttonName)
 void ItemsList::generateSchedule()
 {
     generateCSV();
+
+    QAxObject* excel;
+    QAxObject* wbooks;
+    QAxObject* book;
+    QFileInfo scheduleFile("schedule.xlsm");
+    QVariant excelPath;
+    QVariant destPath;
+
+    excelPath = QVariant(scheduleFile.absoluteFilePath().replace("/", "\\\\"));
+
+    excel = new QAxObject("Excel.Application", this);
+    excel->setProperty("Visible", false);
+    excel->setProperty("DisplayAlerts",0);
+
+    wbooks = excel->querySubObject("Workbooks");
+    book = wbooks->querySubObject("Open (const QString&)", excelPath);
+    destPath = excel->dynamicCall("Run(QVariant)", QVariant("runMacro"));
+
+    book->dynamicCall("Close()");
+    excel->dynamicCall("Quit()");
+
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(QString("Informacja"));
+    msgBox.setText(QString("Wygenerowano harmonogram."));
+    msgBox.setInformativeText(destPath.toString());
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.exec();
+
+    delete book;
+    delete wbooks;
+    delete excel;
+
 }
 
 void ItemsList::setColor( const QString color, const int &itemIndex )

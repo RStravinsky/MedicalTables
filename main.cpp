@@ -12,6 +12,7 @@
 #include <QObject>
 
 #include <itemslist.h>
+#include <schedule.h>
 
 int main(int argc, char *argv[])
 {
@@ -19,6 +20,8 @@ int main(int argc, char *argv[])
     app.setWindowIcon(QIcon("qrc:/images/logo.ico"));
 
     qmlRegisterType<ItemsList>("ItemsListComponent",1,0,"ItemsList");
+    qmlRegisterType<MedicalTable>("MedicalTableComponent",1,0,"MedicalTable");
+
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 

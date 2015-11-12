@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\medicaltable.o
+./release\itemslist.o
+./release\schedule.o
+./release\imagespath.o
+./release\qrc_qml.o
+./release\moc_medicaltable.o
+./release\moc_itemslist.o
+./release\moc_schedule.o
+./release\moc_imagespath.o
+);

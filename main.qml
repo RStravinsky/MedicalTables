@@ -175,6 +175,8 @@ ApplicationWindow {
 
       } // mainImageRectangle
 
+        NumberOfTables { id: numberOfTables }
+
         /* ACCEPT BUTTON */
         AcceptButton {
             id: acceptButton
@@ -191,17 +193,4 @@ ApplicationWindow {
 
     } // MainForm
 
-    MessageDialog {
-        id: messageDialog
-        title: qsTr("May I have your attention, please?")
-
-        function show(caption) {
-            messageDialog.text = caption;
-            messageDialog.open();
-        }
-
-    }
-
 } // ApplicationWindow
-
-

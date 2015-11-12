@@ -11,6 +11,7 @@
         <file>ImageCircle.qml</file>
         <file>ImageState.qml</file>
         <file>ColorArea.qml</file>
+        <file>NumberOfTables.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>logo.ico</file>

@@ -11,6 +11,9 @@
 #include <medicaltable.h>
 #include <imagespath.h>
 #include <array>
+#include <QAxBase>
+#include <QAxObject>
+#include <QAxWidget>
 
 class ItemsList : public QObject
 {
@@ -33,6 +36,7 @@ public:
 
        return QQmlListProperty<QObject>(this, itemsList);
     }
+
 
     Q_INVOKABLE void setItemsList(const QString & buttonName);
     Q_INVOKABLE void clearList();

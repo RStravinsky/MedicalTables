@@ -18,15 +18,16 @@ public:
     MedicalTable(QString path, QString state, bool animationActive, QString color = "transparent", QString text = ""): m_imagePath(path),
     m_imageState(state), m_animationActive(animationActive), m_color(color), m_text(text){}
 
-    inline QString imagePath() const {
+    Q_INVOKABLE inline QString imagePath() const {
         return m_imagePath;
     }
 
-    inline QString imageState() const {
+    Q_INVOKABLE inline QString imageState() const {
         return m_imageState;
     }
 
-    inline bool animationActive() const {
+
+    Q_INVOKABLE inline bool animationActive() const {
 
         return m_animationActive;
     }

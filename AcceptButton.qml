@@ -32,6 +32,8 @@ Item {
             onExited: rectangle.state = "EXITED"
             onClicked: {
                 clickedAnimation.start()
+                numberOfTables.show()
+                //optList.generateSchedule()
             }
         }
 
@@ -95,61 +97,5 @@ Item {
      } // Rectangle
 
 } // Item
-
-
-//Item {
-
-//    Rectangle {
-//        id: acceptButton
-//        anchors.fill: parent
-//        color: "white"
-//        radius: 10
-
-//        Text {
-//            id: text
-//            width: acceptButton.width * .7
-//            height: acceptButton.height
-//            text: "Generuj"
-//            anchors.centerIn: acceptButton
-//            font.pixelSize: acceptButton.height * .5
-//            font.family: "Lato Black"
-//            color: "#00CED1"
-//            styleColor: "#4f000000"
-//            style: Text.Sunken
-//        }
-
-////        Image {
-////            id: title;
-////            source:"/images/images/accept.png"
-////            width: 100
-////            height: acceptButton.height
-////            anchors.left: text.right
-////            anchors.verticalCenter: acceptButton.verticalCenter
-////            antialiasing: true
-////            smooth: true
-////        }
-
-//        MouseArea {
-//            id: mouseArea
-//            anchors.fill: acceptButton
-//            hoverEnabled: true
-//            onClicked: {
-//                numberAnimation.start()
-//                optList.generateSchedule()
-//            }
-//        }
-
-
-//        NumberAnimation {
-//            id:numberAnimation
-//            target: acceptButton
-//            property: "opacity"
-//            from: 0.2
-//            to: 1
-//            duration: 2000
-//            easing.type: Easing.OutSine
-//        }
-//    }
-//}
 
 

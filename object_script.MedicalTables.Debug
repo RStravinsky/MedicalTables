@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\medicaltable.o
+./debug\itemslist.o
+./debug\schedule.o
+./debug\imagespath.o
+./debug\qrc_qml.o
+./debug\moc_medicaltable.o
+./debug\moc_itemslist.o
+./debug\moc_schedule.o
+./debug\moc_imagespath.o
+);
