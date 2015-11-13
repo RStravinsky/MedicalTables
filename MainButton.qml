@@ -58,9 +58,11 @@ Item {
                 optList.setImagesList(bName)
                 imageState.setColor()
                 initRectangle.visible = false
+                numberOfTables.clearText()
                 mainImageRectangle.visible = true
                 gridRectangle.visible = true
                 acceptButton.visible = true
+                numberOfTables.visible = true
             }
         }
 

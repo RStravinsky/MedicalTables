@@ -25,6 +25,7 @@ class ItemsList : public QObject
     QString actualTable;
     QString topColor{"6099"};
     QString bottomColor{"9006"};
+    QString numberOfTables{"1"};
     std::array<int,14> indexArray;
     void setArray();
     void generateCSV();
@@ -54,6 +55,7 @@ public:
 
     Q_INVOKABLE void setText( const QString text, const int &itemIndex );
 
+
 signals:
     void itemsListChanged(QQmlListProperty<QObject> _itemsList);
     void imagesListChanged(QQmlListProperty<QObject> _imagesList);
@@ -61,6 +63,7 @@ signals:
 public slots:
     void mainButtonClicked(const QString &buttonName);
     void itemClicked(const int &itemIndex, const QString state);
+    void onTextChanged(const QString number);
 };
 
 #endif // ITEMSLIST_H

@@ -63,5 +63,7 @@
         <file>images/t7_2.png</file>
         <file>images/t3_3.png</file>
         <file>images/t7_3.png</file>
+        <file>images/number.png</file>
+        <file>images/number1.png</file>
     </qresource>
 </RCC>

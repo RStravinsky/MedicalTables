@@ -175,16 +175,23 @@ ApplicationWindow {
 
       } // mainImageRectangle
 
-        NumberOfTables { id: numberOfTables }
+        NumberOfTables {
+            id: numberOfTables
+            height: imageState.height * 2
+            width: height
+            anchors.margins: 20
+            z: 100
+            anchors.bottom: mainImageRectangle.bottom
+            anchors.left: mainImageRectangle.left
+            visible: false
+        }
 
         /* ACCEPT BUTTON */
         AcceptButton {
             id: acceptButton
-            //width: 3*height
             width: height
             anchors.margins: 20
             z: 100
-            //height: imageState.height
             height: imageState.height * 2
             anchors.bottom: mainImageRectangle.bottom
             anchors.right: mainImageRectangle.right

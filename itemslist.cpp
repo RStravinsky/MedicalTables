@@ -26,8 +26,6 @@ void ItemsList::generateCSV()
     QTextStream out( &csvFile );
     csvFile.open(QIODevice::WriteOnly);
 
-    uint numberOfTables = 3;
-
     out << actualTable << endl;
     out << numberOfTables << endl;
 
@@ -50,6 +48,11 @@ void ItemsList::itemClicked( const int &itemIndex, const QString state)
 {
     indexArray[itemIndex] = !indexArray[itemIndex];
     itemsList.at(itemIndex)->setProperty( "imageState", (QVariant)state );
+}
+
+void ItemsList::onTextChanged( const QString number )
+{
+    numberOfTables = number;
 }
 
 void ItemsList::setItemsList(const QString &buttonName)

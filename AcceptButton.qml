@@ -32,8 +32,7 @@ Item {
             onExited: rectangle.state = "EXITED"
             onClicked: {
                 clickedAnimation.start()
-                numberOfTables.show()
-                //optList.generateSchedule()
+                optList.generateSchedule()
             }
         }
 
