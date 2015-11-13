@@ -16,25 +16,28 @@ void ItemsList::setArray()
     }
 }
 
-void ItemsList::generateCSV()
+void ItemsList::generateCSV(uint column, QString separatorr)
 {
+    qDebug() << "columnCount: " << column << endl;
+    //qDebug() << "separator: " << separator << endl;
     QDir dir;
     QString path = dir.absolutePath();
     QString pathFile = path + "/optionsList.csv";
+    QString separator = ";";
 
     QFile csvFile(pathFile);
     QTextStream out( &csvFile );
     csvFile.open(QIODevice::WriteOnly);
 
-    out << actualTable << endl;
-    out << numberOfTables << endl;
+    out << actualTable + separator <<  endl;
+    out << numberOfTables + separator <<  endl;
 
     /* fill options */
     for( uint row = 0 ; row < indexArray.size() ; ++row )
-        out << indexArray[row] << endl;
+        out << QString::number(indexArray[row]) + separator << endl;
 
-    out << topColor << endl;
-    out << bottomColor << endl;
+    out << topColor + separator << endl;
+    out << bottomColor + separator << endl;
 
     csvFile.close();
 }
@@ -63,7 +66,6 @@ void ItemsList::setItemsList(const QString &buttonName)
         itemsList.append(new MedicalTable("/images/images/electric_regulation_CH.png", "CHECKED", false)); // CHECKED
         itemsList.append(new MedicalTable("/images/images/belt_holder_CH.png", "CHECKED", false)); // CHECKED
         itemsList.append(new MedicalTable("/images/images/angle_regulation_CH.png", "CHECKED", false));
-        itemsList.append(new MedicalTable("/images/images/elastic.png", "CHECKED", false));
         itemsList.append(new MedicalTable("/images/images/electric_top_L.png", "UNCHECKED", false));
         itemsList.append(new MedicalTable("/images/images/chassis.png", "UNCHECKED", true));
         itemsList.append(new MedicalTable("/images/images/bolser.png", "UNCHECKED", true));
@@ -74,6 +76,7 @@ void ItemsList::setItemsList(const QString &buttonName)
         itemsList.append(new MedicalTable("/images/images/sheet_holder.png", "UNCHECKED", true));
         itemsList.append(new MedicalTable("/images/images/plug.png", "UNCHECKED", true));
         itemsList.append(new MedicalTable("/images/images/inox_steel.png", "CHECKED", true));
+        itemsList.append(new MedicalTable("/images/images/settings.png", "CHECKED", true));
         itemsList.append(new MedicalTable("/images/images/top_color.png", "CHECKED", true ,"#13AAB8", "6099"));
         itemsList.append(new MedicalTable("/images/images/bottom_color.png", "CHECKED", true,"gray", "9006"));
         emit itemsListChanged(getItemsList());
@@ -84,7 +87,6 @@ void ItemsList::setItemsList(const QString &buttonName)
         itemsList.append(new MedicalTable("/images/images/electric_regulation_CH.png", "CHECKED", false)); // CHECKED
         itemsList.append(new MedicalTable("/images/images/belt_holder.png", "UNCHECKED", true));
         itemsList.append(new MedicalTable("/images/images/angle_regulation_CH.png", "CHECKED", false)); // CHECKED
-        itemsList.append(new MedicalTable("/images/images/elastic.png", "CHECKED", false));
         itemsList.append(new MedicalTable("/images/images/electric_top_CH.png", "CHECKED", false)); // CHECKED
         itemsList.append(new MedicalTable("/images/images/chassis.png", "UNCHECKED", true));
         itemsList.append(new MedicalTable("/images/images/bolser.png", "UNCHECKED", true));
@@ -95,6 +97,7 @@ void ItemsList::setItemsList(const QString &buttonName)
         itemsList.append(new MedicalTable("/images/images/sheet_holder.png", "UNCHECKED", true));
         itemsList.append(new MedicalTable("/images/images/plug.png", "UNCHECKED", true));
         itemsList.append(new MedicalTable("/images/images/inox_steel.png", "CHECKED", true));
+        itemsList.append(new MedicalTable("/images/images/settings.png", "CHECKED", true));
         itemsList.append(new MedicalTable("/images/images/top_color.png", "CHECKED", true ,"#13AAB8", "6099"));
         itemsList.append(new MedicalTable("/images/images/bottom_color.png", "CHECKED", true,"gray", "9006"));
         emit itemsListChanged(getItemsList());
@@ -105,7 +108,6 @@ void ItemsList::setItemsList(const QString &buttonName)
         itemsList.append(new MedicalTable("/images/images/electric_regulation_CH.png", "CHECKED", false)); // CHECKED
         itemsList.append(new MedicalTable("/images/images/belt_holder.png", "UNCHECKED", true));
         itemsList.append(new MedicalTable("/images/images/angle_regulation_CH.png", "CHECKED", false)); // CHECKED
-        itemsList.append(new MedicalTable("/images/images/elastic.png", "CHECKED", false));
         itemsList.append(new MedicalTable("/images/images/electric_top_CH.png", "CHECKED", false)); // CHECKED
         itemsList.append(new MedicalTable("/images/images/chassis_CH.png", "CHECKED", false)); // CHECKED
         itemsList.append(new MedicalTable("/images/images/bolser_CH.png", "CHECKED", false)); // CHECKED
@@ -116,6 +118,7 @@ void ItemsList::setItemsList(const QString &buttonName)
         itemsList.append(new MedicalTable("/images/images/sheet_holder.png", "UNCHECKED", true)); // OK
         itemsList.append(new MedicalTable("/images/images/plug.png", "UNCHECKED", true));
         itemsList.append(new MedicalTable("/images/images/inox_steel.png", "CHECKED", true));
+        itemsList.append(new MedicalTable("/images/images/settings.png", "CHECKED", true));
         itemsList.append(new MedicalTable("/images/images/top_color.png", "CHECKED", true ,"#13AAB8", "6099"));
         itemsList.append(new MedicalTable("/images/images/bottom_color.png", "CHECKED", true,"gray", "9006"));
         emit itemsListChanged(getItemsList());
@@ -171,8 +174,6 @@ void ItemsList::setImagesList(const QString &buttonName)
 
 void ItemsList::generateSchedule()
 {
-    generateCSV();
-
     QAxObject* excel;
     QAxObject* wbooks;
     QAxObject* book;

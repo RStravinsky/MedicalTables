@@ -28,7 +28,6 @@ class ItemsList : public QObject
     QString numberOfTables{"1"};
     std::array<int,14> indexArray;
     void setArray();
-    void generateCSV();
 
 public:
     explicit ItemsList(QObject *parent = 0); 
@@ -50,6 +49,8 @@ public:
     Q_INVOKABLE void setImagesList(const QString & buttonName);
 
     Q_INVOKABLE void generateSchedule();
+
+    Q_INVOKABLE void generateCSV(uint column, QString separatorr);
 
     Q_INVOKABLE void setColor(QString color,  const int &itemIndex );
 

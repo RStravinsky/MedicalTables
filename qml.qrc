@@ -12,6 +12,8 @@
         <file>ImageState.qml</file>
         <file>ColorArea.qml</file>
         <file>NumberOfTables.qml</file>
+        <file>GenerateButton.qml</file>
+        <file>Settings.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>logo.ico</file>
@@ -65,5 +67,7 @@
         <file>images/t7_3.png</file>
         <file>images/number.png</file>
         <file>images/number1.png</file>
+        <file>images/add_table.png</file>
+        <file>images/settings.png</file>
     </qresource>
 </RCC>

@@ -41,13 +41,17 @@ Component {
                     onClicked: {
                         if(animationActive == true) {
                             checkedAnimation.start()
-                            if ( index < 14 ) {
+                            if ( index < 13 ) {
                                 itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
                                 optList.itemClicked( index, itemImage.state )
                             }
-                            else {
+                            else if ( index != 13) {
                                 colorArea.visible = true
                                 colorArea.colorIndex = index
+                            }
+
+                            else {
+
                             }
                         }
                     }

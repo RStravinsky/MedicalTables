@@ -7,19 +7,24 @@ import QtGraphicalEffects 1.0
 
 Item {
 
-    id: acceptButton
-    property int columnCount
-    property string separator
+    id: generateButton
 
     Rectangle {
         id: rectangle
-        anchors.fill: acceptButton
-        radius: width*0.5
-        color: "transparent"
+        anchors.fill: generateButton
+        border.width: 5
+        border.color: "#787878"
+        radius: 15
+        gradient: Gradient {
+            GradientStop { position: 0;    color: "lightgray" }
+            GradientStop { position: .1;   color: "#838383" }
+            GradientStop { position: .5;   color: "#464646" }
+            GradientStop { position: 1.0; color: "#464646" }
+        }
 
         Image {
-            id: acceptImage;
-            source:"/images/images/add_table.png"
+            id: generateImage;
+            source:"/images/images/accept.png"
             width: height
             height: rectangle.height
             anchors.centerIn: rectangle
@@ -27,37 +32,38 @@ Item {
             smooth: true
         }
 
+
         MouseArea {
+            id: mouseArea;
             anchors.fill: rectangle
             hoverEnabled: true
             onEntered: rectangle.state = "ENTERED"
             onExited: rectangle.state = "EXITED"
             onClicked: {
                 clickedAnimation.start()
-                optList.generateCSV( columnCount, separator )
-                separator = ";"
-                columnCount = columnCount + 1
+                optList.generateSchedule()
             }
         }
 
         ParallelAnimation {
+
             id: clickedAnimation
             NumberAnimation{
                 target: rectangle
                 property: "scale"
-                from: 1.15
-                to: 0.7
-                duration: 50
-                easing.type: Easing.Linear
+                from: 0
+                to: 1
+                duration: 300
+                easing.type: Easing.InCirc
             }
 
             NumberAnimation {
                 target: rectangle
-                property: "scale"
-                from: 0.7
-                to: 1.15
-                duration: 50
-                easing.type: Easing.Linear
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: 300
+                easing.type: Easing.OutSine
             }
         }
 
@@ -66,14 +72,16 @@ Item {
                 name: "ENTERED"
                 PropertyChanges {
                     target: rectangle
-                    scale: 1.15
+                    border.color: "#69C0D9"
+                    opacity: 1.0
                 }
             },
             State {
                 name: "EXITED"
                 PropertyChanges {
                     target: rectangle
-                    scale: 1
+                    border.color: "#787878"
+                    opacity: 1.0
                 }
             }
         ]
@@ -84,7 +92,7 @@ Item {
                 to: "ENTERED"
                 ColorAnimation {
                     target: rectangle
-                    duration: 1000
+                    duration: 600
                 }
             },
             Transition {
@@ -92,7 +100,7 @@ Item {
                 to: "EXITED"
                 ColorAnimation {
                     target: rectangle
-                    duration: 1000
+                    duration: 600
                 }
             }
         ]
@@ -100,5 +108,7 @@ Item {
      } // Rectangle
 
 } // Item
+
+
 
 
