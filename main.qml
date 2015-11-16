@@ -31,6 +31,7 @@ ApplicationWindow {
             width: parent.width;
             height: parent.height/5;
             anchors.top: parent.top
+            visible: false
         }  
 
         ColorArea { id: colorArea; width: mainForm.width/4; height: width; visible: false;}
@@ -42,6 +43,16 @@ ApplicationWindow {
             height: parent.height - topFrame.height
             anchors.top: topFrame.bottom
             color: "transparent"
+
+            Order {
+                id: order
+                width: initRectangle.width/2
+                height: initRectangle.height/2
+                anchors.horizontalCenter: initRectangle.horizontalCenter
+                opacity: 0.8
+                z: 100
+            }
+
             Image {
                id: logoTable
                width: (4*initRectangle.width)/3
@@ -58,6 +69,8 @@ ApplicationWindow {
                 height: initRectangle.height/2
                 anchors.horizontalCenter: initRectangle.horizontalCenter
             }
+
+
         }
 
         /* Table options list */
@@ -164,27 +177,16 @@ ApplicationWindow {
                             Image {
                                 id: imageItem
                                 anchors.fill: delegateItem
-                                source: imageSource
+                                source: mainImageSource
                               }
                         }
                     }
                     Component.onCompleted: positionViewAtBeginning()
                   }
 
-        } // insideRectangle
+            } // insideRectangle
 
-      } // mainImageRectangle
-
-//        Settings {
-//            id: numberOfTables
-//            height: imageState.height * 2
-//            width: height
-//            anchors.margins: 20
-//            z: 100
-//            anchors.bottom: mainImageRectangle.bottom
-//            anchors.left: mainImageRectangle.left
-//            visible: false
-//        }
+        } // mainImageRectangle
 
         /* ACCEPT BUTTON */
         AcceptButton {
@@ -195,8 +197,6 @@ ApplicationWindow {
             height: imageState.height * 2
             anchors.bottom: mainImageRectangle.bottom
             anchors.right: mainImageRectangle.right
-            columnCount: 1
-            separator: ""
             visible: false
         }
 

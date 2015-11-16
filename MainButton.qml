@@ -8,7 +8,7 @@ import QtGraphicalEffects 1.0
 Item {
 
     id: mainButton
-    property string bName
+    property string bName    
 
     Rectangle {
         id: rectangle
@@ -53,16 +53,14 @@ Item {
             onExited: rectangle.state = "EXITED"
             onClicked: {
                 clickedAnimation.start()
-                optList.mainButtonClicked(mainButton.bName)
+                optList.onMainButtonClicked(mainButton.bName)
                 optList.setItemsList(bName)
                 optList.setImagesList(bName)
                 imageState.setColor()
                 initRectangle.visible = false
-                //numberOfTables.clearText()
                 mainImageRectangle.visible = true
                 gridRectangle.visible = true
                 acceptButton.visible = true
-                //numberOfTables.visible = true
             }
         }
 

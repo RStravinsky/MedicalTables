@@ -8,8 +8,6 @@ import QtGraphicalEffects 1.0
 Item {
 
     id: acceptButton
-    property int columnCount
-    property string separator
 
     Rectangle {
         id: rectangle
@@ -34,9 +32,7 @@ Item {
             onExited: rectangle.state = "EXITED"
             onClicked: {
                 clickedAnimation.start()
-                optList.generateCSV( columnCount, separator )
-                separator = ";"
-                columnCount = columnCount + 1
+                optList.generateCSV()
             }
         }
 

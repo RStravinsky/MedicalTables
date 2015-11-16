@@ -5,122 +5,69 @@ ItemsList::ItemsList(QObject *parent) : QObject(parent)
 
 }
 
-void ItemsList::setArray()
+void ItemsList::setItemsList(const QString & _buttonName)
 {
-    for(int i = 0; i < itemsList.size() - 2; ++i)
+    if(_buttonName == "Noxi T2")
     {
-        if(itemsList.at(i)->property("imageState").toString() == "CHECKED")
-            indexArray[i] = true;
-        else
-            indexArray[i] = false;
-    }
-}
-
-void ItemsList::generateCSV(uint column, QString separatorr)
-{
-    qDebug() << "columnCount: " << column << endl;
-    //qDebug() << "separator: " << separator << endl;
-    QDir dir;
-    QString path = dir.absolutePath();
-    QString pathFile = path + "/optionsList.csv";
-    QString separator = ";";
-
-    QFile csvFile(pathFile);
-    QTextStream out( &csvFile );
-    csvFile.open(QIODevice::WriteOnly);
-
-    out << actualTable + separator <<  endl;
-    out << numberOfTables + separator <<  endl;
-
-    /* fill options */
-    for( uint row = 0 ; row < indexArray.size() ; ++row )
-        out << QString::number(indexArray[row]) + separator << endl;
-
-    out << topColor + separator << endl;
-    out << bottomColor + separator << endl;
-
-    csvFile.close();
-}
-
-void ItemsList::mainButtonClicked( const QString &buttonName)
-{
-    actualTable = buttonName;
-}
-
-void ItemsList::itemClicked( const int &itemIndex, const QString state)
-{
-    indexArray[itemIndex] = !indexArray[itemIndex];
-    itemsList.at(itemIndex)->setProperty( "imageState", (QVariant)state );
-}
-
-void ItemsList::onTextChanged( const QString number )
-{
-    numberOfTables = number;
-}
-
-void ItemsList::setItemsList(const QString &buttonName)
-{
-    if(buttonName == "Noxi T2")
-    {
-        itemsList.clear();
-        itemsList.append(new MedicalTable("/images/images/electric_regulation_CH.png", "CHECKED", false)); // CHECKED
-        itemsList.append(new MedicalTable("/images/images/belt_holder_CH.png", "CHECKED", false)); // CHECKED
-        itemsList.append(new MedicalTable("/images/images/angle_regulation_CH.png", "CHECKED", false));
-        itemsList.append(new MedicalTable("/images/images/electric_top_L.png", "UNCHECKED", false));
-        itemsList.append(new MedicalTable("/images/images/chassis.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/bolser.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/chair_position_L.png", "UNCHECKED", false));
-        itemsList.append(new MedicalTable("/images/images/foot_control.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/remote_control.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/pins_L.png", "UNCHECKED", false));
-        itemsList.append(new MedicalTable("/images/images/sheet_holder.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/plug.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/inox_steel.png", "CHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/settings.png", "CHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/top_color.png", "CHECKED", true ,"#13AAB8", "6099"));
-        itemsList.append(new MedicalTable("/images/images/bottom_color.png", "CHECKED", true,"gray", "9006"));
+        m_itemsList.clear();
+        m_itemsList.append(new MedicalTable("/images/images/electric_regulation_CH.png", "CHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/belt_holder_CH.png", "CHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/angle_regulation_CH.png", "CHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/electric_top_L.png", "UNCHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/chassis.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/bolser.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/chair_position_L.png", "UNCHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/foot_control.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/remote_control.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/pins_L.png", "UNCHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/sheet_holder.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/plug.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/inox_steel.png", "CHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/settings.png", "CHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/top_color.png", "CHECKED", true ,"#13AAB8", "6099"));
+        m_itemsList.append(new MedicalTable("/images/images/bottom_color.png", "CHECKED", true,"gray", "9006"));
         emit itemsListChanged(getItemsList());
     }
-    else if(buttonName == "Noxi T3")
+    else if(_buttonName == "Noxi T3")
     {
-        itemsList.clear();      
-        itemsList.append(new MedicalTable("/images/images/electric_regulation_CH.png", "CHECKED", false)); // CHECKED
-        itemsList.append(new MedicalTable("/images/images/belt_holder.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/angle_regulation_CH.png", "CHECKED", false)); // CHECKED
-        itemsList.append(new MedicalTable("/images/images/electric_top_CH.png", "CHECKED", false)); // CHECKED
-        itemsList.append(new MedicalTable("/images/images/chassis.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/bolser.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/chair_position.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/foot_control.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/remote_control.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/pins.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/sheet_holder.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/plug.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/inox_steel.png", "CHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/settings.png", "CHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/top_color.png", "CHECKED", true ,"#13AAB8", "6099"));
-        itemsList.append(new MedicalTable("/images/images/bottom_color.png", "CHECKED", true,"gray", "9006"));
+        m_itemsList.clear();
+        m_itemsList.append(new MedicalTable("/images/images/electric_regulation_CH.png", "CHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/belt_holder.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/angle_regulation_CH.png", "CHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/electric_top_CH.png", "CHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/chassis.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/bolser.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/chair_position.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/foot_control.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/remote_control.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/pins.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/sheet_holder.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/plug.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/inox_steel.png", "CHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/settings.png", "CHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/top_color.png", "CHECKED", true ,"#13AAB8", "6099"));
+        m_itemsList.append(new MedicalTable("/images/images/bottom_color.png", "CHECKED", true,"gray", "9006"));
         emit itemsListChanged(getItemsList());
     }
-    else if(buttonName == "Noxi T7")
+    else if(_buttonName == "Noxi T7")
     {
-        itemsList.clear();
-        itemsList.append(new MedicalTable("/images/images/electric_regulation_CH.png", "CHECKED", false)); // CHECKED
-        itemsList.append(new MedicalTable("/images/images/belt_holder.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/angle_regulation_CH.png", "CHECKED", false)); // CHECKED
-        itemsList.append(new MedicalTable("/images/images/electric_top_CH.png", "CHECKED", false)); // CHECKED
-        itemsList.append(new MedicalTable("/images/images/chassis_CH.png", "CHECKED", false)); // CHECKED
-        itemsList.append(new MedicalTable("/images/images/bolser_CH.png", "CHECKED", false)); // CHECKED
-        itemsList.append(new MedicalTable("/images/images/chair_position.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/foot_control.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/remote_control.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/pins.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/sheet_holder.png", "UNCHECKED", true)); // OK
-        itemsList.append(new MedicalTable("/images/images/plug.png", "UNCHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/inox_steel.png", "CHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/settings.png", "CHECKED", true));
-        itemsList.append(new MedicalTable("/images/images/top_color.png", "CHECKED", true ,"#13AAB8", "6099"));
-        itemsList.append(new MedicalTable("/images/images/bottom_color.png", "CHECKED", true,"gray", "9006"));
+        m_itemsList.clear();
+        m_itemsList.append(new MedicalTable("/images/images/electric_regulation_CH.png", "CHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/belt_holder.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/angle_regulation_CH.png", "CHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/electric_top_CH.png", "CHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/chassis_CH.png", "CHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/bolser_CH.png", "CHECKED", false));
+        m_itemsList.append(new MedicalTable("/images/images/chair_position.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/foot_control.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/remote_control.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/pins.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/sheet_holder.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/plug.png", "UNCHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/inox_steel.png", "CHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/settings.png", "CHECKED", true));
+        m_itemsList.append(new MedicalTable("/images/images/top_color.png", "CHECKED", true ,"#13AAB8", "6099"));
+        m_itemsList.append(new MedicalTable("/images/images/bottom_color.png", "CHECKED", true,"gray", "9006"));
         emit itemsListChanged(getItemsList());
     }
     else
@@ -129,96 +76,229 @@ void ItemsList::setItemsList(const QString &buttonName)
     setArray();
 }
 
-void ItemsList::clearList()
+void ItemsList::setImagesList(const QString & _buttonName)
 {
-    QList<QObject*> tmpList = itemsList;
-    itemsList.clear();
-    emit itemsListChanged(getItemsList());
-    qDeleteAll(tmpList);
-    tmpList.clear();
-    emit itemsListChanged(getItemsList());
-}
-
-void ItemsList::setImagesList(const QString &buttonName)
-{
-    if(buttonName == "Noxi T2")
+    if(_buttonName == "Noxi T2")
     {
-        imagesList.clear();
-        imagesList.append(new ImagesPath("/images/images/t2.png"));
-        imagesList.append(new ImagesPath("/images/images/t2_1.png"));
-        imagesList.append(new ImagesPath("/images/images/t2_2.png"));
-        imagesList.append(new ImagesPath("/images/images/t2_3.png"));
+        m_imagesList.clear();
+        m_imagesList.append(new MainImageSource("/images/images/t2.png"));
+        m_imagesList.append(new MainImageSource("/images/images/t2_1.png"));
+        m_imagesList.append(new MainImageSource("/images/images/t2_2.png"));
+        m_imagesList.append(new MainImageSource("/images/images/t2_3.png"));
         emit imagesListChanged(getImagesList());
     }
-    else if(buttonName == "Noxi T3")
+    else if(_buttonName == "Noxi T3")
     {
-        imagesList.clear();
-        imagesList.append(new ImagesPath("/images/images/t3.png"));
-        imagesList.append(new ImagesPath("/images/images/t3_1.png"));
-        imagesList.append(new ImagesPath("/images/images/t3_2.png"));
-        imagesList.append(new ImagesPath("/images/images/t3_3.png"));
+        m_imagesList.clear();
+        m_imagesList.append(new MainImageSource("/images/images/t3.png"));
+        m_imagesList.append(new MainImageSource("/images/images/t3_1.png"));
+        m_imagesList.append(new MainImageSource("/images/images/t3_2.png"));
+        m_imagesList.append(new MainImageSource("/images/images/t3_3.png"));
         emit imagesListChanged(getImagesList());
     }
-    else if(buttonName == "Noxi T7")
+    else if(_buttonName == "Noxi T7")
     {
-        imagesList.clear();
-        imagesList.append(new ImagesPath("/images/images/t7.png"));
-        imagesList.append(new ImagesPath("/images/images/t7_1.png"));
-        imagesList.append(new ImagesPath("/images/images/t7_2.png"));
-        imagesList.append(new ImagesPath("/images/images/t7_3.png"));
+        m_imagesList.clear();
+        m_imagesList.append(new MainImageSource("/images/images/t7.png"));
+        m_imagesList.append(new MainImageSource("/images/images/t7_1.png"));
+        m_imagesList.append(new MainImageSource("/images/images/t7_2.png"));
+        m_imagesList.append(new MainImageSource("/images/images/t7_3.png"));
         emit imagesListChanged(getImagesList());
     }
     else
         return;
 }
 
-void ItemsList::generateSchedule()
+void ItemsList::setArray()
 {
-    QAxObject* excel;
-    QAxObject* wbooks;
-    QAxObject* book;
-    QFileInfo scheduleFile("schedule.xlsm");
-    QVariant excelPath;
-    QVariant destPath;
+    for(int i = 0; i < m_itemsList.size() - 3; ++i)
+    {
+        if(m_itemsList.at(i)->property("imageState").toString() == "CHECKED")
+            m_indexArray[i] = true;
+        else
+            m_indexArray[i] = false;
+    }
+}
 
-    excelPath = QVariant(scheduleFile.absoluteFilePath().replace("/", "\\\\"));
+void ItemsList::setColor( const QString _color, const int & _itemIndex )
+{
+    m_itemsList.at(_itemIndex)->setProperty("tableColor", (QVariant)_color);
+    emit itemsListChanged(getItemsList());
+}
 
-    excel = new QAxObject("Excel.Application", this);
-    excel->setProperty("Visible", false);
-    excel->setProperty("DisplayAlerts",0);
+void ItemsList::setText( const QString _colorText, const int & _itemIndex )
+{
+    if( _itemIndex == 14 ) m_topColor = _colorText;
+    else if ( _itemIndex == 15 ) m_bottomColor = _colorText;
+    m_itemsList.at(_itemIndex)->setProperty("tableText", (QVariant)_colorText);
+    emit itemsListChanged(getItemsList());
+}
 
-    wbooks = excel->querySubObject("Workbooks");
-    book = wbooks->querySubObject("Open (const QString&)", excelPath);
-    destPath = excel->dynamicCall("Run(QVariant)", QVariant("runMacro"));
+bool ItemsList::checkData()
+{
+    if( m_order.isEmpty() || m_recipient.isEmpty())
+    {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(QString("Informacja"));
+        msgBox.setText(QString("Nie uzupełniono pól tekstowych"));
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.exec();
+        return false;
+    }
+    else if( m_year.toInt() < 2015 || m_day.toInt() < 1 || m_month.toInt() < 1)
+    {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(QString("Informacja"));
+        msgBox.setText(QString("Termin dostawy nieprawidłowy."));
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.exec();
+        return false;
+    }
+    else
+        return true;
+}
 
-    book->dynamicCall("Close()");
-    excel->dynamicCall("Quit()");
+void ItemsList::generateCSV()
+{
+    QDir dir;
+    QString path = dir.absolutePath();
+    QString pathFile = path + "/optionsList.csv";
+    QString separator = ";";
+    bool static firstSave = false;
+
+    QFile csvFile(pathFile);
+    QTextStream out( &csvFile );
+    csvFile.open(QIODevice::WriteOnly | QIODevice::Append);
+
+    if (!firstSave)
+    {
+        out << m_order + separator << m_year + "-" + m_month + "-" + m_day + separator << m_recipient + separator << endl;
+        out << "Rodzaj stołu" + separator
+            << "Elektryczna regulacja wysokości" + separator
+            << "Uchwyty do pasów" + separator
+            << "Regulacja kąta odchylenia" + separator
+            << "Elektrycznie łamane leżysko" + separator
+            << "Układ jezdny z hamulcami"+ separator
+            << "Zagłówek 3-elementowy"+ separator
+            << "Pozycja fotela"+ separator
+            << "Sterowanie nożne"+ separator
+            << "Pilot podblatowy"+ separator
+            << "Kołki do stabilizacji"+ separator
+            << "Uchwyt na prześcieradło"+ separator
+            << "Zatyczka"+ separator
+            << "Stal nierdzewna"+ separator
+            << "Ilość sztuk"+ separator
+            << "Kolor blatu"+ separator
+            << "Kolor ramy" << endl;
+        firstSave = true;
+    }
+
+    out << m_actualTable + separator;
+
+    /* fill options */
+    for( uint row = 0 ; row < m_indexArray.size() ; ++row )
+        out << QString::number(m_indexArray[row]) + separator;
+
+    out << m_numberOfTables + separator;
+    out << m_topColor + separator;
+    out << m_bottomColor << endl;
+
+    csvFile.close();
 
     QMessageBox msgBox;
     msgBox.setWindowTitle(QString("Informacja"));
-    msgBox.setText(QString("Wygenerowano harmonogram."));
-    msgBox.setInformativeText(destPath.toString());
+    msgBox.setText(QString("Dodano do zamówienia."));
     msgBox.setIcon(QMessageBox::Information);
     msgBox.exec();
-
-    delete book;
-    delete wbooks;
-    delete excel;
-
 }
 
-void ItemsList::setColor( const QString color, const int &itemIndex )
+void ItemsList::onMainButtonClicked( const QString & _buttonName)
 {
-    itemsList.at(itemIndex)->setProperty("tableColor", (QVariant)color);
-    emit itemsListChanged(getItemsList());
+    m_actualTable = _buttonName;
 }
 
-void ItemsList::setText( const QString text, const int &itemIndex )
+void ItemsList::onItemClicked(const int & _itemIndex, const QString _itemState)
 {
-    if( itemIndex == 14 ) topColor = text;
-    else if ( itemIndex == 15 ) bottomColor = text;
-    itemsList.at(itemIndex)->setProperty("tableText", (QVariant)text);
-    emit itemsListChanged(getItemsList());
+    m_indexArray[_itemIndex] = !m_indexArray[_itemIndex];
+    m_itemsList.at(_itemIndex)->setProperty( "imageState", (QVariant)_itemState );
 }
+
+void ItemsList::onOrderChanged(const QString _order)
+{
+    m_order = _order;
+}
+
+void ItemsList::onRecipientChanged(const QString _recipient)
+{
+    m_recipient = _recipient;
+}
+
+void ItemsList::onDateChanged(const QString _deliveryTime, QString _type)
+{
+    if ( _type == "year")
+        m_year = _deliveryTime;
+    else if ( _type == "month")
+        m_month = _deliveryTime;
+    else if ( _type == "day")
+        m_day = _deliveryTime;
+}
+
+bool ItemsList::generateSchedule()
+{
+    QDir dir;
+    QString path = dir.absolutePath();
+    QString pathFile = path + "/optionsList.csv";
+    QFile checkFile(pathFile);
+
+    if (!m_actualTable.isEmpty() && checkFile.exists())
+    {
+        QAxObject* excel;
+        QAxObject* wbooks;
+        QAxObject* book;
+        QFileInfo scheduleFile("schedule.xlsm");
+        QVariant excelPath;
+        QVariant destPath;
+
+        excelPath = QVariant(scheduleFile.absoluteFilePath().replace("/", "\\\\"));
+
+        excel = new QAxObject("Excel.Application", this);
+        excel->setProperty("Visible", false);
+        excel->setProperty("DisplayAlerts",0);
+
+        wbooks = excel->querySubObject("Workbooks");
+        book = wbooks->querySubObject("Open (const QString&)", excelPath);
+        destPath = excel->dynamicCall("Run(QVariant)", QVariant("runMacro"));
+
+        book->dynamicCall("Close()");
+        excel->dynamicCall("Quit()");
+
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(QString("Informacja"));
+        msgBox.setText(QString("Wygenerowano harmonogram."));
+        msgBox.setInformativeText(destPath.toString());
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.exec();
+
+        delete book;
+        delete wbooks;
+        delete excel;
+
+        checkFile.remove();
+        return true;
+     }
+     else if(m_actualTable.isEmpty() || !checkFile.exists())
+    {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(QString("Informacja"));
+        msgBox.setText(QString("Nie dodano stołu do harmonogramu."));
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.exec();
+        return false;
+    }
+
+    return false;
+
+}
+
 
 

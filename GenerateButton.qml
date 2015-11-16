@@ -41,7 +41,16 @@ Item {
             onExited: rectangle.state = "EXITED"
             onClicked: {
                 clickedAnimation.start()
-                optList.generateSchedule()
+                if( optList.generateSchedule() === true ) {
+                    order.clearText()
+                    order.visible = true
+                    initRectangle.visible = true
+
+                    topFrame.visible = false
+                    mainImageRectangle.visible = false
+                    gridRectangle.visible = false
+                    acceptButton.visible = false
+                }
             }
         }
 

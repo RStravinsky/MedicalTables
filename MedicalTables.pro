@@ -1,13 +1,10 @@
 TEMPLATE = app
 
 QT += qml quick widgets gui axcontainer
-
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    medicaltable.cpp \
-    itemslist.cpp \
-    imagespath.cpp
+    itemslist.cpp
 
 RESOURCES += qml.qrc
 
@@ -22,4 +19,4 @@ include(deployment.pri)
 HEADERS += \
     medicaltable.h \
     itemslist.h \
-    imagespath.h
+    mainimagesource.h

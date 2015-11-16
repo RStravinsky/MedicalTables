@@ -14,7 +14,7 @@ class MedicalTable : public QObject
     Q_PROPERTY(QString tableText READ tableText WRITE setText NOTIFY textChanged)
 
 public:
-    explicit MedicalTable(QObject *parent = 0);
+    explicit MedicalTable(QObject *parent = 0): QObject(parent){}
     MedicalTable(QString path, QString state, bool animationActive, QString color = "transparent", QString text = ""): m_imagePath(path),
     m_imageState(state), m_animationActive(animationActive), m_color(color), m_text(text){}
 
@@ -28,7 +28,6 @@ public:
 
 
     Q_INVOKABLE inline bool animationActive() const {
-
         return m_animationActive;
     }
 
@@ -51,9 +50,6 @@ public:
     Q_INVOKABLE void setText( QString text ) {
         m_text = text;
     }
-
-
-public slots:
 
 signals:
     void pathChanged( QString path );
