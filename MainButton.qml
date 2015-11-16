@@ -8,7 +8,7 @@ import QtGraphicalEffects 1.0
 Item {
 
     id: mainButton
-    property string bName
+    property string bName    
 
     Rectangle {
         id: rectangle

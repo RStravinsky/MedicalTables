@@ -22,14 +22,14 @@ Item
             anchors.fill: rectangle
             anchors.margins: 10
             spacing: 10
-            property real itemWidth : ((width*.85 + spacing) / 3) - 2*spacing/3 ;
+            property real itemWidth : ((width*.85 + spacing) / 3) - spacing - 3 ;
 
             MainButton {
                 id: t2
                 width: row.itemWidth
                 height: row.height
                 bName: "Noxi T2"
-            }
+            } 
            MainButton {
                 id: t3
                 width:  row.itemWidth

@@ -7,7 +7,7 @@ ItemsList::ItemsList(QObject *parent) : QObject(parent)
 
 void ItemsList::setArray()
 {
-    for(int i = 0; i < itemsList.size() - 2; ++i)
+    for(int i = 0; i < itemsList.size() - 3; ++i)
     {
         if(itemsList.at(i)->property("imageState").toString() == "CHECKED")
             indexArray[i] = true;
@@ -16,28 +16,50 @@ void ItemsList::setArray()
     }
 }
 
-void ItemsList::generateCSV(uint column, QString separatorr)
+void ItemsList::generateCSV()
 {
-    qDebug() << "columnCount: " << column << endl;
-    //qDebug() << "separator: " << separator << endl;
     QDir dir;
     QString path = dir.absolutePath();
     QString pathFile = path + "/optionsList.csv";
     QString separator = ";";
+    bool static firstSave = false;
 
     QFile csvFile(pathFile);
     QTextStream out( &csvFile );
-    csvFile.open(QIODevice::WriteOnly);
+    csvFile.open(QIODevice::WriteOnly | QIODevice::Append);
 
-    out << actualTable + separator <<  endl;
-    out << numberOfTables + separator <<  endl;
+    if (!firstSave)
+    {
+        out << "456/33/22" + separator << "12-01-2015" + separator << "ERES Medical" + separator << endl;
+        out << "Rodzaj stołu" + separator
+            << "Elektryczna regulacja wysokości" + separator
+            << "Uchwyty do pasów" + separator
+            << "Regulacja kąta odchylenia" + separator
+            << "Elektrycznie łamane leżysko" + separator
+            << "Układ jezdny z hamulcami"+ separator
+            << "Zagłówek 3-elementowy"+ separator
+            << "Pozycja fotela"+ separator
+            << "Sterowanie nożne"+ separator
+            << "Pilot podblatowy"+ separator
+            << "Kołki do stabilizacji"+ separator
+            << "Uchwyt na prześcieradło"+ separator
+            << "Zatyczka"+ separator
+            << "Stal nierdzewna"+ separator
+            << "Ilość sztuk"+ separator
+            << "Kolor blatu"+ separator
+            << "Kolor ramy" << endl;
+        firstSave = true;
+    }
+
+    out << actualTable + separator;
 
     /* fill options */
     for( uint row = 0 ; row < indexArray.size() ; ++row )
-        out << QString::number(indexArray[row]) + separator << endl;
+        out << QString::number(indexArray[row]) + separator;
 
-    out << topColor + separator << endl;
-    out << bottomColor + separator << endl;
+    out << numberOfTables + separator;
+    out << topColor + separator;
+    out << bottomColor << endl;
 
     csvFile.close();
 }
@@ -174,36 +196,43 @@ void ItemsList::setImagesList(const QString &buttonName)
 
 void ItemsList::generateSchedule()
 {
-    QAxObject* excel;
-    QAxObject* wbooks;
-    QAxObject* book;
-    QFileInfo scheduleFile("schedule.xlsm");
-    QVariant excelPath;
-    QVariant destPath;
+    QDir dir;
+    QString path = dir.absolutePath();
+    QString pathFile = path + "/optionsList.csv";
+    QFile checkFile(pathFile);
 
-    excelPath = QVariant(scheduleFile.absoluteFilePath().replace("/", "\\\\"));
+    if (!actualTable.isEmpty() && checkFile.exists()) qDebug() << "DONE" << endl;
+    else if(actualTable.isEmpty() || !checkFile.exists())  qDebug() << "ERROR" << endl;
+//    QAxObject* excel;
+//    QAxObject* wbooks;
+//    QAxObject* book;
+//    QFileInfo scheduleFile("schedule.xlsm");
+//    QVariant excelPath;
+//    QVariant destPath;
 
-    excel = new QAxObject("Excel.Application", this);
-    excel->setProperty("Visible", false);
-    excel->setProperty("DisplayAlerts",0);
+//    excelPath = QVariant(scheduleFile.absoluteFilePath().replace("/", "\\\\"));
 
-    wbooks = excel->querySubObject("Workbooks");
-    book = wbooks->querySubObject("Open (const QString&)", excelPath);
-    destPath = excel->dynamicCall("Run(QVariant)", QVariant("runMacro"));
+//    excel = new QAxObject("Excel.Application", this);
+//    excel->setProperty("Visible", false);
+//    excel->setProperty("DisplayAlerts",0);
 
-    book->dynamicCall("Close()");
-    excel->dynamicCall("Quit()");
+//    wbooks = excel->querySubObject("Workbooks");
+//    book = wbooks->querySubObject("Open (const QString&)", excelPath);
+//    destPath = excel->dynamicCall("Run(QVariant)", QVariant("runMacro"));
 
-    QMessageBox msgBox;
-    msgBox.setWindowTitle(QString("Informacja"));
-    msgBox.setText(QString("Wygenerowano harmonogram."));
-    msgBox.setInformativeText(destPath.toString());
-    msgBox.setIcon(QMessageBox::Information);
-    msgBox.exec();
+//    book->dynamicCall("Close()");
+//    excel->dynamicCall("Quit()");
 
-    delete book;
-    delete wbooks;
-    delete excel;
+//    QMessageBox msgBox;
+//    msgBox.setWindowTitle(QString("Informacja"));
+//    msgBox.setText(QString("Wygenerowano harmonogram."));
+//    msgBox.setInformativeText(destPath.toString());
+//    msgBox.setIcon(QMessageBox::Information);
+//    msgBox.exec();
+
+//    delete book;
+//    delete wbooks;
+//    delete excel;
 
 }
 

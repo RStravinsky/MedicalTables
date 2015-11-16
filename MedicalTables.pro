@@ -1,7 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets gui axcontainer
-
+QT += qml quick widgets gui
 CONFIG += c++11
 
 SOURCES += main.cpp \

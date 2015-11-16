@@ -12,7 +12,7 @@
 #include <QObject>
 
 #include <itemslist.h>
-#include <schedule.h>
+//#include <schedule.h>
 
 int main(int argc, char *argv[])
 {

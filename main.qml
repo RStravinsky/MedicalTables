@@ -31,6 +31,7 @@ ApplicationWindow {
             width: parent.width;
             height: parent.height/5;
             anchors.top: parent.top
+            visible: false
         }  
 
         ColorArea { id: colorArea; width: mainForm.width/4; height: width; visible: false;}
@@ -42,6 +43,33 @@ ApplicationWindow {
             height: parent.height - topFrame.height
             anchors.top: topFrame.bottom
             color: "transparent"
+
+            Rectangle {
+                id: rect
+                width: initRectangle.width/2
+                height: initRectangle.height/2
+                anchors.horizontalCenter: initRectangle.horizontalCenter
+                color: "lightgray"
+                border.width: 5
+                border.color: "gray"
+                radius: 20
+                opacity: 0.8
+                z: 100
+
+                Button
+                {
+                    width: height * 2
+                    height: parent.height/8
+                    anchors.bottom: parent.bottom
+                    anchors.right: parent.right
+                    anchors.margins: 20
+                    onClicked: {
+                        topFrame.visible = true
+                        rect.visible = false
+                    }
+                }
+            }
+
             Image {
                id: logoTable
                width: (4*initRectangle.width)/3
@@ -58,6 +86,8 @@ ApplicationWindow {
                 height: initRectangle.height/2
                 anchors.horizontalCenter: initRectangle.horizontalCenter
             }
+
+
         }
 
         /* Table options list */
@@ -195,8 +225,6 @@ ApplicationWindow {
             height: imageState.height * 2
             anchors.bottom: mainImageRectangle.bottom
             anchors.right: mainImageRectangle.right
-            columnCount: 1
-            separator: ""
             visible: false
         }
 

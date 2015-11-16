@@ -6,14 +6,15 @@
 #include <QMap>
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QMessageBox>
 #include <QTextStream>
 #include <medicaltable.h>
 #include <imagespath.h>
 #include <array>
-#include <QAxBase>
-#include <QAxObject>
-#include <QAxWidget>
+//#include <QAxBase>
+//#include <QAxObject>
+//#include <QAxWidget>
 
 class ItemsList : public QObject
 {
@@ -22,11 +23,11 @@ class ItemsList : public QObject
     Q_PROPERTY (QQmlListProperty<QObject> imagesList READ getImagesList NOTIFY imagesListChanged)
     QList<QObject*> itemsList;
     QList<QObject*> imagesList;
-    QString actualTable;
+    QString actualTable{};
     QString topColor{"6099"};
     QString bottomColor{"9006"};
     QString numberOfTables{"1"};
-    std::array<int,14> indexArray;
+    std::array<int,13> indexArray;
     void setArray();
 
 public:
@@ -50,7 +51,7 @@ public:
 
     Q_INVOKABLE void generateSchedule();
 
-    Q_INVOKABLE void generateCSV(uint column, QString separatorr);
+    Q_INVOKABLE void generateCSV();
 
     Q_INVOKABLE void setColor(QString color,  const int &itemIndex );
 

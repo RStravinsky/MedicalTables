@@ -49,6 +49,7 @@ Item {
     }
 
     SequentialAnimation {
+
         running: true
 
         NumberAnimation {
