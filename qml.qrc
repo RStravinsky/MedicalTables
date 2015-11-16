@@ -14,6 +14,7 @@
         <file>NumberOfTables.qml</file>
         <file>GenerateButton.qml</file>
         <file>Order.qml</file>
+        <file>Settings.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>logo.ico</file>

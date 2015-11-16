@@ -36,6 +36,8 @@ ApplicationWindow {
 
         ColorArea { id: colorArea; width: mainForm.width/4; height: width; visible: false;}
 
+        Settings  { id: settingsArea; width: mainForm.width/5; height: width/2; visible: false; }
+
         /* Animation at start of application */
         Rectangle {
             id: initRectangle

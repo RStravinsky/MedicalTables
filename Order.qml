@@ -153,7 +153,10 @@ Item {
                                     implicitWidth: yearLineEdit.width
                                     implicitHeight: yearLineEdit.height
                                     radius: 20
-                                    border.color: "gray"
+                                    border.color: {
+                                        if ( yearLineEdit.text < 2015 && yearLineEdit.text != "") "#FFA07A"
+                                        else "gray"
+                                        }
                                     border.width: 2
                                 }
                         }
@@ -180,7 +183,10 @@ Item {
                                     implicitWidth: monthLineEdit.width
                                     implicitHeight: monthLineEdit.height
                                     radius: 20
-                                    border.color: "gray"
+                                    border.color: {
+                                        if ( monthLineEdit.text < 1 && monthLineEdit.text != "") "#FFA07A"
+                                        else "gray"
+                                        }
                                     border.width: 2
                                 }
                         }
@@ -207,7 +213,10 @@ Item {
                                     implicitWidth: dayLineEdit.width
                                     implicitHeight: dayLineEdit.height
                                     radius: 20
-                                    border.color: "gray"
+                                    border.color: {
+                                        if ( dayLineEdit.text < 1 && dayLineEdit.text != "") "#FFA07A"
+                                        else "gray"
+                                        }
                                     border.width: 2
                                 }
                         }
