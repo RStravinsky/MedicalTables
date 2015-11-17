@@ -36,6 +36,18 @@ ApplicationWindow {
 
         ColorArea { id: colorArea; width: mainForm.width/4; height: width; visible: false;}
 
+        SettingsArea  { id: settingsArea; width: mainForm.width/6; height: mainForm.height/3; visible: false }
+
+        InitData {
+            id: order
+            width: initRectangle.width/2
+            height: initRectangle.height/2
+            anchors.horizontalCenter: initRectangle.horizontalCenter
+            anchors.top: mainForm.top
+            anchors.topMargin: 30
+            z: 100
+        }
+
         /* Animation at start of application */
         Rectangle {
             id: initRectangle
@@ -43,15 +55,6 @@ ApplicationWindow {
             height: parent.height - topFrame.height
             anchors.top: topFrame.bottom
             color: "transparent"
-
-            Order {
-                id: order
-                width: initRectangle.width/2
-                height: initRectangle.height/2
-                anchors.horizontalCenter: initRectangle.horizontalCenter
-                opacity: 0.8
-                z: 100
-            }
 
             Image {
                id: logoTable
@@ -68,6 +71,8 @@ ApplicationWindow {
                 width: initRectangle.width/2
                 height: initRectangle.height/2
                 anchors.horizontalCenter: initRectangle.horizontalCenter
+                anchors.bottom: initRectangle.bottom
+                anchors.bottomMargin: logoTable.height/2
             }
 
 

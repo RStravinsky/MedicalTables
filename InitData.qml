@@ -8,7 +8,7 @@ import QtQuick.Controls.Styles 1.3
 
 Item {
 
-    id: order
+    id: initData
 
     function clearText() {
         dayLineEdit.text = ""
@@ -19,10 +19,10 @@ Item {
 
     Rectangle {
         id: rectangle
-        anchors.fill: order
-        color: "lightgray"
+        anchors.fill: initData
+        color: Qt.rgba(0.239, 0.237, 0.237, 0.3)
         border.width: 5
-        border.color: "gray"
+        border.color: "lightgray"
         radius: 20
 
         Column {
@@ -36,13 +36,13 @@ Item {
             Row {
                 id: orderRow
                 width: column.width
-                height: column.height * .25 - column.spacing
+                height: column.height * .23 - column.spacing
 
                 Text {
                     text: "Numer zlecenia:"
                     height: orderRow.height
                     width: orderRow.width *.35
-                    color: "#323232"
+                    color: "white"
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignVCenter
                     font { family: "Arial"; pixelSize: orderRow.width * .035 }
@@ -52,19 +52,18 @@ Item {
                     id: orderLineEdit
                     height: orderRow.height
                     width: orderRow.width *.65
-                    opacity: 0.6
                     anchors.verticalCenter: orderRow.verticalCenter
                     horizontalAlignment: Text.AlignHCenter
                     focus: orderLineEdit.hovered == true ? true : false
                     font { family: "Arial"; pixelSize: orderRow.width * .035  }
                     style: TextFieldStyle {
-                            textColor: "#323232"
+                            textColor: "gray"
                             background: Rectangle {
                                 implicitWidth: orderLineEdit.width
                                 implicitHeight: orderLineEdit.height
                                 radius: 20
-                                border.color: "gray"
-                                border.width: 2
+                                border.color: orderLineEdit.hovered === true ? "#69C0D9" : "lightgray"
+                                border.width: 3
                             }
                     }
                     onTextChanged: {
@@ -76,13 +75,13 @@ Item {
             Row {
                 id: recipientRow
                 width: column.width
-                height: column.height * .25 - column.spacing
+                height: column.height * .23 - column.spacing
 
                 Text {
                     text: "Odbiorca:"
                     height: recipientRow.height
                     width: recipientRow.width *.35
-                    color: "#323232"
+                    color: "white"
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignVCenter
                     font { family: "Arial"; pixelSize: recipientRow.width * .035 }
@@ -92,19 +91,18 @@ Item {
                     id: recipientLineEdit
                     height: recipientRow.height
                     width: recipientRow.width *.65
-                    opacity: 0.6
                     anchors.verticalCenter: recipientRow.verticalCenter
                     horizontalAlignment: Text.AlignHCenter
                     focus: recipientLineEdit.hovered == true ? true : false
                     font { family: "Arial"; pixelSize: recipientRow.width * .035 }
                     style: TextFieldStyle {
-                            textColor: "#323232"
+                            textColor: "gray"
                             background: Rectangle {
                                 implicitWidth: recipientLineEdit.width
                                 implicitHeight: recipientLineEdit.height
                                 radius: 20
-                                border.color: "gray"
-                                border.width: 2
+                                border.color: recipientLineEdit.hovered === true ? "#69C0D9" : "lightgray"
+                                border.width: 3
                             }
                     }
                     onTextChanged: {
@@ -113,17 +111,16 @@ Item {
                 }
             }
 
-
             Row {
                 id: termRow
                 width: column.width
-                height: column.height * 0.25 - column.spacing
+                height: column.height * 0.23 - column.spacing
 
                 Text {
                     text: "Termin dostawy:"
                     height: termRow.height
                     width: termRow.width*.35
-                    color: "#323232"
+                    color: "white"
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignVCenter
                     font { family: "Arial"; pixelSize: termRow.width * .035 }
@@ -135,28 +132,33 @@ Item {
                     height: termRow.height
                     spacing: 10
 
+                    property int offset: (2*dateRow.spacing)/3
+
                     TextField {
                         property string type: "year"
                         id: yearLineEdit
                         height: termRow.height
-                        width: dateRow.width * .33 - dateRow.spacing
-                        opacity: 0.6
+                        width: dateRow.width/3 - dateRow.offset
                         anchors.verticalCenter: dateRow.verticalCenter
                         horizontalAlignment: Text.AlignHCenter
-                        placeholderText: "rrrr"
+                        placeholderText: "rrrr"                                     
                         focus: yearLineEdit.hovered == true ? true : false
                         validator: IntValidator { bottom: 2015; top: 7999}
                         font { family: "Arial"; pixelSize: termRow.width * .035 }
                         style: TextFieldStyle {
-                                textColor: "#323232"
+                                textColor: {
+                                    if ( yearLineEdit.text < 2015 && yearLineEdit.text != "") "#FFA07A"
+                                    else "gray"
+                                }
                                 background: Rectangle {
                                     implicitWidth: yearLineEdit.width
                                     implicitHeight: yearLineEdit.height
                                     radius: 20
-                                    border.color: "gray"
-                                    border.width: 2
+                                    border.color: yearLineEdit.hovered === true ? "#69C0D9" : "lightgray"
+                                    border.width: 3
                                 }
                         }
+
                         onTextChanged: {
                             optList.onDateChanged(yearLineEdit.text, type)
                         }
@@ -166,24 +168,27 @@ Item {
                         id: monthLineEdit
                         property string type: "month"
                         height: termRow.height
-                        width: dateRow.width * .33 - dateRow.spacing
+                        width: dateRow.width/3 - dateRow.offset
                         anchors.verticalCenter: dateRow.verticalCenter
                         horizontalAlignment: Text.AlignHCenter
-                        opacity: 0.6
                         placeholderText: "mm"
                         validator: IntValidator { bottom: 1; top: 12}
                         focus: monthLineEdit.hovered == true ? true : false
                         font { family: "Arial"; pixelSize: termRow.width * .035 }
                         style: TextFieldStyle {
-                                textColor: "#323232"
+                                textColor: {
+                                    if ( monthLineEdit.text < 2015 && monthLineEdit.text != "") "#FFA07A"
+                                    else "gray"
+                                }
                                 background: Rectangle {
                                     implicitWidth: monthLineEdit.width
                                     implicitHeight: monthLineEdit.height
                                     radius: 20
-                                    border.color: "gray"
-                                    border.width: 2
+                                    border.color: monthLineEdit.hovered === true ? "#69C0D9" : "lightgray"
+                                    border.width: 3
                                 }
                         }
+
                         onTextChanged: {
                             optList.onDateChanged(monthLineEdit.text, type)
                         }
@@ -193,24 +198,27 @@ Item {
                         id: dayLineEdit
                         property string type: "day"
                         height: termRow.height
-                        width: dateRow.width * .33 - dateRow.spacing
+                        width: dateRow.width/3 - dateRow.offset
                         anchors.verticalCenter: dateRow.verticalCenter
                         horizontalAlignment: Text.AlignHCenter
-                        opacity: 0.6
                         placeholderText: "dd"
                         validator: IntValidator { bottom: 1; top: 31}
                         focus: dayLineEdit.hovered == true ? true : false
                         font { family: "Arial"; pixelSize: termRow.width * .035 }
                         style: TextFieldStyle {
-                                textColor: "#323232"
+                                textColor: {
+                                    if ( dayLineEdit.text < 2015 && dayLineEdit.text != "") "#FFA07A"
+                                    else "gray"
+                                }
                                 background: Rectangle {
                                     implicitWidth: dayLineEdit.width
                                     implicitHeight: dayLineEdit.height
                                     radius: 20
-                                    border.color: "gray"
-                                    border.width: 2
+                                    border.color: dayLineEdit.hovered === true ? "#69C0D9" : "lightgray"
+                                    border.width: 3
                                 }
                         }
+
                         onTextChanged: {
                             optList.onDateChanged(dayLineEdit.text, type)
                         }
@@ -218,29 +226,17 @@ Item {
                 }
             }
 
-            Rectangle
-            {
-                id: acceptButton
+            Image {
                 width: height
-                height: rectangle.height * .25 - column.spacing
+                height: rectangle.height * .31
                 anchors.right: column.right
-                radius: 20
-                color: {
-                       if( mouseArea.containsMouse ) "#919191"
-                       else "gray"
-                }
-
-                Image {
-                    anchors.fill: acceptButton
-                    source: "/images/images/check.png"
-                    smooth: true
-                    scale: mouseArea.pressed ? 0.8 : 1
-                }
+                source: "/images/images/go.png"
+                smooth: true
+                scale: mouseArea.pressed ? 0.7 : 1
 
                 MouseArea {
                     id: mouseArea
-                    hoverEnabled: true
-                    anchors.fill: acceptButton
+                    anchors.fill: parent
                     onClicked: {
                         if( optList.checkData() === true) {
                             topFrame.visible = true
@@ -250,8 +246,9 @@ Item {
                 }
             }
 
-        }
+        } // Columns
 
-    }
-}
+    } // Rectangle
+
+} // Item
 

@@ -12,9 +12,9 @@
 #include <medicaltable.h>
 #include <mainimagesource.h>
 #include <array>
-#include <QAxBase>
-#include <QAxObject>
-#include <QAxWidget>
+//#include <QAxBase>
+//#include <QAxObject>
+//#include <QAxWidget>
 
 class ItemsList : public QObject
 {

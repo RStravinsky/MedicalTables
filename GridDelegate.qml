@@ -45,9 +45,13 @@ Component {
                                 itemImage.state == "CHECKED" ? itemImage.state = "UNCHECKED" : itemImage.state = "CHECKED"
                                 optList.onItemClicked( index, itemImage.state )
                             }
-                            else if ( index != 13) {
+                            else if ( index != 13 ) {
                                 colorArea.visible = true
                                 colorArea.colorIndex = index
+                            }
+                            else if ( index == 13 )
+                            {
+                                settingsArea.visible = true
                             }
                         }
                     }
