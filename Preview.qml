@@ -30,7 +30,7 @@ Item {
             hoverEnabled: true
             onEntered: rectangle.state = "ENTERED"
             onExited: rectangle.state = "EXITED"
-            onReleased: {
+            onClicked: {
                 clickedAnimation.start()
                 optList.showTable()
             }
@@ -51,7 +51,7 @@ Item {
                 target: rectangle
                 property: "scale"
                 from: 0.7
-                to: 1.15
+                to: 1
                 duration: 50
                 easing.type: Easing.Linear
             }

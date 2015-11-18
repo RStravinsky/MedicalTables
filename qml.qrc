@@ -15,7 +15,6 @@
         <file>GenerateButton.qml</file>
         <file>InitData.qml</file>
         <file>SettingsArea.qml</file>
-        <file>CommentsArea.qml</file>
         <file>NotesArea.qml</file>
         <file>TableView.qml</file>
         <file>Preview.qml</file>

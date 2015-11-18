@@ -50,6 +50,7 @@ Item {
                     mainImageRectangle.visible = false
                     gridRectangle.visible = false
                     acceptButton.visible = false
+                    previewButton.visible = false
                 }
             }
         }

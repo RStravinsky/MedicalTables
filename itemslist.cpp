@@ -3,6 +3,11 @@
 ItemsList::ItemsList(QObject *parent) : QObject(parent)
 {
     tableDialog = new TableDialog;
+
+    QDir dir;
+    QString path = dir.absolutePath();
+    QString pathFile = path + "/optionsList.csv";
+    csvFile = new QFile(pathFile);
 }
 
 void ItemsList::setItemsList(const QString & _buttonName)
@@ -72,8 +77,6 @@ void ItemsList::setItemsList(const QString & _buttonName)
     }
     else
         return;
-
-    setArray();
 }
 
 void ItemsList::setImagesList(const QString & _buttonName)
@@ -109,14 +112,14 @@ void ItemsList::setImagesList(const QString & _buttonName)
         return;
 }
 
-void ItemsList::setArray()
+void ItemsList::setItemsState()
 {
     for(int i = 0; i < m_itemsList.size() - 3; ++i)
     {
         if(m_itemsList.at(i)->property("imageState").toString() == "CHECKED")
-            m_indexArray[i] = true;
+            m_statesArray[i] = true;
         else
-            m_indexArray[i] = false;
+            m_statesArray[i] = false;
     }
 }
 
@@ -142,7 +145,15 @@ void ItemsList::setAdditionalSettings(const QString _quantity, const QString _no
 
 void ItemsList::showTable()
 {
-    tableDialog->exec();
+    if (mainOrderActive) tableDialog->exec();
+    else
+    {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(QString("Informacja"));
+        msgBox.setText(QString("Zamówienie jest puste."));
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.exec();
+    }
 }
 
 bool ItemsList::checkData()
@@ -171,18 +182,13 @@ bool ItemsList::checkData()
 
 void ItemsList::generateCSV()
 {
-    QDir dir;
-    QString path = dir.absolutePath();
-    QString pathFile = path + "/optionsList.csv";
     QString separator = ";";
     bool static firstSave = false;
     QList <QStandardItem*> itemsList;
+    QTextStream out( csvFile );
+    csvFile->open(QIODevice::WriteOnly | QIODevice::Append);
 
-    QFile csvFile(pathFile);
-    QTextStream out( &csvFile );
-    csvFile.open(QIODevice::WriteOnly | QIODevice::Append);
-
-    if (!firstSave)
+    if (!mainOrderActive)
     {
         out << m_order + separator << m_year + "-" + m_month + "-" + m_day + separator << m_recipient + separator << endl;
         out << "Rodzaj stołu" + separator
@@ -203,16 +209,16 @@ void ItemsList::generateCSV()
             << "Kolor blatu"+ separator
             << "Kolor ramy" + separator
             << "Uwagi" << endl;
-        firstSave = true;
+        mainOrderActive = true;
     }
 
     out << m_actualTable + separator;
     itemsList.push_back(new QStandardItem(m_actualTable));
 
     /* fill options */
-    for( uint row = 0 ; row < m_indexArray.size() ; ++row ) {
-        out << QString::number(m_indexArray[row]) + separator;
-        itemsList.push_back( new QStandardItem(QString::number(m_indexArray[row])));
+    for( uint row = 0 ; row < m_statesArray.size() ; ++row ) {
+        out << QString::number(m_statesArray[row]) + separator;
+        itemsList.push_back( new QStandardItem(QString::number(m_statesArray[row])));
     }
 
     out << m_quantity + separator;
@@ -227,7 +233,7 @@ void ItemsList::generateCSV()
     out << m_notes << endl;
     itemsList.push_back( new QStandardItem(m_notes));
 
-    csvFile.close();
+    csvFile->close();
     tableDialog->model->appendRow(itemsList);
 
     QMessageBox msgBox;
@@ -237,49 +243,9 @@ void ItemsList::generateCSV()
     msgBox.exec();
 }
 
-void ItemsList::onMainButtonClicked( const QString & _buttonName)
-{
-    m_actualTable = _buttonName;
-    m_notes.clear();
-    m_bottomColor = "9006";
-    m_topColor = "6099";
-    m_quantity = "1";
-}
-
-void ItemsList::onItemClicked(const int & _itemIndex, const QString _itemState)
-{
-    m_indexArray[_itemIndex] = !m_indexArray[_itemIndex];
-    m_itemsList.at(_itemIndex)->setProperty( "imageState", (QVariant)_itemState );
-}
-
-void ItemsList::onOrderChanged(const QString _order)
-{
-    m_order = _order;
-}
-
-void ItemsList::onRecipientChanged(const QString _recipient)
-{
-    m_recipient = _recipient;
-}
-
-void ItemsList::onDateChanged(const QString _deliveryTime, QString _type)
-{
-    if ( _type == "year")
-        m_year = _deliveryTime;
-    else if ( _type == "month")
-        m_month = _deliveryTime;
-    else if ( _type == "day")
-        m_day = _deliveryTime;
-}
-
 bool ItemsList::generateSchedule()
 {
-    QDir dir;
-    QString path = dir.absolutePath();
-    QString pathFile = path + "/optionsList.csv";
-    checkFile.setFileName(pathFile);
-
-    if (!m_actualTable.isEmpty() && checkFile.exists())
+    if (!m_actualTable.isEmpty() && csvFile->exists() )
     {
 //        QAxObject* excel;
 //        QAxObject* wbooks;
@@ -307,20 +273,20 @@ bool ItemsList::generateSchedule()
 //        msgBox.setInformativeText(destPath.toString());
 //        msgBox.setIcon(QMessageBox::Information);
 //        msgBox.exec();
-
 //        delete book;
 //        delete wbooks;
 //        delete excel;
 
-        checkFile.remove();
+        csvFile->remove();
         tableDialog->model->clear();
+        mainOrderActive = false;
         return true;
      }
-     else if(m_actualTable.isEmpty() || !checkFile.exists())
-    {
+     else if(m_actualTable.isEmpty() || !csvFile->exists() )
+     {
         QMessageBox msgBox;
         msgBox.setWindowTitle(QString("Informacja"));
-        msgBox.setText(QString("Nie dodano stołu do harmonogramu."));
+        msgBox.setText(QString("Zamówienie jest puste."));
         msgBox.setIcon(QMessageBox::Information);
         msgBox.exec();
         return false;
@@ -329,6 +295,53 @@ bool ItemsList::generateSchedule()
     return false;
 
 }
+
+void ItemsList::clear()
+{
+    m_notes.clear();
+    m_bottomColor = "9006";
+    m_topColor = "6099";
+    m_quantity = "1";
+}
+
+
+// SLOTS
+
+void ItemsList::onMainButtonClicked( const QString & _buttonName)
+{
+    m_actualTable = _buttonName;   
+    setItemsList( m_actualTable );
+    setImagesList( m_actualTable );
+    setItemsState();
+    clear();
+}
+
+void ItemsList::onItemClicked(const int & _itemIndex, const QString _itemState)
+{
+    m_statesArray[_itemIndex] = !m_statesArray[_itemIndex];
+    m_itemsList.at(_itemIndex)->setProperty( "imageState", (QVariant)_itemState );
+}
+
+void ItemsList::onOrderChanged(const QString _order)
+{
+    m_order = _order;
+}
+
+void ItemsList::onRecipientChanged(const QString _recipient)
+{
+    m_recipient = _recipient;
+}
+
+void ItemsList::onDateChanged(const QString _deliveryTime, QString _type)
+{
+    if ( _type == "year")
+        m_year = _deliveryTime;
+    else if ( _type == "month")
+        m_month = _deliveryTime;
+    else if ( _type == "day")
+        m_day = _deliveryTime;
+}
+
 
 
 

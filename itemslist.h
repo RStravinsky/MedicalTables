@@ -35,42 +35,34 @@ class ItemsList : public QObject
     QString m_month{};
     QString m_day{};
     QString m_notes{};
-    std::array <int,13> m_indexArray;
+    std::array <int,13> m_statesArray;
     TableDialog * tableDialog;
-    QFile checkFile;
+    QStandardItemModel * model;
+    QFile * csvFile{NULL};
+    bool mainOrderActive{false};
 
-    void setArray();
+    void setItemsState();
+    void setItemsList(const QString & _buttonName);
+    void setImagesList(const QString & _buttonName);
+    void clear();
 
 public:
     explicit ItemsList(QObject *parent = 0); 
     ~ItemsList() {
-        QDir dir;
-        QString path = dir.absolutePath();
-        QString pathFile = path + "/optionsList.csv";
-        checkFile.setFileName(pathFile);
-        checkFile.remove();
+        if(csvFile) {
+        csvFile->remove();
+        delete csvFile;
+        }
     }
-
-    Q_INVOKABLE QQmlListProperty<QObject> getItemsList() {
-       return QQmlListProperty<QObject>(this, m_itemsList);
-    }
-    Q_INVOKABLE void setItemsList(const QString & _buttonName);
-
-    Q_INVOKABLE QQmlListProperty<QObject> getImagesList() {
-       return QQmlListProperty<QObject>(this, m_imagesList);
-    }
-    Q_INVOKABLE void setImagesList(const QString & _buttonName);
-
+    Q_INVOKABLE QQmlListProperty<QObject> getItemsList() { return QQmlListProperty<QObject>(this, m_itemsList); }
+    Q_INVOKABLE QQmlListProperty<QObject> getImagesList() { return QQmlListProperty<QObject>(this, m_imagesList); }
+    Q_INVOKABLE void setAdditionalSettings( const QString _quantity, const QString _notes);
+    Q_INVOKABLE void setText(const QString _colorText, const int & _itemIndex );
+    Q_INVOKABLE void setColor(QString _color,  const int & _itemIndex );
     Q_INVOKABLE bool generateSchedule();
     Q_INVOKABLE void generateCSV();
-    Q_INVOKABLE void setColor(QString _color,  const int & _itemIndex );
-    Q_INVOKABLE void setText(const QString _colorText, const int & _itemIndex );
-    Q_INVOKABLE void setAdditionalSettings( const QString _quantity, const QString _notes);
     Q_INVOKABLE void showTable();
     Q_INVOKABLE bool checkData();
-
-    QStandardItemModel * model;
-
 
 signals:
     void itemsListChanged(QQmlListProperty<QObject> _itemsList);

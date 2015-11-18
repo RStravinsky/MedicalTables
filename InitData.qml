@@ -173,7 +173,7 @@ Item {
                         font { family: "Arial"; pixelSize: termRow.width * .035 }
                         style: TextFieldStyle {
                                 textColor: {
-                                    if ( monthLineEdit.text < 2015 && monthLineEdit.text != "") "#FFA07A"
+                                    if ( monthLineEdit.text < 1 && monthLineEdit.text != "") "#FFA07A"
                                     else "gray"
                                 }
                                 background: Rectangle {
@@ -202,7 +202,7 @@ Item {
                         font { family: "Arial"; pixelSize: termRow.width * .035 }
                         style: TextFieldStyle {
                                 textColor: {
-                                    if ( dayLineEdit.text < 2015 && dayLineEdit.text != "") "#FFA07A"
+                                    if ( dayLineEdit.text < 1 && dayLineEdit.text != "") "#FFA07A"
                                     else "gray"
                                 }
                                 background: Rectangle {
@@ -222,6 +222,7 @@ Item {
             }
 
             Image {
+                id: acceptButton
                 width: height
                 height: rectangle.height * .31
                 anchors.right: column.right
@@ -236,6 +237,7 @@ Item {
                         if( optList.checkData() === true) {
                             topFrame.visible = true
                             order.visible = false
+                            initData.forceActiveFocus()
                         }
                     }
                 }

@@ -55,8 +55,6 @@ Item {
                 clickedAnimation.start()
                 optList.onMainButtonClicked(mainButton.bName)
                 settingsArea.clear()
-                optList.setItemsList(bName)
-                optList.setImagesList(bName)
                 imageState.setColor()
                 initRectangle.visible = false
                 mainImageRectangle.visible = true
