@@ -17,6 +17,8 @@
         <file>SettingsArea.qml</file>
         <file>CommentsArea.qml</file>
         <file>NotesArea.qml</file>
+        <file>TableView.qml</file>
+        <file>Preview.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>logo.ico</file>
@@ -77,5 +79,6 @@
         <file>images/quantity.png</file>
         <file>images/notes.png</file>
         <file>images/downArrow.png</file>
+        <file>images/preview.png</file>
     </qresource>
 </RCC>

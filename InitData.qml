@@ -54,7 +54,6 @@ Item {
                     width: orderRow.width *.65
                     anchors.verticalCenter: orderRow.verticalCenter
                     horizontalAlignment: Text.AlignHCenter
-                    focus: orderLineEdit.hovered == true ? true : false
                     font { family: "Arial"; pixelSize: orderRow.width * .035  }
                     style: TextFieldStyle {
                             textColor: "gray"
@@ -62,7 +61,7 @@ Item {
                                 implicitWidth: orderLineEdit.width
                                 implicitHeight: orderLineEdit.height
                                 radius: 20
-                                border.color: orderLineEdit.hovered === true ? "#69C0D9" : "lightgray"
+                                border.color: orderLineEdit.focus === true ? "#69C0D9" : "lightgray"
                                 border.width: 3
                             }
                     }
@@ -93,7 +92,6 @@ Item {
                     width: recipientRow.width *.65
                     anchors.verticalCenter: recipientRow.verticalCenter
                     horizontalAlignment: Text.AlignHCenter
-                    focus: recipientLineEdit.hovered == true ? true : false
                     font { family: "Arial"; pixelSize: recipientRow.width * .035 }
                     style: TextFieldStyle {
                             textColor: "gray"
@@ -101,7 +99,7 @@ Item {
                                 implicitWidth: recipientLineEdit.width
                                 implicitHeight: recipientLineEdit.height
                                 radius: 20
-                                border.color: recipientLineEdit.hovered === true ? "#69C0D9" : "lightgray"
+                                border.color: recipientLineEdit.focus === true ? "#69C0D9" : "lightgray"
                                 border.width: 3
                             }
                     }
@@ -142,7 +140,6 @@ Item {
                         anchors.verticalCenter: dateRow.verticalCenter
                         horizontalAlignment: Text.AlignHCenter
                         placeholderText: "rrrr"                                     
-                        focus: yearLineEdit.hovered == true ? true : false
                         validator: IntValidator { bottom: 2015; top: 7999}
                         font { family: "Arial"; pixelSize: termRow.width * .035 }
                         style: TextFieldStyle {
@@ -154,7 +151,7 @@ Item {
                                     implicitWidth: yearLineEdit.width
                                     implicitHeight: yearLineEdit.height
                                     radius: 20
-                                    border.color: yearLineEdit.hovered === true ? "#69C0D9" : "lightgray"
+                                    border.color: yearLineEdit.focus === true ? "#69C0D9" : "lightgray"
                                     border.width: 3
                                 }
                         }
@@ -173,7 +170,6 @@ Item {
                         horizontalAlignment: Text.AlignHCenter
                         placeholderText: "mm"
                         validator: IntValidator { bottom: 1; top: 12}
-                        focus: monthLineEdit.hovered == true ? true : false
                         font { family: "Arial"; pixelSize: termRow.width * .035 }
                         style: TextFieldStyle {
                                 textColor: {
@@ -184,7 +180,7 @@ Item {
                                     implicitWidth: monthLineEdit.width
                                     implicitHeight: monthLineEdit.height
                                     radius: 20
-                                    border.color: monthLineEdit.hovered === true ? "#69C0D9" : "lightgray"
+                                    border.color: monthLineEdit.focus === true ? "#69C0D9" : "lightgray"
                                     border.width: 3
                                 }
                         }
@@ -203,7 +199,6 @@ Item {
                         horizontalAlignment: Text.AlignHCenter
                         placeholderText: "dd"
                         validator: IntValidator { bottom: 1; top: 31}
-                        focus: dayLineEdit.hovered == true ? true : false
                         font { family: "Arial"; pixelSize: termRow.width * .035 }
                         style: TextFieldStyle {
                                 textColor: {
@@ -214,7 +209,7 @@ Item {
                                     implicitWidth: dayLineEdit.width
                                     implicitHeight: dayLineEdit.height
                                     radius: 20
-                                    border.color: dayLineEdit.hovered === true ? "#69C0D9" : "lightgray"
+                                    border.color: dayLineEdit.focus === true ? "#69C0D9" : "lightgray"
                                     border.width: 3
                                 }
                         }

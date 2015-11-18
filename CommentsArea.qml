@@ -29,7 +29,7 @@ Item {
             color: "gray"
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
-            font { family: "Arial"; pointSize: 16 }
+            font { family: "Arial"; pixelSize: settingsArea.width * 0.05  }
         }
 
     } // Row

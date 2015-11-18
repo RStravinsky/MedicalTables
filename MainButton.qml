@@ -54,6 +54,7 @@ Item {
             onClicked: {
                 clickedAnimation.start()
                 optList.onMainButtonClicked(mainButton.bName)
+                settingsArea.clear()
                 optList.setItemsList(bName)
                 optList.setImagesList(bName)
                 imageState.setColor()
@@ -61,6 +62,7 @@ Item {
                 mainImageRectangle.visible = true
                 gridRectangle.visible = true
                 acceptButton.visible = true
+                previewButton.visible = true
             }
         }
 

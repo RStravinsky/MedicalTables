@@ -1,4 +1,4 @@
-﻿import QtQuick 2.2
+import QtQuick 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Window 2.2
@@ -11,7 +11,6 @@ Window {
         lineEdit.clearTextField()
     }
     title: qsTr("Wybierz kolor")
-    modality: Qt.ApplicationModal
     minimumHeight: height
     maximumHeight: height
     minimumWidth: width

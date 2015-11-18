@@ -34,7 +34,7 @@ ApplicationWindow {
             visible: false
         }  
 
-        ColorArea { id: colorArea; width: mainForm.width/4; height: width; visible: false;}
+        ColorArea { id: colorArea; width: mainForm.width/4; height: mainForm.width/4; visible: false;}
 
         SettingsArea  { id: settingsArea; width: mainForm.width/6; height: mainForm.height/3; visible: false }
 
@@ -74,8 +74,6 @@ ApplicationWindow {
                 anchors.bottom: initRectangle.bottom
                 anchors.bottomMargin: logoTable.height/2
             }
-
-
         }
 
         /* Table options list */
@@ -193,15 +191,27 @@ ApplicationWindow {
 
         } // mainImageRectangle
 
-        /* ACCEPT BUTTON */
+        /* Accept Button */
         AcceptButton {
             id: acceptButton
             width: height
+            height: imageState.height * 1.5
             anchors.margins: 20
             z: 100
-            height: imageState.height * 2
             anchors.bottom: mainImageRectangle.bottom
             anchors.right: mainImageRectangle.right
+            visible: false
+        }
+
+        /* Preview Button */
+        Preview {
+            id: previewButton
+            width: height
+            height: imageState.height * 1.5
+            anchors.margins: 20
+            z: 100
+            anchors.bottom: mainImageRectangle.bottom
+            anchors.right: acceptButton.left
             visible: false
         }
 

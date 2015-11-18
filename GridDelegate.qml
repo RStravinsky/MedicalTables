@@ -52,6 +52,7 @@ Component {
                             else if ( index == 13 )
                             {
                                 settingsArea.visible = true
+
                             }
                         }
                     }

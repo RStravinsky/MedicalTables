@@ -7,17 +7,17 @@ import QtGraphicalEffects 1.0
 
 Item {
 
-    id: acceptButton
+    id: previewButton
 
     Rectangle {
         id: rectangle
-        anchors.fill: acceptButton
+        anchors.fill: previewButton
         radius: width*0.5
         color: "transparent"
 
         Image {
             id: acceptImage;
-            source:"/images/images/add_table.png"
+            source:"/images/images/preview.png"
             width: height
             height: rectangle.height
             anchors.centerIn: rectangle
@@ -32,7 +32,7 @@ Item {
             onExited: rectangle.state = "EXITED"
             onReleased: {
                 clickedAnimation.start()
-                optList.generateCSV()
+                optList.showTable()
             }
         }
 

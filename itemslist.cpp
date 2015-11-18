@@ -2,7 +2,7 @@
 
 ItemsList::ItemsList(QObject *parent) : QObject(parent)
 {
-
+    tableDialog = new TableDialog;
 }
 
 void ItemsList::setItemsList(const QString & _buttonName)
@@ -134,6 +134,17 @@ void ItemsList::setText( const QString _colorText, const int & _itemIndex )
     emit itemsListChanged(getItemsList());
 }
 
+void ItemsList::setAdditionalSettings(const QString _quantity, const QString _notes)
+{
+   m_quantity = _quantity;
+   m_notes = _notes;
+}
+
+void ItemsList::showTable()
+{
+    tableDialog->exec();
+}
+
 bool ItemsList::checkData()
 {
     if( m_order.isEmpty() || m_recipient.isEmpty())
@@ -165,6 +176,7 @@ void ItemsList::generateCSV()
     QString pathFile = path + "/optionsList.csv";
     QString separator = ";";
     bool static firstSave = false;
+    QList <QStandardItem*> itemsList;
 
     QFile csvFile(pathFile);
     QTextStream out( &csvFile );
@@ -189,21 +201,34 @@ void ItemsList::generateCSV()
             << "Stal nierdzewna"+ separator
             << "Ilość sztuk"+ separator
             << "Kolor blatu"+ separator
-            << "Kolor ramy" << endl;
+            << "Kolor ramy" + separator
+            << "Uwagi" << endl;
         firstSave = true;
     }
 
     out << m_actualTable + separator;
+    itemsList.push_back(new QStandardItem(m_actualTable));
 
     /* fill options */
-    for( uint row = 0 ; row < m_indexArray.size() ; ++row )
+    for( uint row = 0 ; row < m_indexArray.size() ; ++row ) {
         out << QString::number(m_indexArray[row]) + separator;
+        itemsList.push_back( new QStandardItem(QString::number(m_indexArray[row])));
+    }
 
-    out << m_numberOfTables + separator;
+    out << m_quantity + separator;
+    itemsList.push_back( new QStandardItem(m_quantity));
+
     out << m_topColor + separator;
-    out << m_bottomColor << endl;
+    itemsList.push_back( new QStandardItem(m_topColor));
+
+    out << m_bottomColor  + separator ;
+    itemsList.push_back( new QStandardItem(m_bottomColor));
+
+    out << m_notes << endl;
+    itemsList.push_back( new QStandardItem(m_notes));
 
     csvFile.close();
+    tableDialog->model->appendRow(itemsList);
 
     QMessageBox msgBox;
     msgBox.setWindowTitle(QString("Informacja"));
@@ -215,6 +240,10 @@ void ItemsList::generateCSV()
 void ItemsList::onMainButtonClicked( const QString & _buttonName)
 {
     m_actualTable = _buttonName;
+    m_notes.clear();
+    m_bottomColor = "9006";
+    m_topColor = "6099";
+    m_quantity = "1";
 }
 
 void ItemsList::onItemClicked(const int & _itemIndex, const QString _itemState)
@@ -248,7 +277,7 @@ bool ItemsList::generateSchedule()
     QDir dir;
     QString path = dir.absolutePath();
     QString pathFile = path + "/optionsList.csv";
-    QFile checkFile(pathFile);
+    checkFile.setFileName(pathFile);
 
     if (!m_actualTable.isEmpty() && checkFile.exists())
     {
@@ -284,6 +313,7 @@ bool ItemsList::generateSchedule()
 //        delete excel;
 
         checkFile.remove();
+        tableDialog->model->clear();
         return true;
      }
      else if(m_actualTable.isEmpty() || !checkFile.exists())

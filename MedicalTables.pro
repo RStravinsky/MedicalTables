@@ -4,7 +4,8 @@ QT += qml quick widgets gui #axcontainer
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    itemslist.cpp
+    itemslist.cpp \
+    tabledialog.cpp
 
 RESOURCES += qml.qrc
 
@@ -19,4 +20,8 @@ include(deployment.pri)
 HEADERS += \
     medicaltable.h \
     itemslist.h \
-    mainimagesource.h
+    mainimagesource.h \
+    tabledialog.h
+
+FORMS += \
+    tabledialog.ui

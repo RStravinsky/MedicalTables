@@ -1,24 +1,29 @@
 import QtQuick 2.2
-import QtQuick.Controls 1.2
-import QtQuick.Dialogs 1.2
+import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
+import QtQuick.Dialogs 1.2
+import QtQuick.Layouts 1.1
+import QtGraphicalEffects 1.0
 import QtQuick.Controls.Styles 1.3
 
 Item {
 
     id: quantityArea
 
+    function clearQuantity() { quantityLineEdit.text = "" }
+    property string text: quantityLineEdit.text
+
     Row {
         id: quantityRow
         width: quantityArea.width
         height: quantityArea.height
-        spacing: 20
+        spacing: 5
 
         Image {
             id: addImage
-            source: "/images/images/quantity.png"
+            source: "/images/images/add.png"
             anchors.verticalCenter: quantityRow.verticalCenter
-            height: quantityRow.height/1.5
+            height: quantityRow.height
             width: height
         }
 
@@ -30,17 +35,16 @@ Item {
             maximumLength: 4
             placeholderText: "Wpisz ilość sztuk"
             validator: IntValidator {}
-            focus: quantityLineEdit.hovered == true ? true : false
-            font { family: "Arial"; pointSize: 17  }
+            font { family: "Arial"; pixelSize: settingsArea.width * 0.05 }
             style: TextFieldStyle {
                     textColor: "gray"
                     background: Rectangle {
                         implicitWidth: quantityLineEdit.width
                         implicitHeight: quantityLineEdit.height
-                        radius: 20
-                        border.color: quantityLineEdit.hovered == true ? "#569ffd" : "lightgray"
+                        radius: 10
+                        border.color: quantityLineEdit.focus == true ? "#69C0D9" : "lightgray"
                         border.width: 3
-                    }
+                    }      
             }
 
             Image {
@@ -63,8 +67,8 @@ Item {
                 }
             }
 
-        }
-    }
+        } // TextField
 
+    } // Row
 
-}
+} // Item
