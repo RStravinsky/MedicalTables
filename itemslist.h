@@ -13,9 +13,9 @@
 #include <mainimagesource.h>
 #include <array>
 #include <tabledialog.h>
-//#include <QAxBase>
-//#include <QAxObject>
-//#include <QAxWidget>
+#include <QAxBase>
+#include <QAxObject>
+#include <QAxWidget>
 
 class ItemsList : public QObject
 {

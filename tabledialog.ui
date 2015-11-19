@@ -25,6 +25,16 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"> background-color: #646464;
+
+
+
+
+
+
+</string>
+  </property>
   <widget class="QTableView" name="tableView">
    <property name="geometry">
     <rect>
@@ -33,6 +43,35 @@
      <width>690</width>
      <height>490</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QHeaderView::section  {
+     background: qlineargradient(x1:0, y1:0, x2:0, y2:1
+    stop: 0  &quot;lightgray&quot;, stop: 0.1 &quot;#838383&quot;,stop: 0.5  &quot;#464646&quot;, stop:1  &quot;#464646&quot;);
+    font-size: 10pt ;
+    font-family: &quot;Arial&quot;;
+    color: &quot;white&quot;;
+    font-weight: bold 
+}
+
+ QTableView {
+    background: #2e2e2e;
+    color:#fffff8;
+    gridline-color: #fffff8;   
+    font-size: 10pt;
+	border: 2px solid #555;
+	padding: 5px;
+} 
+
+QTableView QTableCornerButton::section {
+     background: qlineargradient(x1:0, y1:0, x2:0, y2:1
+     stop: 0  &quot;lightgray&quot;, stop: 0.1 &quot;#838383&quot;,stop: 0.5  &quot;#464646&quot;, stop:1  &quot;#464646&quot;);
+}
+
+
+
+
+</string>
    </property>
   </widget>
  </widget>

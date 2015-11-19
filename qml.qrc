@@ -20,7 +20,6 @@
         <file>Preview.qml</file>
     </qresource>
     <qresource prefix="/images">
-        <file>logo.ico</file>
         <file>images/bolser.png</file>
         <file>images/belt_holder.png</file>
         <file>images/chair_position.png</file>
@@ -49,7 +48,6 @@
         <file>images/t3.png</file>
         <file>images/t7.png</file>
         <file>images/inox_steel.png</file>
-        <file>images/electric_regulation.png</file>
         <file>images/elastic.png</file>
         <file>images/angle_regulation.png</file>
         <file>images/accept.png</file>
@@ -69,15 +67,11 @@
         <file>images/t7_2.png</file>
         <file>images/t3_3.png</file>
         <file>images/t7_3.png</file>
-        <file>images/number.png</file>
-        <file>images/number1.png</file>
         <file>images/add_table.png</file>
         <file>images/settings.png</file>
-        <file>images/calendar.png</file>
         <file>images/go.png</file>
-        <file>images/quantity.png</file>
-        <file>images/notes.png</file>
         <file>images/downArrow.png</file>
         <file>images/preview.png</file>
+        <file>logo.ico</file>
     </qresource>
 </RCC>

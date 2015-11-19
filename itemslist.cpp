@@ -3,10 +3,7 @@
 ItemsList::ItemsList(QObject *parent) : QObject(parent)
 {
     tableDialog = new TableDialog;
-
-    QDir dir;
-    QString path = dir.absolutePath();
-    QString pathFile = path + "/optionsList.csv";
+    QString pathFile = QDir::homePath()+"/schedule.csv";
     csvFile = new QFile(pathFile);
 }
 
@@ -139,6 +136,7 @@ void ItemsList::setText( const QString _colorText, const int & _itemIndex )
 
 void ItemsList::setAdditionalSettings(const QString _quantity, const QString _notes)
 {
+   qDebug() << m_quantity << endl;
    m_quantity = _quantity;
    m_notes = _notes;
 }
@@ -183,7 +181,6 @@ bool ItemsList::checkData()
 void ItemsList::generateCSV()
 {
     QString separator = ";";
-    bool static firstSave = false;
     QList <QStandardItem*> itemsList;
     QTextStream out( csvFile );
     csvFile->open(QIODevice::WriteOnly | QIODevice::Append);
@@ -221,6 +218,7 @@ void ItemsList::generateCSV()
         itemsList.push_back( new QStandardItem(QString::number(m_statesArray[row])));
     }
 
+    qDebug() << m_quantity << endl;
     out << m_quantity + separator;
     itemsList.push_back( new QStandardItem(m_quantity));
 
@@ -247,35 +245,35 @@ bool ItemsList::generateSchedule()
 {
     if (!m_actualTable.isEmpty() && csvFile->exists() )
     {
-//        QAxObject* excel;
-//        QAxObject* wbooks;
-//        QAxObject* book;
-//        QFileInfo scheduleFile("schedule.xlsm");
-//        QVariant excelPath;
-//        QVariant destPath;
+        QAxObject* excel;
+        QAxObject* wbooks;
+        QAxObject* book;
+        QFileInfo scheduleFile("schedule.xlsm");
+        QVariant excelPath;
+        QVariant destPath;
 
-//        excelPath = QVariant(scheduleFile.absoluteFilePath().replace("/", "\\\\"));
+        excelPath = QVariant(scheduleFile.absoluteFilePath().replace("/", "\\\\"));
 
-//        excel = new QAxObject("Excel.Application", this);
-//        excel->setProperty("Visible", false);
-//        excel->setProperty("DisplayAlerts",0);
+        excel = new QAxObject("Excel.Application", this);
+        excel->setProperty("Visible", false);
+        excel->setProperty("DisplayAlerts",0);
 
-//        wbooks = excel->querySubObject("Workbooks");
-//        book = wbooks->querySubObject("Open (const QString&)", excelPath);
-//        destPath = excel->dynamicCall("Run(QVariant)", QVariant("runMacro"));
+        wbooks = excel->querySubObject("Workbooks");
+        book = wbooks->querySubObject("Open (const QString&)", excelPath);
+        destPath = excel->dynamicCall("Run(QVariant)", QVariant("runMacro"));
 
-//        book->dynamicCall("Close()");
-//        excel->dynamicCall("Quit()");
+        book->dynamicCall("Close()");
+        excel->dynamicCall("Quit()");
 
-//        QMessageBox msgBox;
-//        msgBox.setWindowTitle(QString("Informacja"));
-//        msgBox.setText(QString("Wygenerowano harmonogram."));
-//        msgBox.setInformativeText(destPath.toString());
-//        msgBox.setIcon(QMessageBox::Information);
-//        msgBox.exec();
-//        delete book;
-//        delete wbooks;
-//        delete excel;
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(QString("Informacja"));
+        msgBox.setText(QString("Wygenerowano harmonogram."));
+        msgBox.setInformativeText(destPath.toString());
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.exec();
+        delete book;
+        delete wbooks;
+        delete excel;
 
         csvFile->remove();
         tableDialog->model->clear();
