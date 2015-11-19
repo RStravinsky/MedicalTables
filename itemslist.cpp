@@ -1,5 +1,7 @@
 #include "itemslist.h"
 
+extern bool mainOrderActive;
+
 ItemsList::ItemsList(QObject *parent) : QObject(parent)
 {
     tableDialog = new TableDialog;
@@ -136,8 +138,8 @@ void ItemsList::setText( const QString _colorText, const int & _itemIndex )
 
 void ItemsList::setAdditionalSettings(const QString _quantity, const QString _notes)
 {
-   qDebug() << m_quantity << endl;
-   m_quantity = _quantity;
+   if ( _quantity == "" ) m_quantity = "1";
+   else m_quantity = _quantity;
    m_notes = _notes;
 }
 
@@ -243,7 +245,7 @@ void ItemsList::generateCSV()
 
 bool ItemsList::generateSchedule()
 {
-    if (!m_actualTable.isEmpty() && csvFile->exists() )
+    if (!m_actualTable.isEmpty() && mainOrderActive )
     {
         QAxObject* excel;
         QAxObject* wbooks;
@@ -280,7 +282,7 @@ bool ItemsList::generateSchedule()
         mainOrderActive = false;
         return true;
      }
-     else if(m_actualTable.isEmpty() || !csvFile->exists() )
+     else if(m_actualTable.isEmpty() || !mainOrderActive )
      {
         QMessageBox msgBox;
         msgBox.setWindowTitle(QString("Informacja"));

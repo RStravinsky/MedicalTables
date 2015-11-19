@@ -74,7 +74,7 @@ Window {
                     hoverEnabled: true
                     anchors.fill: acceptButton
                     onClicked: {
-                        if( quantityArea.text == "" ) quantityArea.text = "1"
+                        //if( quantityArea.text == "" ) quantityArea.text = "1"
                         optList.setAdditionalSettings( quantityArea.text, notesArea.text )
                         settingDialog.acceptDone  = true
                         settingDialog.close()

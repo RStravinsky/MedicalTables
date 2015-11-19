@@ -39,7 +39,6 @@ class ItemsList : public QObject
     TableDialog * tableDialog;
     QStandardItemModel * model;
     QFile * csvFile{NULL};
-    bool mainOrderActive{false};
 
     void setItemsState();
     void setItemsList(const QString & _buttonName);

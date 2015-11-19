@@ -7,6 +7,9 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QPushButton>
+#include <QTextStream>
+#include <QFile>
+#include <QDir>
 
 namespace Ui {
 class TableDialog;
@@ -20,6 +23,7 @@ public:
     explicit TableDialog(QWidget *parent = 0);
      QStandardItemModel * model;
      void deleteRecord();
+     void generateCSV();
     ~TableDialog();
 
 private:
