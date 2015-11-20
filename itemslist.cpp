@@ -179,6 +179,13 @@ void ItemsList::generateCSV()
             return;
         }
 
+    QBrush brush;
+    QFont checkedFont;
+    checkedFont.setFamily("Arial");
+    checkedFont.setBold(true);
+    checkedFont.setWeight(15);
+    brush.setColor(Qt::green);
+
     if (!mainOrderActive)
     {
         out << m_order + separator << m_year + "-" + m_month + "-" + m_day + separator << m_recipient + separator << endl;
@@ -213,6 +220,11 @@ void ItemsList::generateCSV()
         out << QString::number(m_statesArray[row]) + separator;
         item = new QStandardItem(QString::number(m_statesArray[row]));
         item -> setTextAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
+        if(item->text() == "1")
+        {
+            item -> setForeground(brush);
+            item -> setFont(checkedFont);
+        }
         itemsList.push_back( item );
     }
 
@@ -305,7 +317,7 @@ bool ItemsList::generateSchedule()
         delete wbooks;
         delete excel;
 
-//        csvFile->remove();
+        csvFile->remove();
         tableDialog->model->clear();
         mainOrderActive = false;
         return true;
@@ -333,7 +345,7 @@ void ItemsList::clear()
 
 void ItemsList::onMainButtonClicked( const QString & _buttonName)
 {
-    m_actualTable = _buttonName;   
+    m_actualTable = _buttonName;
     setItemsList( m_actualTable );
     setImagesList( m_actualTable );
     setItemsState();

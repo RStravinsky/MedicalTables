@@ -11,23 +11,22 @@ TableDialog::TableDialog(QWidget *parent) :
     model = new QStandardItemModel;
     model->setVerticalHeaderItem( 0, new QStandardItem("Rodzaj stołu"));
     model->setVerticalHeaderItem( 1, new QStandardItem("Elektryczna regulacja wysokości"));
-    model->setVerticalHeaderItem( 2, new QStandardItem("Uchwyty do pasów"));
+    model->setVerticalHeaderItem( 2, new QStandardItem("Uchwyty do stabilizacji  pasów"));
     model->setVerticalHeaderItem( 3, new QStandardItem("Regulacja kąta odchylenia"));
     model->setVerticalHeaderItem( 4, new QStandardItem("Elektrycznie łamane leżysko"));
     model->setVerticalHeaderItem( 5, new QStandardItem("Układ jezdny z hamulcami"));
     model->setVerticalHeaderItem( 6, new QStandardItem("Zagłowek 3-elementowy"));
-    model->setVerticalHeaderItem( 7, new QStandardItem("Pozycja fotela"));
+    model->setVerticalHeaderItem( 7, new QStandardItem("Leżysko składane"));
     model->setVerticalHeaderItem( 8, new QStandardItem("Sterowanie nożne"));
     model->setVerticalHeaderItem( 9, new QStandardItem("Pilot podblatowy"));
     model->setVerticalHeaderItem( 10, new QStandardItem("Kołki do stabilizacji"));
     model->setVerticalHeaderItem( 11, new QStandardItem("Uchwyt na prześcieradło"));
-    model->setVerticalHeaderItem( 12, new QStandardItem("Zatycznka"));
+    model->setVerticalHeaderItem( 12, new QStandardItem("Zatyczka"));
     model->setVerticalHeaderItem( 13, new QStandardItem("Stal nierdzewna"));
     model->setVerticalHeaderItem( 14, new QStandardItem("Ilość sztuk"));
     model->setVerticalHeaderItem( 15, new QStandardItem("Kolor tapicerki"));
     model->setVerticalHeaderItem( 16, new QStandardItem("Kolor stelaża"));
     model->setVerticalHeaderItem( 17, new QStandardItem("Uwagi"));
-
 
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableView->horizontalHeader()->setFixedHeight( 40 );
@@ -41,11 +40,11 @@ TableDialog::TableDialog(QWidget *parent) :
 void TableDialog::deleteRecord()
 {
     bool deleted {false};
-    QModelIndexList indexes = ui->tableView->selectionModel()->selectedRows();
+    QModelIndexList indexes = ui->tableView->selectionModel()->selectedColumns();
     while (!indexes.isEmpty())
     {
         deleted = true;
-        model->removeRows(indexes.last().row(), 1);
+        model->removeColumns(indexes.last().column(), 1);
         indexes.removeLast();
         generateCSV();
     }
@@ -97,11 +96,11 @@ void TableDialog::generateCSV()
     out << firstLine << endl;
     out << secondLine << endl;
 
-    for ( int i=0; i<model->rowCount(); ++i)
+    for ( int i=0; i<model->columnCount(); ++i)
     {
-        for ( int j=0; j<model->columnCount(); ++j)
+        for ( int j=0; j<model->rowCount(); ++j)
         {
-            QModelIndex index = model->index(i, j);
+            QModelIndex index = model->index(j, i);
             out << ui->tableView->model()->data(index).toString() + ";";
         }
         out << endl;

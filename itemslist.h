@@ -49,7 +49,7 @@ class ItemsList : public QObject
     void runMsg(QString _msg, QString _informativeText ="");
 
 public:
-    explicit ItemsList(QObject *parent = 0); 
+    explicit ItemsList(QObject *parent = 0);
     ~ItemsList() {
         if(csvFile) {
         csvFile->remove();
