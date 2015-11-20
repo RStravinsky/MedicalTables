@@ -1,5 +1,7 @@
 #include "itemslist.h"
 
+extern bool mainOrderActive;
+
 ItemsList::ItemsList(QObject *parent) : QObject(parent)
 {
     tableDialog = new TableDialog;
@@ -243,7 +245,7 @@ void ItemsList::generateCSV()
 
 bool ItemsList::generateSchedule()
 {
-    if (!m_actualTable.isEmpty() && csvFile->exists() )
+    if (!m_actualTable.isEmpty() && mainOrderActive )
     {
         QAxObject* excel;
         QAxObject* wbooks;
@@ -280,7 +282,7 @@ bool ItemsList::generateSchedule()
         mainOrderActive = false;
         return true;
      }
-     else if(m_actualTable.isEmpty() || !csvFile->exists() )
+     else if(m_actualTable.isEmpty() || !mainOrderActive )
      {
         QMessageBox msgBox;
         msgBox.setWindowTitle(QString("Informacja"));
@@ -307,7 +309,7 @@ void ItemsList::clear()
 
 void ItemsList::onMainButtonClicked( const QString & _buttonName)
 {
-    m_actualTable = _buttonName;   
+    m_actualTable = _buttonName;
     setItemsList( m_actualTable );
     setImagesList( m_actualTable );
     setItemsState();

@@ -13,6 +13,8 @@
 
 #include <itemslist.h>
 
+bool mainOrderActive{false};
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);

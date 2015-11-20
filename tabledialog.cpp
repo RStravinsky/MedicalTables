@@ -1,6 +1,8 @@
 #include "tabledialog.h"
 #include "ui_tabledialog.h"
 
+extern bool mainOrderActive;
+
 TableDialog::TableDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::TableDialog)
@@ -40,49 +42,71 @@ TableDialog::TableDialog(QWidget *parent) :
 
 void TableDialog::deleteRecord()
 {
-
-    QItemSelection selection( ui->tableView->selectionModel()->selection() );
-    QList<int> rows;
-    foreach( const QModelIndex & index, selection.indexes() ) {
-       rows.append( index.row() );
+    bool deleted {false};
+    uint rowToDelete {};
+    QModelIndexList indexes = ui->tableView->selectionModel()->selectedRows();
+    while (!indexes.isEmpty())
+    {
+        deleted = true;
+        rowToDelete = indexes.last().row();
+        model->removeRows(indexes.last().row(), 1);
+        indexes.removeLast();
+        generateCSV();
     }
-    qSort( rows );
 
-    int prev = -1;
-    for( int i = rows.count() - 1; i >= 0; i -= 1 ) {
-       int current = rows[i];
-       if( current != prev ) {
-          model->removeRows( current, 1 );
-          prev = current;
-       }
-       else
-           QMessageBox::information(this,"Informacja","Nie zaznaczono wiersza do usunięcia.");
+    if( deleted == false )
+    {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(QString("Informacja"));
+        msgBox.setText(QString("Nie zaznaczono wiersza do usunięcia."));
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.exec();
     }
-//    if(ui->tableView->currentIndex().row()!=-1)
-//        {
-//            QMessageBox msgBox;
-//            QPushButton yes_button;
-//            QPushButton no_button;
-//            yes_button.setText("TAK");
-//            no_button.setText("NIE");
-//            msgBox.addButton(&yes_button, QMessageBox::YesRole);
-//            msgBox.addButton(&no_button, QMessageBox::NoRole);
-//            msgBox.setWindowTitle("Informacja");
-//            msgBox.setText("Czy na pewno USUNĄĆ?");
-//            msgBox.exec();
-//            if (msgBox.clickedButton()!=&yes_button){
-//                return;
-//            };
-//         model->removeRow(ui->tableView->currentIndex().row());
-//    }
-//    else
-//        QMessageBox::information(this,"Informacja","Nie zaznaczono wiersza do usunięcia.");
+
+}
+
+
+void TableDialog::generateCSV()
+{
+    QString separator = ";";
+    QString pathFile = QDir::homePath()+"/schedule.csv";
+    QFile csvFile(pathFile);
+    QTextStream in(&csvFile);
+    QTextStream out(&csvFile);
+
+    // get data
+    csvFile.open(QIODevice::ReadOnly);
+    QString firstLine = in.readLine();
+    QString secondLine = in.readLine();
+    csvFile.remove();
+
+    // write new data
+    csvFile.open(QIODevice::WriteOnly);
+    out << firstLine << endl;
+    out << secondLine << endl;
+
+    for ( int i=0; i<model->rowCount(); ++i)
+    {
+        for ( int j=0; j<model->columnCount(); ++j)
+        {
+            QModelIndex index = model->index(i, j);
+            out << ui->tableView->model()->data(index).toString() + ";";
+        }
+        out << endl;
+    }
+    csvFile.close();
+
+    // check if model is empty
+    if (!model->rowCount()) {
+        mainOrderActive = false;
+        csvFile.resize(0);
+        this -> close();
+    }
 }
 
 void TableDialog::keyPressEvent(QKeyEvent *e)
 {
     if ( e->key () == Qt::Key_Delete) {
-        qDebug ("Return/enter pressed");
         deleteRecord();
     }
 

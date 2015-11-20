@@ -39,7 +39,6 @@ class ItemsList : public QObject
     TableDialog * tableDialog;
     QStandardItemModel * model;
     QFile * csvFile{NULL};
-    bool mainOrderActive{false};
 
     void setItemsState();
     void setItemsList(const QString & _buttonName);
@@ -47,7 +46,7 @@ class ItemsList : public QObject
     void clear();
 
 public:
-    explicit ItemsList(QObject *parent = 0); 
+    explicit ItemsList(QObject *parent = 0);
     ~ItemsList() {
         if(csvFile) {
         csvFile->remove();
