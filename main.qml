@@ -14,6 +14,7 @@ ApplicationWindow {
     visibility: "Maximized"
     minimumHeight: 768
     minimumWidth: 1366
+    opacity: 1
 
     MainForm {
         id: mainForm
@@ -32,7 +33,38 @@ ApplicationWindow {
             height: parent.height/5;
             anchors.top: parent.top
             visible: false
-        }  
+        }
+
+        Rectangle {
+            id: animation
+            width: mainForm.width/3
+            height: height
+            anchors.verticalCenter: mainForm.verticalCenter
+            anchors.horizontalCenter: mainForm.horizontalCenter
+            visible: true
+            color: "blue"
+            z: 202
+            AnimatedImage { anchors.fill: animation; source: "/images/images/animation.gif" }
+
+        }
+
+        Rectangle {
+            id: x
+            anchors.fill: mainForm
+            z: 200
+            color: "white"
+            opacity: 0.5
+            FastBlur {
+                anchors.fill: x
+                source: x
+                radius: 32
+            }
+            visible: optList.animationVisible
+            onVisibleChanged: {
+                animation.visible = true
+            }
+
+        }
 
         ColorArea { id: colorArea; width: mainForm.width/4; height: mainForm.width/4; visible: false;}
 

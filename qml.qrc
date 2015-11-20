@@ -74,5 +74,6 @@
         <file>images/preview.png</file>
         <file>logo.ico</file>
         <file>images/return.png</file>
+        <file>images/animation.gif</file>
     </qresource>
 </RCC>

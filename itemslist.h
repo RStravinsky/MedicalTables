@@ -23,6 +23,7 @@ class ItemsList : public QObject
     Q_OBJECT
     Q_PROPERTY (QQmlListProperty<QObject> itemsList READ getItemsList NOTIFY itemsListChanged)
     Q_PROPERTY (QQmlListProperty<QObject> imagesList READ getImagesList NOTIFY imagesListChanged)
+    Q_PROPERTY (bool animationVisible READ getAnimationVisible WRITE setAnimationVisible NOTIFY animationVisible)
 
     QList<QObject*> m_itemsList;
     QList<QObject*> m_imagesList;
@@ -40,6 +41,7 @@ class ItemsList : public QObject
     TableDialog * tableDialog;
     QStandardItemModel * model;
     QFile * csvFile{NULL};
+    double m_animationVisible {false};
 
     void setItemsState();
     void setItemsList(const QString & _buttonName);
@@ -58,6 +60,10 @@ public:
     }
     Q_INVOKABLE QQmlListProperty<QObject> getItemsList() { return QQmlListProperty<QObject>(this, m_itemsList); }
     Q_INVOKABLE QQmlListProperty<QObject> getImagesList() { return QQmlListProperty<QObject>(this, m_imagesList); }
+
+    Q_INVOKABLE bool getAnimationVisible() { return m_animationVisible; }
+    Q_INVOKABLE void setAnimationVisible(double _animationVisible) { m_animationVisible = _animationVisible; }
+
     Q_INVOKABLE void setAdditionalSettings( const QString _quantity, const QString _notes);
     Q_INVOKABLE void setText(const QString _colorText, const int & _itemIndex );
     Q_INVOKABLE void setColor(QString _color,  const int & _itemIndex );
@@ -69,6 +75,7 @@ public:
 signals:
     void itemsListChanged(QQmlListProperty<QObject> _itemsList);
     void imagesListChanged(QQmlListProperty<QObject> _imagesList);
+    void animationVisible(bool _animationVisible);
 
 public slots:
     void onMainButtonClicked(const QString & _buttonName);

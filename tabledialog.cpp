@@ -53,7 +53,7 @@ void TableDialog::deleteRecord()
     {
         QMessageBox msgBox;
         msgBox.setWindowTitle(QString("Informacja"));
-        msgBox.setText(QString("Nie zaznaczono wiersza do usunięcia."));
+        msgBox.setText(QString("Nie zaznaczono kolumny do usunięcia."));
         msgBox.setIcon(QMessageBox::Information);
         msgBox.exec();
     }

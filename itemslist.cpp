@@ -267,7 +267,7 @@ QString ItemsList::setPath()
         }
 
     qDebug() << csvWritePath;
-    QDataStream out( &csvFile );
+    QTextStream out( &csvFile );
     out << csvWritePath;
     csvFile.close();
 
@@ -288,10 +288,16 @@ bool ItemsList::generateSchedule()
 {
     if (!m_actualTable.isEmpty() && mainOrderActive )
     {
+        setAnimationVisible(true);
+        emit animationVisible(getAnimationVisible());
+
         if( setPath().isEmpty() ) {
             runMsg("Nie wybrano lokalizacji.");
+            setAnimationVisible(false);
+            emit animationVisible(getAnimationVisible());
             return false;
         }
+
         QAxObject* excel;
         QAxObject* wbooks;
         QAxObject* book;
@@ -316,6 +322,9 @@ bool ItemsList::generateSchedule()
         delete book;
         delete wbooks;
         delete excel;
+
+        setAnimationVisible(false);
+        emit animationVisible(getAnimationVisible());
 
         csvFile->remove();
         tableDialog->model->clear();
