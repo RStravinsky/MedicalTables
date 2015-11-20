@@ -212,29 +212,40 @@ void ItemsList::generateCSV()
     }
 
     out << m_actualTable + separator;
-    itemsList.push_back(new QStandardItem(m_actualTable));
+    QStandardItem * item = new QStandardItem(m_actualTable);
+    item -> setTextAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
+    itemsList.push_back( item );
 
     /* fill options */
     for( uint row = 0 ; row < m_statesArray.size() ; ++row ) {
         out << QString::number(m_statesArray[row]) + separator;
-        itemsList.push_back( new QStandardItem(QString::number(m_statesArray[row])));
+        item = new QStandardItem(QString::number(m_statesArray[row]));
+        item -> setTextAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
+        itemsList.push_back( item );
     }
 
-    qDebug() << m_quantity << endl;
     out << m_quantity + separator;
-    itemsList.push_back( new QStandardItem(m_quantity));
+    item = new QStandardItem(m_quantity);
+    item -> setTextAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
+    itemsList.push_back( item );
 
     out << m_topColor + separator;
-    itemsList.push_back( new QStandardItem(m_topColor));
+    item = new QStandardItem(m_topColor);
+    item -> setTextAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
+    itemsList.push_back( item );
 
     out << m_bottomColor  + separator ;
-    itemsList.push_back( new QStandardItem(m_bottomColor));
+    item = new QStandardItem(m_bottomColor);
+    item -> setTextAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
+    itemsList.push_back( item );
 
     out << m_notes << endl;
-    itemsList.push_back( new QStandardItem(m_notes));
+    item = new QStandardItem(m_notes);
+    item -> setTextAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
+    itemsList.push_back( item );
 
     csvFile->close();
-    tableDialog->model->appendRow(itemsList);
+    tableDialog->model->appendColumn(itemsList);
 
     QMessageBox msgBox;
     msgBox.setWindowTitle(QString("Informacja"));
