@@ -12,8 +12,8 @@ ApplicationWindow {
     title: qsTr("NoxiMove Schedule")
     visible: true
     visibility: "Maximized"
-    minimumHeight: 600
-    minimumWidth: 800
+    minimumHeight: 768
+    minimumWidth: 1366
 
     MainForm {
         id: mainForm
@@ -195,7 +195,7 @@ ApplicationWindow {
         AcceptButton {
             id: acceptButton
             width: height
-            height: imageState.height * 1.5
+            height: mainImageRectangle.height/8
             anchors.margins: 20
             z: 100
             anchors.bottom: mainImageRectangle.bottom
@@ -207,7 +207,7 @@ ApplicationWindow {
         Preview {
             id: previewButton
             width: height
-            height: imageState.height * 1.5
+            height:  mainImageRectangle.height/8
             anchors.margins: 20
             z: 100
             anchors.bottom: mainImageRectangle.bottom

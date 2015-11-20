@@ -10,6 +10,9 @@
 #include <QTextStream>
 #include <QFile>
 #include <QDir>
+#include <QVBoxLayout>
+#include <QScrollArea>
+#include <QLabel>
 
 namespace Ui {
 class TableDialog;
@@ -25,6 +28,9 @@ public:
      void deleteRecord();
      void generateCSV();
     ~TableDialog();
+
+private slots:
+     void on_tableView_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::TableDialog *ui;

@@ -9,6 +9,32 @@ Item {
 
     id: generateButton
 
+    Image {
+        id: returnImage;
+        source:"/images/images/return.png"
+        width: height
+        height: generateButton.height/3
+        anchors.top: generateButton.top
+        anchors.left: generateButton.left
+        anchors.margins: 10
+        antialiasing: true
+        smooth: true
+
+        MouseArea {
+            anchors.fill: returnImage
+            onClicked: {
+                    order.clearText()
+                    order.visible = true
+                    initRectangle.visible = true
+                    topFrame.visible = false
+                    mainImageRectangle.visible = false
+                    gridRectangle.visible = false
+                    acceptButton.visible = false
+                    previewButton.visible = false
+                }
+            }
+        }
+
     Rectangle {
         id: rectangle
         anchors.fill: generateButton
@@ -21,6 +47,7 @@ Item {
             GradientStop { position: .5;   color: "#464646" }
             GradientStop { position: 1.0; color: "#464646" }
         }
+
 
         Image {
             id: generateImage;

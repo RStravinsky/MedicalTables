@@ -16,6 +16,7 @@
 #include <QAxBase>
 #include <QAxObject>
 #include <QAxWidget>
+#include <QFileDialog>
 
 class ItemsList : public QObject
 {
@@ -44,6 +45,8 @@ class ItemsList : public QObject
     void setItemsList(const QString & _buttonName);
     void setImagesList(const QString & _buttonName);
     void clear();
+    QString setPath();
+    void runMsg(QString _msg, QString _informativeText ="");
 
 public:
     explicit ItemsList(QObject *parent = 0); 

@@ -148,11 +148,7 @@ void ItemsList::showTable()
     if (mainOrderActive) tableDialog->exec();
     else
     {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(QString("Informacja"));
-        msgBox.setText(QString("Zamówienie jest puste."));
-        msgBox.setIcon(QMessageBox::Information);
-        msgBox.exec();
+        runMsg("Zamówienie jest puste.");
     }
 }
 
@@ -160,20 +156,12 @@ bool ItemsList::checkData()
 {
     if( m_order.isEmpty() || m_recipient.isEmpty())
     {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(QString("Informacja"));
-        msgBox.setText(QString("Nie uzupełniono pól tekstowych"));
-        msgBox.setIcon(QMessageBox::Information);
-        msgBox.exec();
+        runMsg("Nie uzupełniono pól tekstowych");
         return false;
     }
     else if( m_year.toInt() < 2015 || m_day.toInt() < 1 || m_month.toInt() < 1)
     {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(QString("Informacja"));
-        msgBox.setText(QString("Termin dostawy nieprawidłowy."));
-        msgBox.setIcon(QMessageBox::Information);
-        msgBox.exec();
+        runMsg("Termin dostawy nieprawidłowy.");
         return false;
     }
     else
@@ -185,7 +173,11 @@ void ItemsList::generateCSV()
     QString separator = ";";
     QList <QStandardItem*> itemsList;
     QTextStream out( csvFile );
-    csvFile->open(QIODevice::WriteOnly | QIODevice::Append);
+    if ( !csvFile->open(QIODevice::WriteOnly | QIODevice::Append) )
+        {
+            runMsg("Nie można otworzyć pliku pomocniczego schedule.csv.");
+            return;
+        }
 
     if (!mainOrderActive)
     {
@@ -234,12 +226,12 @@ void ItemsList::generateCSV()
     item -> setTextAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
     itemsList.push_back( item );
 
-    out << m_bottomColor  + separator ;
+    out << m_bottomColor + separator ;
     item = new QStandardItem(m_bottomColor);
     item -> setTextAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
     itemsList.push_back( item );
 
-    out << m_notes << endl;
+    out << m_notes + separator << endl;
     item = new QStandardItem(m_notes);
     item -> setTextAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
     itemsList.push_back( item );
@@ -247,9 +239,35 @@ void ItemsList::generateCSV()
     csvFile->close();
     tableDialog->model->appendColumn(itemsList);
 
+    runMsg("Dodano do zamówienia.");
+}
+
+QString ItemsList::setPath()
+{
+    QString csvWritePath = "";
+    csvWritePath = QFileDialog::getExistingDirectory( 0 , tr("Wybierz folder"), QDir::homePath() );
+
+    QFile csvFile( QDir::homePath()+"/schedule.csv" );
+    if ( !csvFile.open(QIODevice::WriteOnly | QIODevice::Append) )
+        {
+            runMsg("Nie można otworzyć pliku pomocniczego schedule.csv.");
+            return QString("");
+        }
+
+    qDebug() << csvWritePath;
+    QDataStream out( &csvFile );
+    out << csvWritePath;
+    csvFile.close();
+
+    return csvWritePath;
+}
+
+void ItemsList::runMsg(QString _msg, QString _informativeText)
+{
     QMessageBox msgBox;
     msgBox.setWindowTitle(QString("Informacja"));
-    msgBox.setText(QString("Dodano do zamówienia."));
+    msgBox.setText(_msg);
+    msgBox.setInformativeText(_informativeText);
     msgBox.setIcon(QMessageBox::Information);
     msgBox.exec();
 }
@@ -258,6 +276,10 @@ bool ItemsList::generateSchedule()
 {
     if (!m_actualTable.isEmpty() && mainOrderActive )
     {
+        if( setPath().isEmpty() ) {
+            runMsg("Nie wybrano lokalizacji.");
+            return false;
+        }
         QAxObject* excel;
         QAxObject* wbooks;
         QAxObject* book;
@@ -278,28 +300,19 @@ bool ItemsList::generateSchedule()
         book->dynamicCall("Close()");
         excel->dynamicCall("Quit()");
 
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(QString("Informacja"));
-        msgBox.setText(QString("Wygenerowano harmonogram."));
-        msgBox.setInformativeText(destPath.toString());
-        msgBox.setIcon(QMessageBox::Information);
-        msgBox.exec();
+        runMsg("Wygenerowano harmonogram",destPath.toString());
         delete book;
         delete wbooks;
         delete excel;
 
-        csvFile->remove();
+//        csvFile->remove();
         tableDialog->model->clear();
         mainOrderActive = false;
         return true;
      }
      else if(m_actualTable.isEmpty() || !mainOrderActive )
      {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(QString("Informacja"));
-        msgBox.setText(QString("Zamówienie jest puste."));
-        msgBox.setIcon(QMessageBox::Information);
-        msgBox.exec();
+        runMsg("Zamówienie jest puste.");
         return false;
     }
 
@@ -352,7 +365,3 @@ void ItemsList::onDateChanged(const QString _deliveryTime, QString _type)
     else if ( _type == "day")
         m_day = _deliveryTime;
 }
-
-
-
-

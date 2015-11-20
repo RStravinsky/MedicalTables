@@ -58,9 +58,7 @@ void TableDialog::deleteRecord()
         msgBox.setIcon(QMessageBox::Information);
         msgBox.exec();
     }
-
 }
-
 
 void TableDialog::generateCSV()
 {
@@ -71,13 +69,31 @@ void TableDialog::generateCSV()
     QTextStream out(&csvFile);
 
     // get data
-    csvFile.open(QIODevice::ReadOnly);
+    if ( !csvFile.open(QIODevice::ReadOnly) )
+        {
+            QMessageBox msgBox;
+            msgBox.setWindowTitle(QString("Informacja"));
+            msgBox.setText(QString("Nie można otworzyć pliku pomocniczego schedule.csv."));
+            msgBox.setIcon(QMessageBox::Information);
+            msgBox.exec();
+            return;
+        }
+
     QString firstLine = in.readLine();
     QString secondLine = in.readLine();
     csvFile.remove();
 
     // write new data
-    csvFile.open(QIODevice::WriteOnly);
+    if ( !csvFile.open(QIODevice::WriteOnly) )
+        {
+            QMessageBox msgBox;
+            msgBox.setWindowTitle(QString("Informacja"));
+            msgBox.setText(QString("Nie można otworzyć pliku pomocniczego schedule.csv."));
+            msgBox.setIcon(QMessageBox::Information);
+            msgBox.exec();
+            return;
+        }
+
     out << firstLine << endl;
     out << secondLine << endl;
 
@@ -113,4 +129,24 @@ void TableDialog::keyPressEvent(QKeyEvent *e)
 TableDialog::~TableDialog()
 {
     delete ui;
+}
+
+void TableDialog::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    if ( index.row() == 17 )
+    {
+        QDialog descriptionDialog;
+        QVBoxLayout layout(&descriptionDialog);
+        QScrollArea scroll;
+        QLabel descriptionLablel;
+        descriptionLablel.setFont( QFont("Arial", 10, QFont::Light ,false));
+        descriptionLablel.setText(model->data(index).toString());
+        descriptionLablel.setWordWrap(true);
+        scroll.setWidget(&descriptionLablel);
+        layout.addWidget(&scroll);
+        descriptionDialog.setWindowTitle("Opis");
+        descriptionDialog.setFixedHeight(220);
+        descriptionDialog.setFixedWidth(270);
+        descriptionDialog.exec();
+    }
 }
