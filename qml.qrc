@@ -73,5 +73,6 @@
         <file>images/downArrow.png</file>
         <file>images/preview.png</file>
         <file>logo.ico</file>
+        <file>images/return.png</file>
     </qresource>
 </RCC>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 3.4.0, 2015-11-19T14:41:00. -->
+=======
+<!-- Written by QtCreator 3.4.0, 2015-11-19T15:05:44. -->
+>>>>>>> fbf0c9fd8d6f4fb45f37f9f49993b5e921af1d6f
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -173,7 +177,11 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">MedicalTables</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/Bartlomiej Pokrzywa/Projekty_QT/MedicalTables_Apps/MedicalTables.pro</value>
+=======
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/ProjektyQT/MedicalTables_Apps/MedicalTables.pro</value>
+>>>>>>> fbf0c9fd8d6f4fb45f37f9f49993b5e921af1d6f
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">MedicalTables.pro</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>

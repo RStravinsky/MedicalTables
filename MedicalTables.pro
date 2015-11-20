@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     itemslist.cpp \
     tabledialog.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += \
+    qml.qrc
 
 RC_ICONS += "logo.ico"
 

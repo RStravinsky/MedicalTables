@@ -1,0 +1,43 @@
+GPL-
+
+Klient musi dostaæ tekst licencji ( np. w Pomocy aplikacji )
+
+Nale¿y udostêpniæ kod Ÿród³owy (lub mo¿liwoœæ uzykania kodu)- link do repozytoriu kodu.
+
+Klient ma prawo do kodu Ÿród³owego, jego modyfikowania i dalszego rozposzwszechniania.
+
+Tym wyj¹tkiem jest wymagana w GPL pisemna oferta dostarczenia Ÿróde³, jaka musi byæ do³¹czona do oprogramowania, 
+
+Jeœli jest ono rozprowadzane w postaci samych binariów). 
+
+Obejmuje umieszczenie w ka¿dym z plików Ÿród³owych programu dwu elementów: informacji o prawach autorskich 
+(np. „copyright 1999 Maria Kowalska”) oraz zezwolenia na kopiowanie, stwierdzaj¹cego, ¿e program jest rozpowszechniany 
+na warunkach Powszechnej Licencji Publicznej GNU (albo Mniejszej GPL).
+
+LGPL-
+
+
+    GNU Lesser General Public License, version 2.1
+    GNU Lesser General Public License, version 3
+
+
+Jeœli linkujesz dynamicznie, nie musisz publikowaæ kodu aplikacji, jedynie modyfikacje jakie dokona³eœ w Qt 
+
+Dodatkowe potrzebne biblioteki, w tym spoza rodziny Qt, mo¿esz umieœciæ w tym samym katalogu aplikacji, w którym 
+jest Twój program; program ten wtedy znajdzie potrzebne biblioteki. Unikasz w ten sposób linkowania statycznego z 
+kodem zamkniêtym, niedozwolonego w licencjach GPL/LGPL 
+
+Jedyne ograniczenia licencji LGPL s¹ takie, ¿e trzeba publikowaæ zmiany dokonane w Ÿród³ach biblioteki, oraz nale¿y 
+dostarczyæ w³asne oprogramowanie tak, aby u¿ytkownik mia³ mo¿liwoœæ wymiany u¿ytej biblioteki na nowsz¹ wersjê.
+W praktyce oznacza to, ¿e nie mo¿na zlinkowaæ aplikacji statycznie i ewentualne poprawki w Qt trzeba jakoœ opublikowaæ.
+
+
+1) I link the app dynamically
+2) I do not make any changes to the Qt source
+3) I include a copy of the LGPL license/a link to the Qt source along with my app
+
+This is the recommended solution - it allows the user to upgrade to later versions of Qt easily.
+
+If your using the DLL, people can simply replace the DLL to use a newer (binary compatible) version of the 
+Qt library (which is the intent in the license), you don't need to distribute object code and building tools
+ as you are not statically linking (thats when it gets complicated).

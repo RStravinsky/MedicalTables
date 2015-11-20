@@ -12,6 +12,7 @@
 #include <QObject>
 
 #include <itemslist.h>
+#include <tabledialog.h>
 
 bool mainOrderActive{false};
 
