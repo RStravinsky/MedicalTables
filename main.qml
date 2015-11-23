@@ -36,19 +36,6 @@ ApplicationWindow {
         }
 
         Rectangle {
-            id: animation
-            width: mainForm.width/3
-            height: height
-            anchors.verticalCenter: mainForm.verticalCenter
-            anchors.horizontalCenter: mainForm.horizontalCenter
-            visible: true
-            color: "blue"
-            z: 202
-            AnimatedImage { anchors.fill: animation; source: "/images/images/animation.gif" }
-
-        }
-
-        Rectangle {
             id: x
             anchors.fill: mainForm
             z: 200
@@ -60,10 +47,6 @@ ApplicationWindow {
                 radius: 32
             }
             visible: optList.animationVisible
-            onVisibleChanged: {
-                animation.visible = true
-            }
-
         }
 
         ColorArea { id: colorArea; width: mainForm.width/4; height: mainForm.width/4; visible: false;}

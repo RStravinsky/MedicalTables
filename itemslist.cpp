@@ -266,7 +266,6 @@ QString ItemsList::setPath()
             return QString("");
         }
 
-    qDebug() << csvWritePath;
     QTextStream out( &csvFile );
     out << csvWritePath;
     csvFile.close();
