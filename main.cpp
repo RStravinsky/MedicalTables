@@ -10,7 +10,6 @@
 #include <QQmlContext>
 #include <QQmlComponent>
 #include <QObject>
-
 #include <itemslist.h>
 #include <tabledialog.h>
 
@@ -22,7 +21,7 @@ int main(int argc, char *argv[])
     app.setWindowIcon(QIcon("qrc:/images/logo.ico"));
 
     qmlRegisterType<ItemsList>("ItemsListComponent",1,0,"ItemsList");
-    qmlRegisterType<MedicalTable>("MedicalTableComponent",1,0,"MedicalTable");
+    //qmlRegisterType<MedicalTable>("MedicalTableComponent",1,0,"MedicalTable");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

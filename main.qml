@@ -9,11 +9,11 @@ import ItemsListComponent 1.0
 
 ApplicationWindow {
     id: applicationWindow
-    title: qsTr("NoxiMove Schedule")
+    title: qsTr("Noxi Move")
     visible: true
     visibility: "Maximized"
-    minimumHeight: 768
-    minimumWidth: 1366
+    minimumHeight: 750
+    minimumWidth: 1250
     opacity: 1
 
     MainForm {
@@ -36,14 +36,14 @@ ApplicationWindow {
         }
 
         Rectangle {
-            id: x
+            id: loadingScreen
             anchors.fill: mainForm
             z: 200
             color: "white"
             opacity: 0.5
             FastBlur {
-                anchors.fill: x
-                source: x
+                anchors.fill: loadingScreen
+                source: loadingScreen
                 radius: 32
             }
             visible: optList.animationVisible

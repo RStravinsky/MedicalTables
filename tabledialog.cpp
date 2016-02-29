@@ -108,7 +108,7 @@ void TableDialog::generateCSV()
     csvFile.close();
 
     // check if model is empty
-    if (!model->rowCount()) {
+    if (!model->columnCount()) {
         mainOrderActive = false;
         csvFile.resize(0);
         this -> close();
